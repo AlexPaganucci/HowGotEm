@@ -1,0 +1,18 @@
+.container-box{
+  display: flex;
+  color: white;
+  font-style: italic;
+  justify-content: space-evenly;
+  background-color: #1D818F;
+  height: 50px;
+  align-items: center;
+}
+
+.container-box div{
+  display: flex;
+}
+
+.container-box div p{
+  margin-bottom: 0;
+  margin-left: 5px;
+}

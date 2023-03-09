@@ -1,0 +1,47 @@
+.example-card {
+  max-width: 300px;
+  margin: 1rem;
+  padding-bottom: 0;
+}
+
+.example-card img{
+  cursor: pointer;
+}
+
+.example-card mat-card-header mat-card-title{
+  cursor: pointer;
+}
+
+.card-footer{
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-footer p{
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .example-card {
+    flex-basis: calc(50% - 10px);
+    margin-bottom: 20px;
+    margin-right: 20px;
+  }
+
+  .card-footer{
+    display: block;
+    position: initial;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .example-card {
+    max-width: 90%;
+    margin: 1rem auto;
+  }
+}

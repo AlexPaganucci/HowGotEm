@@ -1,13 +1,112 @@
-<app-navbar></app-navbar>
+<mat-drawer-container class="example-container" autosize>
+  <div>
+    <mat-toolbar>
+      <div class="mat-toolbar-row">
+        <div *ngIf="showSearch">
+          <button mat-button (click)="showSearch = !showSearch">ANNULLA</button>
+        </div>
+        <h1 *ngIf="!showSearch" routerLink="">How Got Em</h1>
+        <!-- <img src="../../../assets/img/logo.svg" alt="Logo dell'applicazione"> -->
+        <ul class="ul-flex" *ngIf="!isSmallScreen && !showSearch">
+          <li>
+            <div>
+              <a routerLink="/sneakers">SNEAKERS</a>
+              <mat-icon (mouseover)="openSneakersModal()">keyboard_arrow_down</mat-icon>
+            </div>
+          </li>
+          <li>
+            <a routerLink="/contatti">CONTATTI</a>
+          </li>
+          <li>
+            <a routerLink="/chisiamo">CHI SIAMO</a>
+          </li>
+        </ul>
+        <div>
+          <!-- <mat-form-field *ngIf="!isSmallScreen">
+            <input matInput type="text" placeholder="Inserisci la tua ricerca">
+            <button mat-button matSuffix routerLink="/sneakers">
+              <mat-icon>search</mat-icon>
+            </button>
+          </mat-form-field> -->
+          <div>
+            <button mat-icon-button (click)="showSearch = !showSearch" *ngIf="!showSearch">
+              <mat-icon>search</mat-icon>
+            </button>
+            <mat-form-field *ngIf="showSearch">
+              <mat-label>Cerca</mat-label>
+              <div>
+                <input matInput type="text" placeholder="Inserisci la tua ricerca">
+                <button mat-button matSuffix routerLink="/sneakers">
+                  <mat-icon>search</mat-icon>
+                </button>
+              </div>
+            </mat-form-field>
+          </div>
+          <button *ngIf="!isSmallScreen" mat-icon-button [matMenuTriggerFor]="menu"
+            aria-label="Example icon-button with a user icon">
+            <mat-icon> person_pin</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openLoginModal()">
+              <span>ACCEDI</span>
+            </button>
+            <button mat-menu-item (click)="openSignupModal()">
+              <span>REGISTRATI</span>
+            </button>
+            <button mat-menu-item routerLink="/profilo">
+              <span>PROFILO</span>
+            </button>
+          </mat-menu>
+          <button *ngIf="!isSmallScreen" mat-icon-button aria-label="Example icon button with a user icon"
+            routerLink="/carrello">
+            <mat-icon>shopping_cart</mat-icon>
+          </button>
+          <button *ngIf="isSmallScreen" type="button" mat-button (click)="drawer.toggle()" mat-icon-button
+            aria-label="Example icon button with a vertical three dot icon">
+            <mat-icon>reorder</mat-icon>
+          </button>
+        </div>
+      </div>
 
-<nav class="container-fluid">
-  <div class="row">
-    <div class="col-md-3">
-      <app-sidebar></app-sidebar>
-    </div>
-    <div class="col-md-9">
-      <!-- contenuto principale della pagina -->
-    </div>
+    </mat-toolbar>
   </div>
-</nav>
-<router-outlet></router-outlet>
+  <mat-drawer #drawer class="example-sidenav" mode="over">
+    <button mat-menu-item routerLink="/">
+      <span>HOME</span>
+    </button>
+    <button mat-menu-item routerLink="/sneakers">
+      <span>SNEAKERS</span>
+    </button>
+    <button mat-menu-item routerLink="/contatti">
+      <span>CONTATTI</span>
+    </button>
+    <button mat-menu-item routerLink="/chisiamo">
+      <span>CHI SIAMO</span>
+    </button>
+    <button mat-menu-item routerLink="/profilo">
+      <span>PROFILO</span>
+    </button>
+    <button mat-menu-item routerLink="/carrello">
+      <mat-icon>shopping_cart</mat-icon>
+      <span>CARRELLO</span>
+    </button>
+    <div class="sidebar-form">
+      <button mat-menu-item (click)="openLoginModal()">
+        <span>LOGIN</span>
+      </button>
+      <button mat-menu-item (click)="openSignupModal()">
+        <span>REGISTRATI</span>
+      </button>
+    </div>
+    <div class="container-social-header">
+      <a mat-button href="https://wa.me/390123456789"><i class="fa-brands fa-whatsapp"></i></a>
+      <a mat-button href="https://www.instagram.com/il_tuo_account/"><i class="fa-brands fa-instagram"></i></a>
+      <a mat-button href="https://www.facebook.com/il_tuo_account/"><i class="fa-brands fa-facebook-f"></i></a>
+    </div>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+  </div>
+</mat-drawer-container>

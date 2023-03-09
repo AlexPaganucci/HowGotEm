@@ -1,0 +1,57 @@
+<h2>Inserisci i tuoi dati per registrarti</h2>
+<form class="example-form">
+  <table class="example-full-width" cellspacing="0"><tr>
+    <td><mat-form-field class="example-full-width">
+      <mat-label>nome</mat-label>
+      <input matInput>
+    </mat-form-field></td>
+    <td><mat-form-field class="example-full-width">
+      <mat-label>cognome</mat-label>
+      <input matInput>
+    </mat-form-field></td>
+  </tr></table>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Enter your email</mat-label>
+    <input matInput placeholder="pat@example.com" [formControl]="email" required>
+    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Enter your password</mat-label>
+    <input matInput [type]="hide ? 'password' : 'text'">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <p>
+    <mat-form-field class="example-full-width">
+      <mat-label>indirizzo</mat-label>
+      <textarea matInput placeholder="Inserisci il tuo indirizzo"></textarea>
+    </mat-form-field>
+  </p>
+
+  <table class="example-full-width" cellspacing="0"><tr>
+    <td><mat-form-field class="example-full-width">
+      <mat-label>città</mat-label>
+      <input matInput placeholder="Roma">
+    </mat-form-field></td>
+    <td><mat-form-field class="example-full-width">
+      <mat-label>Postal Code</mat-label>
+      <input matInput #postalCode maxlength="5" placeholder="00042" value="94043">
+      <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+    </mat-form-field></td>
+  </tr><tr>
+    <td><mat-form-field class="example-full-width">
+      <mat-label>stato</mat-label>
+      <input matInput placeholder="Ex. California">
+    </mat-form-field></td>
+  </tr>
+</table>
+<p>
+  Sei già registrato?
+  <button mat-dialog-close mat-button (click)="openLoginModal()" color="primary">Clicca qui</button>
+</p>
+</form>

@@ -1,0 +1,130 @@
+.carousel {
+  position: relative;
+  height: 500px;
+  width: 100%;
+  margin: auto;
+  top: 0;
+}
+
+.carousel-item::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+}
+
+.carousel-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.carousel-item h2{
+  padding-top: 100px;
+  font-weight: bold;
+}
+
+.carousel-item h2, .carousel-item p , .carousel-item button{
+  position: relative;
+  z-index: 2;
+  display: flex;
+  font-size: 2rem;
+  margin: 2rem auto 0;
+  justify-content: center;
+  font-style: italic;
+}
+
+.carousel-item-1{
+  background-image: url('../../../assets/img/dunkCarousel.jpg');
+}
+
+.carousel-item-2{
+  background-image: url('../../../assets/img/jordanCarousel.jpg');
+}
+
+.carousel-item-3{
+  background-image: url('../../../assets/img/NewBalanceCarousel.png');
+}
+
+.carousel-item.active {
+  opacity: 1;
+}
+
+.btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.btn:nth-of-type(1){
+  left: 100px;
+}
+
+.btn:last-child {
+  right: 100px;
+}
+
+.btn.mat-icon-button mat-icon {
+  font-size: 2rem;
+}
+
+@media screen and (max-width: 480px) {
+  .carousel-item h2, .carousel-item p , .carousel-item button{
+    font-size: 0rem;
+  }
+
+  .btn:nth-of-type(1){
+    left: 25px;
+  }
+
+  .btn:last-child {
+    right: 25px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .carousel-item h2, .carousel-item p , .carousel-item button{
+    font-size: 1rem;
+  }
+
+  .btn:nth-of-type(1){
+    left: 40px;
+  }
+
+  .btn:last-child {
+    right: 40px;
+  }
+
+}
+
+@media screen and (max-width: 920px) {
+  .carousel-item h2, .carousel-item p , .carousel-item button{
+    font-size: 1.5rem;
+  }
+
+  .btn:nth-of-type(1){
+    left: 80px;
+  }
+
+  .btn:last-child {
+    right: 80px;
+  }
+
+}

@@ -1,0 +1,67 @@
+<div class="container-header-sneaker">
+  <div *ngIf="filter">
+    <button mat-button (click)="filter = !filter">
+      <i class="fa-solid fa-arrow-down-wide-short"></i>
+      nascondi filtri
+    </button>
+  </div>
+  <div *ngIf="!filter" (click)="filter = !filter">
+    <button mat-button>
+      <i class="fa-solid fa-arrow-up-short-wide"></i>
+      mostra filtri
+    </button>
+  </div>
+</div>
+<div class="container-sneakers">
+  <div class="container-filters" *ngIf="filter">
+    <div class="checkbox-filter">
+      <p>filtra per brand</p>
+      <mat-checkbox color="primary">Nike</mat-checkbox>
+      <mat-checkbox color="primary">Jordan</mat-checkbox>
+      <mat-checkbox color="primary">New balance</mat-checkbox>
+    </div>
+    <div class="size-filters">
+      <p>filtra per taglia</p>
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let size of sizes" [selectable]="true" [removable]="true" (removed)="removeSize(size)">
+          {{size}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+      <mat-form-field>
+        <mat-label>Seleziona taglia</mat-label>
+        <mat-select (selectionChange)="addSize($event.value)">
+          <mat-option *ngFor="let size of availableSizes" [value]="size">{{size}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="price-filters">
+      <p>filtra per prezzo</p>
+      <div class="example-label-container">
+        <label id="example-name-label" class="example-name-label">Prezzo</label>
+        <label class="example-value-label"> € {{sliderValue}}</label>
+      </div>
+      <mat-slider [(ngModel)]="sliderValue" min="0" max="1000" step="25" color="primary">
+        <input matSliderThumb>
+      </mat-slider>
+    </div>
+    <div>
+      <p>filtra per colore</p>
+      <div *ngFor="let color of colors" class="color-filter-box">
+        <div class="color-filter">
+          <p>{{color}}</p>
+          <button mat-button>
+            <span [ngStyle]="{'background-color': color}"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <button mat-button>FILTRA</button>
+  </div>
+  <div class="container-cards" [style.width.%]="!filter ? 100 : null">
+    <app-cards></app-cards>
+    <div class="paginator">
+      <app-paginator></app-paginator>
+    </div>
+  </div>
+</div>

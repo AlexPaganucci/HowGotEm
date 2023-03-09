@@ -1,0 +1,97 @@
+body {
+  overflow-x: hidden;
+}
+
+
+/* Sidenav css */
+.example-container {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.example-sidenav {
+  width: 400px;
+  padding: 20px;
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
+}
+
+.sidebar-form{
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar-form button{
+  text-align: center;
+}
+
+.container-social-header{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.container-social-header i{
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+/* Toolbar css */
+mat-toolbar img {
+  width: 100px;
+  background-color: white;
+}
+
+.mat-toolbar-row{
+  justify-content: space-between;
+}
+
+/* .mat-toolbar-row div{
+  padding: 1.2rem;
+} */
+
+.ul-flex{
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+}
+
+.ul-flex li{
+  margin-left: 80px;
+}
+
+.ul-flex li div{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.ul-flex li div mat-icon{
+  position: absolute;
+  top: 20px;
+}
+
+.ul-flex li a{
+  text-decoration: none;
+  color: black;
+}
+
+.ul-flex li a:hover{
+  color: #1D818F;
+}
+
+.mat-toolbar-row div{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-toolbar-row div:last-child{
+  margin-right: 20px;
+}
+
+@media screen and (max-width: 480px) {
+  .example-sidenav {
+    width: 250px;
+  }
+}

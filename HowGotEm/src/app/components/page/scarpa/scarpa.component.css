@@ -1,0 +1,18 @@
+.container-scarpa{
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem;
+}
+
+.container-scarpa-img img{
+  width: 500px;
+}
+
+.container-scarpa-info form{
+  display: flex;
+  flex-direction: column;
+}
+
+.container-scarpa-info form .quantita{
+  display: flex;
+}

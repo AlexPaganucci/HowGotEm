@@ -1,0 +1,44 @@
+.mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}
+
+.container-contact-header{
+  padding: 2rem;
+  background-color: #1D818F;
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+  text-align: center;
+}
+
+.login-contact-section h2{
+  font-size: 2rem;
+}
+
+.container-contact-body > *{
+  padding: 2rem;
+}
+
+.container-contact-body h3{
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.contact-section-flex{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.contact-section-flex div a{
+  text-decoration: none;
+  color: black;
+}
+
+.contact-section-flex div a:hover{
+  color: #1D818F;
+}
+
+.contact-section-flex div a i{
+  font-size: 2rem;
+}
