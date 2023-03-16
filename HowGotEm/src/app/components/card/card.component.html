@@ -1,9 +1,13 @@
-<mat-card class="example-card">
-  <mat-card-header>
-    <mat-card-title routerLink="/scarpa">Dunk panda</mat-card-title>
-    <mat-card-subtitle>Nike</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <img mat-card-image src="../../../assets/img/dunk.jpg" alt="nike dunk" routerLink="/scarpa">
-  </mat-card-content>
-</mat-card>
+<div class="flex-container">
+  <div class="card-container">
+    <mat-card class="example-card" *ngFor="let d of data">
+      <mat-card-header>
+        <mat-card-title routerLink="/scarpa">{{d.nome}}</mat-card-title>
+        <mat-card-subtitle>{{d.brand}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <img mat-card-image src="../../../assets/img/dunk.jpg" alt="nike dunk" routerLink="/scarpa">
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

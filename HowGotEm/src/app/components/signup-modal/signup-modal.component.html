@@ -1,57 +1,68 @@
 <h2>Inserisci i tuoi dati per registrarti</h2>
-<form class="example-form">
+<form class="example-form" [formGroup]="signupForm" (ngSubmit)="onSubmitSignup()">
   <table class="example-full-width" cellspacing="0"><tr>
     <td><mat-form-field class="example-full-width">
       <mat-label>nome</mat-label>
-      <input matInput>
+      <input matInput formControlName="name">
     </mat-form-field></td>
     <td><mat-form-field class="example-full-width">
       <mat-label>cognome</mat-label>
-      <input matInput>
+      <input matInput formControlName="surname">
     </mat-form-field></td>
   </tr></table>
 
   <mat-form-field class="example-full-width">
     <mat-label>Enter your email</mat-label>
-    <input matInput placeholder="pat@example.com" [formControl]="email" required>
-    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    <input matInput placeholder="pat@example.com" formControlName="email">
+    <mat-error *ngIf="signupForm.hasError('required', 'email')">Email is required</mat-error>
+    <mat-error *ngIf="signupForm.hasError('email', 'email')">Invalid email format</mat-error>
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>Enter your password</mat-label>
-    <input matInput [type]="hide ? 'password' : 'text'">
-    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-      [attr.aria-pressed]="hide">
-      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hidePassword">
+      <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
   </mat-form-field>
+  <div *ngIf="signupForm.get('password')!.invalid && (signupForm.get('password')!.dirty || signupForm.get('password')!.touched)">
+    <mat-error *ngIf="signupForm.hasError('required', 'password')">Password is required</mat-error>
+    <mat-error *ngIf="signupForm.hasError('pattern', 'password')">Password must be at least 8 characters long, contain at least one lowercase letter, one uppercase letter, and one number</mat-error>
+  </div>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Enter your confirm password</mat-label>
+    <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword">
+    <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hideConfirmPassword">
+      <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-error *ngIf="signupForm.hasError('notSame')">Passwords do not match</mat-error>
 
   <p>
     <mat-form-field class="example-full-width">
       <mat-label>indirizzo</mat-label>
-      <textarea matInput placeholder="Inserisci il tuo indirizzo"></textarea>
+      <textarea matInput placeholder="Inserisci il tuo indirizzo" formControlName="address"></textarea>
     </mat-form-field>
   </p>
 
   <table class="example-full-width" cellspacing="0"><tr>
     <td><mat-form-field class="example-full-width">
       <mat-label>città</mat-label>
-      <input matInput placeholder="Roma">
+      <input matInput placeholder="Roma" formControlName="city">
     </mat-form-field></td>
     <td><mat-form-field class="example-full-width">
       <mat-label>Postal Code</mat-label>
-      <input matInput #postalCode maxlength="5" placeholder="00042" value="94043">
+      <input matInput #postalCode maxlength="5" placeholder="00042" value="94043" formControlName="postalCode">
       <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
-    </mat-form-field></td>
-  </tr><tr>
-    <td><mat-form-field class="example-full-width">
-      <mat-label>stato</mat-label>
-      <input matInput placeholder="Ex. California">
     </mat-form-field></td>
   </tr>
 </table>
+<button mat-button type="submit" [disabled]="signupForm.invalid">Registrati</button>
+</form>
 <p>
   Sei già registrato?
   <button mat-dialog-close mat-button (click)="openLoginModal()" color="primary">Clicca qui</button>
 </p>
-</form>

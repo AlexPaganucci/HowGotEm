@@ -1,11 +1,38 @@
 .container-scarpa{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 2rem;
 }
 
+.container-scarpa-img{
+  display: flex;
+  width: 70%;
+}
+
 .container-scarpa-img img{
-  width: 500px;
+  width: 75%;
+}
+
+.container-scarpe-imgs{
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.container-scarpe-imgs img{
+  /* width: 100%; */
+  /* width: 30%; */
+  padding: 0.5rem;
+}
+
+.container-scarpa-info{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
 }
 
 .container-scarpa-info form{
@@ -15,4 +42,31 @@
 
 .container-scarpa-info form .quantita{
   display: flex;
+}
+
+.autenticita-scarpa{
+  text-align: center;
+}
+
+.prodotti-correlati{
+  margin-top: 3rem;
+}
+
+.prodotti-correlati h3{
+  text-align: center;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+
+  .container-scarpa{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container-scarpa-img{
+    width: 100%;
+    margin-bottom: 2rem;
+  }
 }

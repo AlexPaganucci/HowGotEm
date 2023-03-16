@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
@@ -8,7 +8,11 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class PaginatorComponent implements OnInit {
 
-  constructor() { }
+  @Output() page: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
+
+  pageChanged(event: PageEvent) {
+    this.page.emit(event);
+  }
 
   ngOnInit(): void {
   }

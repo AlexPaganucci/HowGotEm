@@ -24,6 +24,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   height: 100vh;
 }
 
+/* PAGINA SNEAKERS INPUT FORM WIDHT */
+.container-scarpa-info .mat-form-field-infix{
+  width: 40px;
+}
+
+/* TASTO CLOSE DI SNACKBAR */
+.custom-close-button .mat-button-wrapper{
+  color: #1D818F;
+}
+
 @media screen and (max-width: 1100px) {
   .login-dialog-container{
     width: 35%;
@@ -52,4 +62,5 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .signup-dialog-container{
     width: 95%;
   }
+
 }

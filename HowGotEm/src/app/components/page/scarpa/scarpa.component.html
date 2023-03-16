@@ -1,6 +1,15 @@
+<div>
+<h2></h2>
+</div>
 <div class="container-scarpa">
   <div class="container-scarpa-img">
-    <img src="../../../../assets/img/dunk.jpg" alt="scarpa">
+    <img [src]="immaginePrincipale" alt="Immagine prodotto">
+    <div class="container-scarpe-imgs">
+      <img [src]="img1" alt="Immagine prodotto" (click)="selezionaImmagine(img1)">
+      <img [src]="img2" alt="Immagine prodotto" (click)="selezionaImmagine(img2)">
+      <img [src]="img3" alt="Immagine prodotto" (click)="selezionaImmagine(img3)">
+      <img [src]="img4" alt="Immagine prodotto" (click)="selezionaImmagine(img4)">
+    </div>
   </div>
   <div class="container-scarpa-info">
     <p>brand</p>
@@ -16,19 +25,25 @@
         </mat-select>
       </mat-form-field>
       <div class="quantita">
-        <button mat-button (click)="aumentaQuantita()">+</button>
+        <button mat-button (click)="diminuisciQuantita()">-</button>
         <mat-form-field class="example-full-width">
           <mat-label>Quantità</mat-label>
           <input matInput [(ngModel)]="quantita" name="quantita">
         </mat-form-field>
-        <button mat-button (click)="diminuisciQuantita()">-</button>
+        <button mat-button (click)="aumentaQuantita()">+</button>
       </div>
       <button mat-button>AGGIUNGI AL CARRELLO</button>
     </form>
   </div>
 </div>
-<div>
+<div class="autenticita-scarpa">
   <p>Tutti i prodotti che troverete disponibili sul nostro sito sono nuovi ed originali, verranno consegnati con il
-    sigillo Icy Sneakers, certificato di autenticità per garantire che il prodotto sia stato autenticato prima che ti
+    sigillo How Got'Em, certificato di autenticità per garantire che il prodotto sia stato autenticato prima che ti
     venga consegnato.</p>
+</div>
+<div class="prodotti-correlati">
+  <h3>Prodotti correlati</h3>
+  <div>
+    <app-cards></app-cards>
+  </div>
 </div>

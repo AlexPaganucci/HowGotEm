@@ -1,5 +1,11 @@
+.card-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 .example-card {
-  max-width: 300px;
+  max-width: 20%;
   margin: 1rem;
   padding-bottom: 0;
 }
@@ -27,21 +33,29 @@
 }
 
 @media screen and (max-width: 768px) {
+
+  .card-container{
+    justify-content: center;
+  }
+
   .example-card {
-    flex-basis: calc(50% - 10px);
-    margin-bottom: 20px;
-    margin-right: 20px;
+    max-width: 35%;
   }
 
   .card-footer{
     display: block;
     position: initial;
   }
-}
 
-@media screen and (max-width: 576px) {
-  .example-card {
-    max-width: 90%;
-    margin: 1rem auto;
+  @media screen and (max-width: 576px) {
+
+    .card-container{
+      flex-direction: column;
+      width: 100%;
+    }
+    .example-card {
+      max-width: 80%;
+      margin: 1rem auto;
+    }
   }
 }

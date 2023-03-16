@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarrelloComponent implements OnInit {
 
+  cartVoid: boolean = true;
+
   constructor() { }
 
   ngOnInit(): void {

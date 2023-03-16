@@ -1,1 +1,38 @@
-<p>carrello works!</p>
+<h2 class="title-cart">CARRELLO</h2>
+<div class="container-cart">
+  <section class="products-cart">
+    <div class="cart-void" *ngIf="cartVoid">
+      <p>NON CI SONO ELEMENTI NEL TUO CARRELLO!</p>
+   </div>
+   <div class="cart-full" *ngIf="cartVoid">
+    <button mat-button>X</button>
+    <img src="../../../../assets/img/dunk.jpg" alt="scarpa">
+    <p>€ price</p>
+    <p>quantità</p>
+    <p>€ total price</p>
+   </div>
+  </section>
+  <section class="cart-payment">
+    <h2>RIEPILOGO</h2>
+    <div class="section-cart-payment">
+      <p>Subtotale</p>
+      <p>€ price</p>
+    </div>
+    <div class="section-cart-payment">
+      <p>Costi di spedizione</p>
+      <p>gratis</p>
+    </div>
+    <hr>
+    <div class="section-cart-payment">
+      <p>Totale</p>
+      <p>€ price</p>
+    </div>
+    <hr>
+    <div class="Payment-method">
+      <button mat-button><i class="fa-brands fa-paypal"></i></button>
+      <button mat-button><i class="fa-brands fa-cc-mastercard"></i></button>
+      <button mat-button><i class="fa-brands fa-stripe"></i></button>
+      <button mat-button><i class="fa-brands fa-cc-visa"></i></button>
+    </div>
+  </section>
+</div>

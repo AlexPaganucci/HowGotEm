@@ -16,6 +16,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatSliderModule} from '@angular/material/slider';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
@@ -36,7 +37,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatChipsModule,
     MatSliderModule,
     MatButtonToggleModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSnackBarModule
   ],
   exports: [
     CommonModule,
@@ -55,7 +57,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatChipsModule,
     MatSliderModule,
     MatButtonToggleModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModule { }

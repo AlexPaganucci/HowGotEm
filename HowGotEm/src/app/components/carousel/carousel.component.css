@@ -62,6 +62,11 @@
   opacity: 1;
 }
 
+.carousel-item button{
+  background-color: #1D818F;
+  color: white;
+}
+
 .btn {
   position: absolute;
   top: 50%;

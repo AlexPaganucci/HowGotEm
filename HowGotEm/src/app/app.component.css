@@ -41,6 +41,11 @@ mat-toolbar img {
   background-color: white;
 }
 
+.mat-toolbar{
+  position: fixed;
+  z-index: 100000000000000;
+}
+
 .mat-toolbar-row{
   justify-content: space-between;
 }
@@ -88,6 +93,10 @@ mat-toolbar img {
 
 .mat-toolbar-row div:last-child{
   margin-right: 20px;
+}
+
+.example-sidenav-content{
+  margin-top: 64px;
 }
 
 @media screen and (max-width: 480px) {

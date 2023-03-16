@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { lastValueFrom } from 'rxjs';
+import { SignupRequest } from 'src/app/models/signup-request';
 import { ModalService } from 'src/app/services/modal.service';
-import { LoginModalComponent } from '../login-modal/login-modal.component';
+import { SignupService } from 'src/app/services/signup.service';
+
+const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
 
 @Component({
   selector: 'app-signup-modal',
@@ -11,12 +14,14 @@ import { LoginModalComponent } from '../login-modal/login-modal.component';
 })
 export class SignupModalComponent implements OnInit {
 
-  hide = true;
-  email = new FormControl('', [Validators.required, Validators.email]);
+  hidePassword = true;
+  hideConfirmPassword = true;
+  signupForm!: FormGroup;
 
-  constructor(private modalSrv: ModalService) { }
+  constructor(private signupSrv: SignupService, private modalSrv: ModalService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.createForm();
   }
 
   openLoginModal(){
@@ -24,10 +29,70 @@ export class SignupModalComponent implements OnInit {
   }
 
   getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'You must enter a value';
+    if (this.signupForm.get('email')!.hasError('required')) {
+      return 'You must enter an email';
     }
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+    return this.signupForm.get('email')!.hasError('email') ? 'Not a valid email' : '';
+  }
+
+  passwordsMatch(group: FormGroup): { [key: string]: any } | null {
+    const password = group.get('password')?.value;
+    const confirmPassword = group.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { notSame: true };
+  }
+
+  createForm() {
+    this.signupForm = this.fb.group({
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.pattern(passwordRegex)]],
+      confirmPassword: ['', Validators.required],
+      address: ['', Validators.required],
+      city: ['', Validators.required],
+      postalCode: ['', [Validators.required, Validators.maxLength(5)]],
+    }, { validator: this.passwordsMatch });
+  }
+
+  async onSubmitSignup() {
+    const emailValue = this.signupForm.get('email')?.value;
+    const nameValue = this.signupForm.get('name')?.value;
+    const surnameValue = this.signupForm.get('surname')?.value;
+    const passwordValue = this.signupForm.get('password')?.value;
+    const confirmPasswordValue = this.signupForm.get('confirmPassword')?.value;
+    const addressValue = this.signupForm.get('address')?.value;
+    const cityValue = this.signupForm.get('city')?.value;
+    const postalCodeValue = this.signupForm.get('postalCode')?.value;
+
+    if (!emailValue || !passwordValue || !confirmPasswordValue) {
+      console.error('Errore: email o password non validi');
+      return;
+    }
+
+    if (passwordValue !== confirmPasswordValue) {
+      console.error('Errore: la password e la conferma della password non corrispondono');
+      return;
+    }
+
+    const signup: SignupRequest = {
+      email: emailValue,
+      name: nameValue,
+      surname: surnameValue,
+      password: passwordValue,
+      confirmPassword: confirmPasswordValue,
+      address: addressValue,
+      city: cityValue,
+      postalCode: postalCodeValue
+    };
+
+    try {
+      let response = await lastValueFrom(this.signupSrv.signup(signup));
+      this.signupForm.reset();
+      this.modalSrv.closeModals();
+      this.modalSrv.showNotification("Registrazione effettuata con successo");
+    } catch (error) {
+      console.error('Errore nella chiamata HTTP', error);
+    }
   }
 }
