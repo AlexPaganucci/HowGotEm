@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { lastValueFrom } from 'rxjs';
 import { SignupRequest } from 'src/app/models/signup-request';
+import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
-import { SignupService } from 'src/app/services/signup.service';
 
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
 
@@ -18,7 +18,7 @@ export class SignupModalComponent implements OnInit {
   hideConfirmPassword = true;
   signupForm!: FormGroup;
 
-  constructor(private signupSrv: SignupService, private modalSrv: ModalService, private fb: FormBuilder) { }
+  constructor(private authSrv: AuthService, private modalSrv: ModalService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -52,6 +52,7 @@ export class SignupModalComponent implements OnInit {
       address: ['', Validators.required],
       city: ['', Validators.required],
       postalCode: ['', [Validators.required, Validators.maxLength(5)]],
+      birthdate: ['', [Validators.required]],
     }, { validator: this.passwordsMatch });
   }
 
@@ -64,6 +65,7 @@ export class SignupModalComponent implements OnInit {
     const addressValue = this.signupForm.get('address')?.value;
     const cityValue = this.signupForm.get('city')?.value;
     const postalCodeValue = this.signupForm.get('postalCode')?.value;
+    const birthdateValue = this.signupForm.get('birthdate')?.value;
 
     if (!emailValue || !passwordValue || !confirmPasswordValue) {
       console.error('Errore: email o password non validi');
@@ -83,11 +85,12 @@ export class SignupModalComponent implements OnInit {
       confirmPassword: confirmPasswordValue,
       address: addressValue,
       city: cityValue,
-      postalCode: postalCodeValue
+      postalCode: postalCodeValue,
+      birthdate: birthdateValue
     };
 
     try {
-      let response = await lastValueFrom(this.signupSrv.signup(signup));
+      let response = await lastValueFrom(this.authSrv.signup(signup));
       this.signupForm.reset();
       this.modalSrv.closeModals();
       this.modalSrv.showNotification("Registrazione effettuata con successo");

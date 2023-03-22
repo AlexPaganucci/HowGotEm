@@ -1,5 +1,6 @@
 package it.alexpaganucci.howgotem.entities;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,11 +15,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -62,9 +64,12 @@ public class User {
 	@Column(name="ORDERS_ID")
 	@JsonManagedReference
 	private List<Order> orders;
+	@Temporal(TemporalType.DATE)
+	@Column(name="BIRTHDATE")
+	private Date birthdate;
 	
 	
-	public User(String email, String name, String surname, String password, String address, String city, String postalCode) {
+	public User(String email, String name, String surname, String password, String address, String city, String postalCode, Date birthdate) {
 		this.email = email;
 		this.name = name;
 		this.surname = surname;
@@ -72,6 +77,7 @@ public class User {
 		this.address = address;
 		this.city = city;
 		this.postalCode = postalCode;
+		this.birthdate = birthdate;
 	}
 
 }

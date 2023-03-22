@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Shoe, Size } from 'src/app/models/shoe';
+import { CartService } from 'src/app/services/cart.service';
+import { ShoeService } from 'src/app/services/shoe.service';
 
 @Component({
   selector: 'app-scarpa',
@@ -6,6 +10,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./scarpa.component.css']
 })
 export class ScarpaComponent implements OnInit {
+
+  //SCARPA CON ID GIUSTO
+  shoe!: Shoe;
+  //SIZE
+  sizeNumber!: number;
+  selectedSize!: Size;
   //QUANTITà
   quantita: number = 1;
   //IMMAGINI
@@ -16,9 +26,21 @@ export class ScarpaComponent implements OnInit {
 
   immaginePrincipale: string = this.img1;
 
-  constructor() { }
+  constructor(private shoeSrv: ShoeService, private cartSrv: CartService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    const id = +this.route.snapshot.paramMap.get('id')!;
+    this.shoeSrv.getShoeById(id).subscribe({
+      next: (shoe) => this.shoe = shoe,
+      error: (error) => console.log(error),
+      complete: () => console.log("ok")
+    })
+  }
+
+  onSizeChange() {
+    this.selectedSize = this.shoe.sizes.find(size => size.size === Number(this.sizeNumber))!;
+    console.log(this.selectedSize);
+    console.log(this.sizeNumber);
   }
 
   aumentaQuantita(){
@@ -57,4 +79,7 @@ export class ScarpaComponent implements OnInit {
     }
   }
 
+  addToCart(){
+    this.cartSrv.addToCart(this.shoe, this.selectedSize);
+  }
 }

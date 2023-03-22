@@ -9,51 +9,56 @@ import { ShoeDto } from '../models/shoe-dto';
   providedIn: 'root'
 })
 export class ShoeService {
+
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
   addShoe(shoe: ShoeDto): Observable<Shoe> {
-    return this.http.post<Shoe>(`http://${this.apiUrl}/shoe`, shoe);
+    return this.http.post<Shoe>(`${this.apiUrl}/shoe`, shoe);
   }
 
   deleteShoe(id: number): Observable<any> {
-    return this.http.delete(`http://${this.apiUrl}/shoe${id}`);
+    return this.http.delete(`${this.apiUrl}/shoe${id}`);
   }
 
   getAllShoes(): Observable<Shoe[]> {
-    return this.http.get<Shoe[]>(`http://${this.apiUrl}/shoe`);
+    return this.http.get<Shoe[]>(`${this.apiUrl}/shoe`);
+  }
+
+  getShoeById(id: number){
+    return this.http.get<Shoe>(`${this.apiUrl}/shoe/${id}`)
   }
 
   filterShoeByPartOfModel(m: string): Observable<Shoe[]> {
-    const url = `http://${this.apiUrl}/shoe/filter_by_part_of_model=${m}`;
+    const url = `${this.apiUrl}/shoe/filter_by_part_of_model=${m}`;
     return this.http.get<Shoe[]>(url);
   }
 
   filterShoeByModel(m: string): Observable<Shoe[]> {
-    const url = `http://${this.apiUrl}/shoe/filter_by_model=${m}`;
+    const url = `${this.apiUrl}/shoe/filter_by_model=${m}`;
     return this.http.get<Shoe[]>(url);
   }
 
   filterShoeBySkuCode(s: string): Observable<Shoe> {
-    const url = `http://${this.apiUrl}/shoe/filter_by_sku_code=${s}`;
+    const url = `${this.apiUrl}/shoe/filter_by_sku_code=${s}`;
     return this.http.get<Shoe>(url);
   }
 
   filterShoeByBrand(b: string): Observable<Shoe[]> {
-    const url = `http://${this.apiUrl}/shoe/filter_by_brand=${b}`;
+    const url = `${this.apiUrl}/shoe/filter_by_brand=${b}`;
     return this.http.get<Shoe[]>(url);
   }
 
   filterShoesByColor(c: string): Observable<Shoe[]> {
-    return this.http.get<Shoe[]>(`http://${this.apiUrl}/shoe/filter_by_color=${c}`);
+    return this.http.get<Shoe[]>(`${this.apiUrl}/shoe/filter_by_color=${c}`);
   }
 
   filterShoesBySize(s: number): Observable<Shoe[]> {
-    return this.http.get<Shoe[]>(`http://${this.apiUrl}/shoe/filter_by_size=${s}`);
+    return this.http.get<Shoe[]>(`${this.apiUrl}/shoe/filter_by_size=${s}`);
   }
 
   filterShoesByMaxPrice(p: number): Observable<Shoe[]> {
-    return this.http.get<Shoe[]>(`http://${this.apiUrl}/shoe/filter_by_price=${p}`);
+    return this.http.get<Shoe[]>(`${this.apiUrl}/shoe/filter_by_price=${p}`);
   }
 }

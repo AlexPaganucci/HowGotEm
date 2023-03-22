@@ -47,14 +47,17 @@
             <mat-icon> person_pin</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="openLoginModal()">
+            <button mat-menu-item (click)="openLoginModal()" *ngIf="!isLogged">
               <span>ACCEDI</span>
             </button>
-            <button mat-menu-item (click)="openSignupModal()">
+            <button mat-menu-item (click)="openSignupModal()" *ngIf="!isLogged">
               <span>REGISTRATI</span>
             </button>
-            <button mat-menu-item routerLink="/profilo">
+            <button mat-menu-item routerLink="/profilo" *ngIf="isLogged">
               <span>PROFILO</span>
+            </button>
+            <button mat-menu-item (click)="openLogoutModal()" *ngIf="isLogged">
+              <span>ESCI</span>
             </button>
           </mat-menu>
           <button *ngIf="!isSmallScreen" mat-icon-button aria-label="Example icon button with a user icon"
@@ -82,7 +85,7 @@
     <button mat-menu-item routerLink="/chisiamo">
       <span>CHI SIAMO</span>
     </button>
-    <button mat-menu-item routerLink="/profilo">
+    <button mat-menu-item routerLink="/profilo" *ngIf="isLogged">
       <span>PROFILO</span>
     </button>
     <button mat-menu-item routerLink="/carrello">
@@ -90,11 +93,14 @@
       <span>CARRELLO</span>
     </button>
     <div class="sidebar-form">
-      <button mat-menu-item (click)="openLoginModal()">
+      <button mat-menu-item (click)="openLoginModal()" *ngIf="!isLogged">
         <span>LOGIN</span>
       </button>
-      <button mat-menu-item (click)="openSignupModal()">
+      <button mat-menu-item (click)="openSignupModal()" *ngIf="!isLogged">
         <span>REGISTRATI</span>
+      </button>
+      <button mat-menu-item (click)="openLogoutModal()" *ngIf="isLogged">
+        <span>ESCI</span>
       </button>
     </div>
     <div class="container-social-header">

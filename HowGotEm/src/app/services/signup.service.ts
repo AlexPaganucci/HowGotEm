@@ -20,11 +20,12 @@ export class SignupService {
   constructor(private http: HttpClient) { }
 
   public signup(signupReq: SignupRequest): Observable<Token> {
-    return this.http.post<Token>(`http://${this.apiUrl}/auth/signup`, signupReq )
+    return this.http.post<Token>(`${this.apiUrl}/auth/signup`, signupReq )
       .pipe(
         tap(data => {
           this.authSubject.next(data);
           sessionStorage.setItem(CONST_UTENTE, JSON.stringify(data));
+          // window.location.reload();
         }),
         catchError(error => {
           console.error('Errore nella chiamata HTTP', error);

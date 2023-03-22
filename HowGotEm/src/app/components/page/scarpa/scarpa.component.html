@@ -1,7 +1,7 @@
 <div>
 <h2></h2>
 </div>
-<div class="container-scarpa">
+<div class="container-scarpa" *ngIf="shoe">
   <div class="container-scarpa-img">
     <img [src]="immaginePrincipale" alt="Immagine prodotto">
     <div class="container-scarpe-imgs">
@@ -13,15 +13,12 @@
   </div>
   <div class="container-scarpa-info">
     <p>brand</p>
-    <h2>Nome scarpa</h2>
-    <p>prezzo</p>
+    <h2>{{shoe.model}}</h2>
     <p>codice di scarpa</p>
-    <form action="">
       <mat-form-field class="example-full-width taglia">
         <mat-label>Taglia</mat-label>
-        <mat-select>
-          <mat-option value="one">First option</mat-option>
-          <mat-option value="two">Second option</mat-option>
+        <mat-select [(ngModel)]="sizeNumber" (selectionChange)="onSizeChange()">
+          <mat-option value={{size.size}} *ngFor="let size of shoe.sizes">{{size.size}}</mat-option>
         </mat-select>
       </mat-form-field>
       <div class="quantita">
@@ -32,8 +29,8 @@
         </mat-form-field>
         <button mat-button (click)="aumentaQuantita()">+</button>
       </div>
-      <button mat-button>AGGIUNGI AL CARRELLO</button>
-    </form>
+      <p *ngIf="selectedSize">€ {{selectedSize.price}}</p>
+      <button mat-button (click)="addToCart()">AGGIUNGI AL CARRELLO</button>
   </div>
 </div>
 <div class="autenticita-scarpa">

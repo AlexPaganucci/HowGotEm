@@ -3,7 +3,9 @@ export interface Shoe {
   model: string,
   skuCode: string,
   brand: string,
-  color: string
+  color: string,
+  sizes: Size[],
+  urlImg: string
 }
 
 export interface Size {
@@ -11,5 +13,5 @@ export interface Size {
   size: number,
   quantityAvailable: number,
   price: number,
-  shoe: Shoe
+  shoeId: number
 }

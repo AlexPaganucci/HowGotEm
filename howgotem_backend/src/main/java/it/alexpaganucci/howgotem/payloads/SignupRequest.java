@@ -1,8 +1,11 @@
 package it.alexpaganucci.howgotem.payloads;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -38,4 +41,6 @@ public class SignupRequest {
 	@NotBlank
 	@Size(min = 5, max = 5, message = "Il codice postale deve contenere esattamente 5 cifre")
 	private String postalCode;
+	@Temporal(TemporalType.DATE)
+	private Date birthdate;
 }

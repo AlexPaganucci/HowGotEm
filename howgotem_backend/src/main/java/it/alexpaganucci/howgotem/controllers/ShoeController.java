@@ -9,7 +9,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,12 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.alexpaganucci.howgotem.entities.Shoe;
 import it.alexpaganucci.howgotem.entities.Size;
+import it.alexpaganucci.howgotem.exceptions.ShoeNotFoundException;
 import it.alexpaganucci.howgotem.payloads.ShoeDto;
 import it.alexpaganucci.howgotem.payloads.SizeDto;
 import it.alexpaganucci.howgotem.services.ShoeService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true", allowedHeaders = "*")
 @RequestMapping("/api/shoe")
 public class ShoeController {
 
@@ -34,7 +33,7 @@ public class ShoeController {
 	
 	@PostMapping
     public ResponseEntity<ShoeDto> addShoe(@Valid @RequestBody ShoeDto shoeDto) {
-        Shoe shoe = new Shoe(shoeDto.getModel(), shoeDto.getSkuCode(), shoeDto.getBrand(), shoeDto.getColor());
+        Shoe shoe = new Shoe(shoeDto.getModel(), shoeDto.getSkuCode(), shoeDto.getBrand(), shoeDto.getColor(), shoeDto.getUrlImg());
         List<Size> sizes = new ArrayList<>();
         for (SizeDto sizeDto : shoeDto.getSizes()) {
             Size size = new Size(sizeDto.getSize(), sizeDto.getQuantityAvailable(), sizeDto.getPrice(), shoe);
@@ -48,6 +47,7 @@ public class ShoeController {
         savedShoeDto.setSkuCode(savedShoe.getSkuCode());
         savedShoeDto.setBrand(savedShoe.getBrand());
         savedShoeDto.setColor(savedShoe.getColor());
+        savedShoeDto.setUrlImg(savedShoe.getUrlImg());
         List<SizeDto> savedSizeDtos = new ArrayList<>();
         for (Size size : savedShoe.getSizes()) {
             SizeDto sizeDto = new SizeDto();
@@ -83,6 +83,12 @@ public class ShoeController {
 		}
 		
 		return new ResponseEntity<>(list, HttpStatus.OK);
+	}
+	
+	@GetMapping("{id}")
+	public ResponseEntity<Object> findShoeById(@PathVariable("id") Long id){
+		return new ResponseEntity<>(shoeService.findById(id)
+				.orElseThrow(()-> new ShoeNotFoundException(id)), HttpStatus.OK);
 	}
 	
 	@GetMapping("/filter_by_part_of_model={m}")

@@ -1,6 +1,8 @@
 package it.alexpaganucci.howgotem;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +53,7 @@ public class HowgotemApplication implements CommandLineRunner{
 		
 //		PROVE DI INSERIMENTO PER VEDERE LE TABELLE
 		
-//		User u = new User("alex.paganucci@gmail.com", "Alex", "Paganucci", passwordEncoder.encode("Alexpaga1994"), "Via Bellandra 25/E", "Fano", "61032");
+//		User u = new User("alex.paganucci@gmail.com", "Alex", "Paganucci", passwordEncoder.encode("Alexpaga1994"), "Via Bellandra 25/E", "Fano", "61032", new GregorianCalendar(1994, Calendar.JULY, 9).getTime());
 //		Role r = new Role(RoleType.USER);
 //		Role r1 = new Role(RoleType.ADMIN);
 //		u.setRoles(new HashSet<>() {{

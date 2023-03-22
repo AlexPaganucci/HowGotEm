@@ -1,4 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { Shoe } from 'src/app/models/shoe';
+import { ShoeService } from 'src/app/services/shoe.service';
 
 @Component({
   selector: 'app-card',
@@ -7,36 +9,14 @@ import { Component, OnInit, Output } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
-  data = [
-    {nome:"dunk-low", brand:"nike"},
-    {nome:"jordan1", brand:"nike"},
-    {nome:"550", brand:"new-balance"},
-    {nome:"dunk-low", brand:"nike"},
-    {nome:"jordan1", brand:"nike"},
-    {nome:"550", brand:"new-balance"},
-    {nome:"dunk-low", brand:"nike"},
-    {nome:"jordan1", brand:"nike"},
-    {nome:"550", brand:"new-balance"},
-    {nome:"dunk-low", brand:"nike"},
-    {nome:"jordan1", brand:"nike"},
-    {nome:"550", brand:"new-balance"},
-    {nome:"dunk-low", brand:"nike"},
-    {nome:"jordan1", brand:"nike"},
-    {nome:"550", brand:"new-balance"},
-    {nome:"dunk-low", brand:"nike"},
-    {nome:"jordan1", brand:"nike"},
-    {nome:"550", brand:"new-balance"},
-    {nome:"dunk-low", brand:"nike"},
-    {nome:"jordan1", brand:"nike"},
-    {nome:"550", brand:"new-balance"},
-    {nome:"dunk-low", brand:"nike"},
-    {nome:"jordan1", brand:"nike"},
-    {nome:"550", brand:"new-balance"}
-  ];
+  shoes: Shoe[] = [];
 
-  constructor() { }
+  constructor(private shoeSrv: ShoeService) { }
 
   ngOnInit(): void {
+    this.shoeSrv.getAllShoes().subscribe((shoes: Shoe[]) => {
+      this.shoes = shoes;
+    });
   }
 
 }

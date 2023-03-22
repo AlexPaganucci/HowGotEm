@@ -18,4 +18,5 @@ public class ShoeDto {
     private String brand;
     private String color;
     private List<SizeDto> sizes;
+    private String urlImg;
 }

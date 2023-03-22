@@ -11,4 +11,5 @@ export interface User {
   city: string;
   postalCode: string;
   orders: Order[];
+  birthdate: Date;
 }

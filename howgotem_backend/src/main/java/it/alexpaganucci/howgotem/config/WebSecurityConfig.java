@@ -3,6 +3,7 @@ package it.alexpaganucci.howgotem.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -56,10 +57,10 @@ public class WebSecurityConfig {
 		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
 				.antMatchers("/api/auth/**").permitAll() 
-				.antMatchers("/user/**").permitAll()
-//				.antMatchers(HttpMethod.POST, "/api/user").hasAuthority("ADMIN")
-//				.antMatchers(HttpMethod.PUT, "/api/user/{id}").hasAuthority("ADMIN")		
-//				.antMatchers(HttpMethod.DELETE, "/api/user/{id}").hasAuthority("ADMIN")
+				.antMatchers(HttpMethod.GET, "/api/shoe/**").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/shoe/**").hasAuthority("ADMIN")
+				.antMatchers(HttpMethod.PUT, "/api/shoe/**").hasAuthority("ADMIN")
+				.antMatchers(HttpMethod.DELETE, "/api/shoe/**").hasAuthority("ADMIN")
 				.anyRequest().authenticated();
 
 		http.authenticationProvider(authenticationProvider());

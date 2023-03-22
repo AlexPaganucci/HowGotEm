@@ -46,11 +46,14 @@ public class Shoe {
 	@OneToMany(mappedBy = "shoe", cascade = CascadeType.REMOVE)
 	@JsonManagedReference
 	List<Size> sizes = new ArrayList<>();
+	@Column(name="URL_IMG", nullable=false)
+	private String urlImg;
 	
-	public Shoe(String model, String skuCode, String brand, String color) {
+	public Shoe(String model, String skuCode, String brand, String color, String urlImg) {
 		this.model = model;
 		this.skuCode = skuCode;
 		this.brand = brand;
 		this.color = color;
+		this.urlImg = urlImg;
 	}
 }

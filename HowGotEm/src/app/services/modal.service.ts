@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginModalComponent } from '../components/login-modal/login-modal.component';
+import { LogoutConfirmModalComponent } from '../components/logout-confirm-modal/logout-confirm-modal.component';
 import { SignupModalComponent } from '../components/signup-modal/signup-modal.component';
 import { SneakersModalComponent } from '../components/sneakers-modal/sneakers-modal.component';
 
@@ -27,6 +28,12 @@ export class ModalService {
   openSignupModal(): void {
     this.dialog.open(SignupModalComponent,  {
       panelClass: 'signup-dialog-container'
+    });
+  }
+
+  openLogoutModal(): void {
+    this.dialog.open(LogoutConfirmModalComponent,{
+      panelClass: 'logout-dialog-container'
     });
   }
 

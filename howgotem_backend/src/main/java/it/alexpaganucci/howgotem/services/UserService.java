@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import it.alexpaganucci.howgotem.entities.User;
+import it.alexpaganucci.howgotem.exceptions.PasswordMismatchException;
 import it.alexpaganucci.howgotem.exceptions.UserNotFoundException;
 import it.alexpaganucci.howgotem.payloads.UpdateUserRequest;
 import it.alexpaganucci.howgotem.repositories.UserRepository;
@@ -25,7 +26,7 @@ public class UserService {
 		    userRepository.delete(user);
 		  }
 	  
-	  public void updateUserById(Long id, UpdateUserRequest updateUserRequest) throws UserNotFoundException {
+	  public void updateUserById(Long id, UpdateUserRequest updateUserRequest) throws UserNotFoundException, PasswordMismatchException {
 		    User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id " + id));
 		    if (updateUserRequest.getEmail() != null) {
 		      user.setEmail(updateUserRequest.getEmail());
@@ -36,9 +37,10 @@ public class UserService {
 		    if (updateUserRequest.getSurname() != null) {
 		      user.setSurname(updateUserRequest.getSurname());
 		    }
-		    if (updateUserRequest.getPassword() != null) {
-		      user.setPassword(passwordEncoder.encode(updateUserRequest.getPassword()));
-		    }
+	        if (updateUserRequest.getConfirmPassword() == null || !updateUserRequest.getPassword().equals(updateUserRequest.getConfirmPassword())) {
+	            throw new PasswordMismatchException("Password and confirm password do not match");
+	        }
+	        user.setPassword(passwordEncoder.encode(updateUserRequest.getPassword()));
 		    userRepository.save(user);
 		  }
 	  

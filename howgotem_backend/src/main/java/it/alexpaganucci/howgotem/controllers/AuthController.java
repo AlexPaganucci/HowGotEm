@@ -18,7 +18,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +36,6 @@ import it.alexpaganucci.howgotem.repositories.RoleRepository;
 import it.alexpaganucci.howgotem.repositories.UserRepository;
 import it.alexpaganucci.howgotem.utils.JwtUtils;
 
-@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -83,6 +81,7 @@ public class AuthController {
 	            .address(signUpRequest.getAddress())
 	            .city(signUpRequest.getCity())
 	            .postalCode(signUpRequest.getPostalCode())
+	            .birthdate(signUpRequest.getBirthdate())
 	            .build();
 
 	    Set<String> roles = signUpRequest.getRoles();

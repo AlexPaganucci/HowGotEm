@@ -7,7 +7,7 @@
   </ul>
 </section><hr>
 <section class="section-profile">
-  <h2>Nome e cognome</h2>
+  <h2 *ngIf="user != null">{{user.name}}</h2>
   <p>membro di How Got'Em da 00/00/0000</p>
 </section>
 <section>

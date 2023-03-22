@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +34,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true", allowedHeaders = "*")
 @RequestMapping("/api/order")
 public class OrderController {
 	
@@ -51,7 +50,7 @@ public class OrderController {
 	public ResponseEntity<Order> saveOrder(@RequestBody OrderRequest orderRequest) {
 		log.info("Received order request: {}", orderRequest);
 	    User user = userService.findById(orderRequest.getUserId())
-	    		.orElseThrow(() -> new UserNotFoundException("Shoe not found"));
+	    		.orElseThrow(() -> new UserNotFoundException("User not found"));
 	    List<OrderShoe> orderShoes = new ArrayList<>();
 	    for (OrderShoeRequest shoe : orderRequest.getShoes()) {
 	        Shoe s = shoeService.findById(shoe.getShoeId())
@@ -77,8 +76,9 @@ public class OrderController {
         }
         return totalPrice;
     }
-    
+//    DA CONTROLLARE 
     @DeleteMapping("{id}")
+    @PreAuthorize("hasAuthority('USER') and (#id == authentication.principal.id)")
     public ResponseEntity<?>deleteOrder(@PathVariable Long id){
 		Optional<Order> optOrder = orderService.findById(id);
 		if( !optOrder.isPresent() )  {
@@ -92,6 +92,7 @@ public class OrderController {
 	}
     
     @GetMapping("/filter_by_user={id}")
+    @PreAuthorize("hasAuthority('USER') and (#id == authentication.principal.id)")
     public ResponseEntity<List<Order>> filterOrderByUser(@PathVariable Long id){
     	return new ResponseEntity<>(orderService.filterOrderByUser(id), HttpStatus.OK);
     }

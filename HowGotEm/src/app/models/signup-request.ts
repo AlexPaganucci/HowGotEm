@@ -8,5 +8,6 @@ password: string,
 confirmPassword: string,
 address: string,
 city: string,
-postalCode: string
+postalCode: string,
+birthdate: Date
 }

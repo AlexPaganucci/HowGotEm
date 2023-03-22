@@ -26,6 +26,7 @@ import { ScarpaComponent } from './components/page/scarpa/scarpa.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorComponent } from './components/error/error.component';
 import { AuthTokenInterceptor } from './auth/auth-token.interceptor';
+import { LogoutConfirmModalComponent } from './components/logout-confirm-modal/logout-confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { AuthTokenInterceptor } from './auth/auth-token.interceptor';
     PaginatorComponent,
     ChiSiamoComponent,
     ScarpaComponent,
-    ErrorComponent
+    ErrorComponent,
+    LogoutConfirmModalComponent
   ],
   imports: [
     BrowserModule,

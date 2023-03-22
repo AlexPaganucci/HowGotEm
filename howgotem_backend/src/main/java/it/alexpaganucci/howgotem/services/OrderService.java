@@ -23,8 +23,8 @@ public class OrderService {
 		orderRepository.deleteById(id);
 	}
 	
-	public List<Order> filterOrderByUser(Long id){
-		return orderRepository.filterOrderByUser(id);
+	public List<Order> filterOrderByUser(Long userId){
+		return orderRepository.filterOrderByUser(userId);
 	}
 	
 	public Optional<Order> findById(Long id){
