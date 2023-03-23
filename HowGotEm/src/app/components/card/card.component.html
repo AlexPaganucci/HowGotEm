@@ -8,6 +8,12 @@
       <mat-card-content>
         <img mat-card-image src="../../../assets/img/dunk.jpg" alt="nike dunk" [routerLink]="['/scarpa', shoe.id]">
       </mat-card-content>
+      <span *ngIf="isAdmin">
+        <button mat-button (click)="goToAdminPage(shoe.id)">MODIFICA</button>
+      </span>
     </mat-card>
   </div>
+  <span *ngIf="isAdmin">
+    <button mat-button routerLink="/admin">MODIFICA</button>
+  </span>
 </div>

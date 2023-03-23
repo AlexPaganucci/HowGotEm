@@ -37,7 +37,6 @@ export class AuthService {
           this.authSubject.next(data);
           sessionStorage.setItem(CONST_UTENTE, JSON.stringify(data));
           this.setCart();
-          console.log(data);
         }),
         catchError(error => {
           console.error('Errore nella chiamata HTTP', error);
@@ -52,6 +51,7 @@ export class AuthService {
         tap(data => {
           this.authSubject.next(data);
           sessionStorage.setItem(CONST_UTENTE, JSON.stringify(data));
+          this.setCart();
         }),
         catchError(error => {
           console.error('Errore nella chiamata HTTP', error);

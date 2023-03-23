@@ -1,1 +1,52 @@
-<p>admin-form works!</p>
+<form class="example-form" [formGroup]="adminForm" (ngSubmit)="onSubmitAdmin()">
+  <mat-form-field appearance="fill">
+    <mat-label>modello</mat-label>
+    <input matInput formControlName="model">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>sku code</mat-label>
+    <input matInput formControlName="skuCode">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>brand</mat-label>
+    <input matInput formControlName="brand">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>colore</mat-label>
+    <input matInput formControlName="color">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>taglia</mat-label>
+    <mat-select formControlName="size">
+      <mat-option value=35>35</mat-option>
+      <mat-option value=36>36</mat-option>
+      <mat-option value=37>37</mat-option>
+      <mat-option value=38>38</mat-option>
+      <mat-option value=39>39</mat-option>
+      <mat-option value=40>40</mat-option>
+      <mat-option value=41>41</mat-option>
+      <mat-option value=42>42</mat-option>
+      <mat-option value=43>43</mat-option>
+      <mat-option value=44>44</mat-option>
+      <mat-option value=45>45</mat-option>
+      <mat-option value=46>46</mat-option>
+    </mat-select>
+    <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>quantità disponibile</mat-label>
+    <input matInput type="number" formControlName="quantityAvailable">
+  </mat-form-field>
+  <mat-form-field appearance="fill" floatLabel="always">
+    <mat-label>Amount</mat-label>
+    <input matInput type="number" class="example-right-align" placeholder="0" formControlName="price">
+    <span matTextPrefix>$&nbsp;</span>
+    <span matTextSuffix>.00</span>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>url immagine</mat-label>
+    <input matInput formControlName="urlImg">
+  </mat-form-field>
+  <button mat-button type="submit" [disabled]="adminForm.invalid" *ngIf="isModifica">Modifica</button>
+  <button mat-button type="submit" [disabled]="adminForm.invalid" *ngIf="!isModifica">salva</button>
+</form>

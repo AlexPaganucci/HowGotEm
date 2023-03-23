@@ -20,10 +20,10 @@ const routes: Routes = [
   {path: "carrello", component: CarrelloComponent},
   {path: "profilo", component: ProfiloComponent, canActivate:[AuthGuard]},
   {path: "admin", component: AdminFormComponent, canActivate:[AdminGuard]},
+  {path: "admin/:id", component: AdminFormComponent, canActivate:[AdminGuard]},
   {path: "chisiamo", component: ChiSiamoComponent},
   {path: "scarpa/:id", component: ScarpaComponent},
   {path:'**', component : ErrorComponent}
-  // {path: "scarpa/:id", component: ScarpaComponent}
 ];
 
 @NgModule({

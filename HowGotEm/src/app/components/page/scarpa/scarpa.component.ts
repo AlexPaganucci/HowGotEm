@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CartShoe } from 'src/app/models/cart';
 import { Shoe, Size } from 'src/app/models/shoe';
 import { CartService } from 'src/app/services/cart.service';
+import { ModalService } from 'src/app/services/modal.service';
 import { ShoeService } from 'src/app/services/shoe.service';
 
 @Component({
@@ -26,7 +28,7 @@ export class ScarpaComponent implements OnInit {
 
   immaginePrincipale: string = this.img1;
 
-  constructor(private shoeSrv: ShoeService, private cartSrv: CartService, private route: ActivatedRoute) { }
+  constructor(private shoeSrv: ShoeService, private cartSrv: CartService, private modalSrv: ModalService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id')!;
@@ -79,7 +81,15 @@ export class ScarpaComponent implements OnInit {
     }
   }
 
-  addToCart(){
-    this.cartSrv.addToCart(this.shoe, this.selectedSize);
+  addToCart() {
+    const cartShoe: CartShoe = {
+      shoe: this.shoe,
+      sizes: [{
+        size: this.selectedSize,
+        quantityOrdered: this.quantita,
+      }]
+    };
+    this.cartSrv.addToCart(cartShoe);
+    this.modalSrv.showNotification("Scarpa aggiunta al carrello");
   }
 }

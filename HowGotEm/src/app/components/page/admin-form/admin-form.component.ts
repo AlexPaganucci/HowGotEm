@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { lastValueFrom } from 'rxjs';
+import { Shoe } from 'src/app/models/shoe';
+import { ShoeDto } from 'src/app/models/shoe-dto';
+import { SizeDto } from 'src/app/models/size-dto';
+import { ModalService } from 'src/app/services/modal.service';
+import { ShoeService } from 'src/app/services/shoe.service';
 
 @Component({
   selector: 'app-admin-form',
@@ -7,9 +15,95 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminFormComponent implements OnInit {
 
-  constructor() { }
+  shoeId!: number;
+  adminForm!: FormGroup;
+  isModifica: boolean = false;
+  shoe!: Shoe;
+
+  constructor(private shoeSrv: ShoeService, private route: ActivatedRoute, private modalSrv: ModalService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.shoeId = +this.route.snapshot.params['id'];
+    if (this.shoeId) {
+      this.isModifica = true;
+      this.loadShoe();
+    }
+    this.createAdminForm();
   }
 
+  createAdminForm(){
+    this.adminForm = this.fb.group({
+      model: ['', Validators.required],
+      skuCode: ['', Validators.required],
+      brand: ['', Validators.required],
+      color: ['', Validators.required],
+      size: ['', Validators.required],
+      quantityAvailable: ['', Validators.required],
+      price: ['', Validators.required],
+      urlImg: ['', Validators.required]
+    })
+  }
+
+  async loadShoe() {
+    try {
+      this.shoe = await lastValueFrom(this.shoeSrv.getShoeById(this.shoeId));
+      this.adminForm.patchValue({
+        model: this.shoe.model,
+        skuCode: this.shoe.skuCode,
+        brand: this.shoe.brand,
+        color: this.shoe.color,
+        size: this.shoe.sizes[0].size,
+        quantityAvailable: this.shoe.sizes[0].quantityAvailable,
+        price: this.shoe.sizes[0].price,
+        urlImg: this.shoe.urlImg
+      });
+    } catch (error) {
+      console.error('Errore nella chiamata HTTP', error);
+    }
+  }
+
+  async onSubmitAdmin(){
+    console.log(this.adminForm);
+    const modelValue = this.adminForm.get('model')?.value;
+    const skuCodeValue = this.adminForm.get('skuCode')?.value;
+    const brandValue = this.adminForm.get('brand')?.value;
+    const colorValue = this.adminForm.get('color')?.value;
+    const sizeValue = this.adminForm.get('size')?.value;
+    const quantityAvailableValue = this.adminForm.get('quantityAvailable')?.value;
+    const priceValue = this.adminForm.get('price')?.value;
+    const urlImgValue = this.adminForm.get('urlImg')?.value;
+
+    const adminRequest: ShoeDto = {
+      model: modelValue,
+      skuCode: skuCodeValue,
+      brand: brandValue,
+      color: colorValue,
+      sizes: [
+        {
+          size: sizeValue,
+          quantityAvailable: quantityAvailableValue,
+          price: priceValue
+        }
+      ],
+      urlImg: urlImgValue
+    };
+
+    if(!this.isModifica){
+      try {
+        let response = await lastValueFrom(this.shoeSrv.addShoe(adminRequest));
+        this.adminForm.reset();
+        this.modalSrv.showNotification("Scarpa aggiunta con successo");
+      } catch (error) {
+        console.error('Errore nella chiamata HTTP', error);
+      }
+    } else {
+      // try {
+      //   let response = await lastValueFrom(this.shoeSrv.(adminRequest));
+      //   this.adminForm.reset();
+      //   this.modalSrv.showNotification("Scarpa aggiunta con successo");
+      // } catch (error) {
+      //   console.error('Errore nella chiamata HTTP', error);
+      // }
+    }
+  }
 }

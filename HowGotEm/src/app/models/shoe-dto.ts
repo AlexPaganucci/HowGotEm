@@ -5,5 +5,6 @@ export interface ShoeDto {
   skuCode: string,
   brand: string,
   color: string,
-  sizes: SizeDto[]
+  sizes: SizeDto[],
+  urlImg: string
 }

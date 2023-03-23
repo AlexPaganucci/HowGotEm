@@ -1,22 +1,58 @@
 <h2 class="title-cart">CARRELLO</h2>
 <div class="container-cart">
   <section class="products-cart">
-    <div class="cart-void" *ngIf="cartVoid">
-      <p>NON CI SONO ELEMENTI NEL TUO CARRELLO!</p>
-   </div>
-   <div class="cart-full" *ngIf="cartVoid">
-    <button mat-button>X</button>
-    <img src="../../../../assets/img/dunk.jpg" alt="scarpa">
-    <p>€ price</p>
-    <p>quantità</p>
-    <p>€ total price</p>
-   </div>
+    <div *ngIf="shoes.length > 0; else emptyCart">
+      <h2>Carrello</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Modello</th>
+            <th>Prezzo</th>
+            <th>Taglia</th>
+            <th>Quantità</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cartShoe of cartShoes">
+            <td>{{ cartShoe.shoe.model }}</td>
+            <td>{{ cartShoe.shoe.sizes[0].price | currency: 'EUR' }}</td>
+            <td>
+              <ul>
+                <li *ngFor="let size of cartShoe.sizes">{{ size.size.size }}</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li *ngFor="let size of cartShoe.sizes">
+                  {{ size.quantityOrdered }}
+                </li>
+              </ul>
+            </td>
+            <td>
+              <button (click)="removeFromCart(cartShoe.shoe.id)">Rimuovi</button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5">
+              Totale: {{ cartTotalPrice | currency: 'EUR' }}
+              <button (click)="clearCart()">Svuota Carrello</button>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <ng-template #emptyCart>
+      <p>Il carrello è vuoto.</p>
+    </ng-template>
   </section>
   <section class="cart-payment">
     <h2>RIEPILOGO</h2>
     <div class="section-cart-payment">
       <p>Subtotale</p>
-      <p>€ price</p>
+      <p>{{ cartTotalPrice | currency: 'EUR' }}</p>
     </div>
     <div class="section-cart-payment">
       <p>Costi di spedizione</p>
