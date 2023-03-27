@@ -1,15 +1,17 @@
 <h2>Inserisci i tuoi dati per registrarti</h2>
 <form class="example-form" [formGroup]="signupForm" (ngSubmit)="onSubmitSignup()">
-  <table class="example-full-width" cellspacing="0"><tr>
-    <td><mat-form-field class="example-full-width">
-      <mat-label>nome</mat-label>
-      <input matInput formControlName="name">
-    </mat-form-field></td>
-    <td><mat-form-field class="example-full-width">
-      <mat-label>cognome</mat-label>
-      <input matInput formControlName="surname">
-    </mat-form-field></td>
-  </tr></table>
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td><mat-form-field class="example-full-width">
+          <mat-label>nome</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field></td>
+      <td><mat-form-field class="example-full-width">
+          <mat-label>cognome</mat-label>
+          <input matInput formControlName="surname">
+        </mat-form-field></td>
+    </tr>
+  </table>
 
   <mat-form-field class="example-full-width">
     <mat-label>Enter your email</mat-label>
@@ -26,16 +28,18 @@
       <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
   </mat-form-field>
-  <div *ngIf="signupForm.get('password')!.invalid && (signupForm.get('password')!.dirty || signupForm.get('password')!.touched)">
+  <div
+    *ngIf="signupForm.get('password')!.invalid && (signupForm.get('password')!.dirty || signupForm.get('password')!.touched)">
     <mat-error *ngIf="signupForm.hasError('required', 'password')">Password is required</mat-error>
-    <mat-error *ngIf="signupForm.hasError('pattern', 'password')">Password must be at least 8 characters long, contain at least one lowercase letter, one uppercase letter, and one number</mat-error>
+    <mat-error *ngIf="signupForm.hasError('pattern', 'password')">Password must be at least 8 characters long, contain
+      at least one lowercase letter, one uppercase letter, and one number</mat-error>
   </div>
 
   <mat-form-field class="example-full-width">
     <mat-label>Enter your confirm password</mat-label>
     <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword">
-    <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'Hide password'"
-      [attr.aria-pressed]="hideConfirmPassword">
+    <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword"
+      [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPassword">
       <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
   </mat-form-field>
@@ -48,28 +52,31 @@
     </mat-form-field>
   </p>
 
-  <table class="example-full-width" cellspacing="0"><tr>
-    <td><mat-form-field class="example-full-width">
-      <mat-label>città</mat-label>
-      <input matInput placeholder="Roma" formControlName="city">
-    </mat-form-field></td>
-    <td><mat-form-field class="example-full-width">
-      <mat-label>Postal Code</mat-label>
-      <input matInput #postalCode maxlength="5" placeholder="00042" value="94043" formControlName="postalCode">
-      <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
-    </mat-form-field></td>
-  </tr>
-</table>
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td><mat-form-field class="example-full-width">
+          <mat-label>città</mat-label>
+          <input matInput placeholder="Roma" formControlName="city">
+        </mat-form-field></td>
+      <td><mat-form-field class="example-full-width">
+          <mat-label>Postal Code</mat-label>
+          <input matInput #postalCode maxlength="5" placeholder="00042" value="94043" formControlName="postalCode">
+          <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+        </mat-form-field></td>
+    </tr>
+  </table>
 
-<mat-form-field class="example-full-width" appearance="fill">
-  <mat-label>Choose a date</mat-label>
-  <input matInput [matDatepicker]="picker" formControlName="birthdate">
-  <mat-hint>MM/DD/YYYY</mat-hint>
-  <mat-datepicker #picker></mat-datepicker>
-</mat-form-field>
-<button mat-raised-button (click)="picker.open()">Open</button><br>
-
-<button mat-button type="submit" [disabled]="signupForm.invalid">Registrati</button>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="birthdate">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <button mat-raised-button (click)="picker.open()">Open</button><br>
+  <div>
+    <re-captcha id="recaptcha" name="recaptcha" formControlName="recaptcha"></re-captcha>
+  </div>
+  <button mat-button type="submit" [disabled]="signupForm.invalid">Registrati</button>
 </form>
 <p>
   Sei già registrato?

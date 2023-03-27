@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Cart, CartShoe } from '../models/cart';
 import { CONST_CART } from './auth.service';
 
@@ -6,9 +7,21 @@ import { CONST_CART } from './auth.service';
   providedIn: 'root'
 })
 export class CartService {
-  authService: any;
 
-  constructor() { }
+  private cartSubject = new BehaviorSubject<Cart>({
+    userId: '',
+    shoes: [],
+    totalPrice: 0,
+    speditionPrice: 0
+  });
+  public cart$ = this.cartSubject.asObservable();
+
+  constructor() {
+    const cart = this.getCart();
+    if (cart) {
+      this.cartSubject.next(cart);
+    }
+   }
 
   private getCart(): Cart {
     const cartString = sessionStorage.getItem(CONST_CART);
@@ -17,6 +30,7 @@ export class CartService {
 
   private setCart(cart: Cart) {
     sessionStorage.setItem(CONST_CART, JSON.stringify(cart));
+    this.cartSubject.next(cart);
   }
 
   public getCartItems(): CartShoe[] {
@@ -25,6 +39,10 @@ export class CartService {
 
   public getCartTotalPrice(): number {
     return this.getCart().totalPrice;
+  }
+
+  public getCartSpeditionPrice(): number {
+    return this.getCart().speditionPrice;
   }
 
   public addToCart(shoe: CartShoe): void {
@@ -45,7 +63,9 @@ export class CartService {
       }
     }
     // aggiorno il prezzo totale
-    cart.totalPrice += shoe.sizes[0].size.price * shoe.sizes[0].quantityOrdered;
+    const shoePrice = shoe.sizes[0].size.price * shoe.sizes[0].quantityOrdered;
+    cart.totalPrice += shoePrice;
+    cart.speditionPrice = cart.totalPrice < 200 ? 20 : 0;
     // salvo il carrello aggiornato nella sessionStorage
     this.setCart(cart);
   }
@@ -66,16 +86,24 @@ export class CartService {
       // se non ci sono più scarpe rimuovo la scarpa dal carrello
       if (shoe.sizes.length === 0 || shoe.sizes.every(size => size.quantityOrdered === 0)) {
         cart.shoes.splice(index, 1);
+        }
       }
+    // controlla se il prezzo totale è inferiore a 200 e imposta la spedizione di conseguenza
+    if (cart.totalPrice < 200) {
+      cart.speditionPrice = 20;
+    } else {
+      cart.speditionPrice = 0;
+    }
       // salvo il carrello aggiornato nella sessionStorage
       this.setCart(cart);
     }
-  }
+
 
   public clearCart(): void {
     const cart = this.getCart();
     cart.shoes = [];
     cart.totalPrice = 0;
+    cart.speditionPrice = 0;
     this.setCart(cart);
   }
 }

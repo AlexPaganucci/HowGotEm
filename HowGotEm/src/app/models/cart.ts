@@ -3,7 +3,8 @@ import { Shoe, Size } from "./shoe";
 export interface Cart {
   userId: string,
   shoes: CartShoe[],
-  totalPrice: number
+  totalPrice: number,
+  speditionPrice: number
 }
 
 export interface CartShoe {

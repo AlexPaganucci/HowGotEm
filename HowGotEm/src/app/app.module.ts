@@ -26,6 +26,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorComponent } from './components/error/error.component';
 import { AuthTokenInterceptor } from './auth/auth-token.interceptor';
 import { LogoutConfirmModalComponent } from './components/logout-confirm-modal/logout-confirm-modal.component';
+import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
+import { environment } from 'src/environments/environment';
+import { NgxPayPalModule } from 'ngx-paypal';
+import { PayPalComponent } from './components/payments/pay-pal/pay-pal.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,8 @@ import { LogoutConfirmModalComponent } from './components/logout-confirm-modal/l
     ChiSiamoComponent,
     ScarpaComponent,
     ErrorComponent,
-    LogoutConfirmModalComponent
+    LogoutConfirmModalComponent,
+    PayPalComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,10 +61,15 @@ import { LogoutConfirmModalComponent } from './components/logout-confirm-modal/l
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
+    NgxPayPalModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
+    { provide: RECAPTCHA_SETTINGS, useValue: { siteKey: environment.recaptcha.siteKey } as RecaptchaSettings
+    },
   ],
   bootstrap: [AppComponent]
 })

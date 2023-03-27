@@ -3,6 +3,11 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+re-captcha.is-invalid > div {
+  border: 1px solid #dc3545 !important;
+  border-radius: 0.2rem;
+}
+
 .sneakers-dialog-container{
   position: fixed !important;
   top: 64px;

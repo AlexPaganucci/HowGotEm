@@ -1,7 +1,7 @@
 <h2 class="title-cart">CARRELLO</h2>
-<div class="container-cart">
+<div class="container-cart" *ngIf="shoes.length > 0; else emptyCart">
   <section class="products-cart">
-    <div *ngIf="shoes.length > 0; else emptyCart">
+    <div>
       <h2>Carrello</h2>
       <table>
         <thead>
@@ -44,9 +44,6 @@
         </tfoot>
       </table>
     </div>
-    <ng-template #emptyCart>
-      <p>Il carrello è vuoto.</p>
-    </ng-template>
   </section>
   <section class="cart-payment">
     <h2>RIEPILOGO</h2>
@@ -56,19 +53,23 @@
     </div>
     <div class="section-cart-payment">
       <p>Costi di spedizione</p>
-      <p>gratis</p>
+      <p *ngIf="cartSpeditionPrice">{{ cartSpeditionPrice | currency: 'EUR' }}</p>
+      <p *ngIf="!cartSpeditionPrice">gratis</p>
     </div>
     <hr>
     <div class="section-cart-payment">
       <p>Totale</p>
-      <p>€ price</p>
+      <p>{{ cartTotalAndSpeditionPrice | currency: 'EUR' }}</p>
     </div>
     <hr>
     <div class="Payment-method">
-      <button mat-button><i class="fa-brands fa-paypal"></i></button>
+      <app-pay-pal [price]="cartTotalPrice"></app-pay-pal>
       <button mat-button><i class="fa-brands fa-cc-mastercard"></i></button>
       <button mat-button><i class="fa-brands fa-stripe"></i></button>
       <button mat-button><i class="fa-brands fa-cc-visa"></i></button>
     </div>
   </section>
 </div>
+<ng-template #emptyCart>
+  <p>Il carrello è vuoto.</p>
+</ng-template>

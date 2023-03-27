@@ -18,7 +18,7 @@ export class SignupModalComponent implements OnInit {
   hideConfirmPassword = true;
   signupForm!: FormGroup;
 
-  constructor(private authSrv: AuthService, private modalSrv: ModalService, private fb: FormBuilder) { }
+  constructor(private authSrv: AuthService, private modalSrv: ModalService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.createForm();
@@ -53,6 +53,7 @@ export class SignupModalComponent implements OnInit {
       city: ['', Validators.required],
       postalCode: ['', [Validators.required, Validators.maxLength(5)]],
       birthdate: ['', [Validators.required]],
+      recaptcha: ['', [Validators.required]]
     }, { validator: this.passwordsMatch });
   }
 
