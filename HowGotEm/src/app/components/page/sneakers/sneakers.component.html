@@ -16,14 +16,26 @@
   <div class="container-filters" *ngIf="filter">
     <div class="checkbox-filter">
       <p>filtra per brand</p>
-      <mat-checkbox color="primary">Nike</mat-checkbox>
-      <mat-checkbox color="primary">Jordan</mat-checkbox>
-      <mat-checkbox color="primary">New balance</mat-checkbox>
+      <!-- <div *ngFor="let item of stringBrand">
+        <mat-checkbox color="primary" [(ngModel)]="selectedFilters.brands" [value]="item" name="brand">{{item}}</mat-checkbox>
+      </div> -->
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let item of selectedFilters.brands" [selectable]="true" [removable]="true" (removed)="removeBrand(item)">
+          {{item}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+      <mat-form-field>
+        <mat-label>Seleziona brand</mat-label>
+        <mat-select (selectionChange)="addBrand($event.value)">
+          <mat-option *ngFor="let string of stringBrand" [value]="string">{{string}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
     <div class="size-filters">
       <p>filtra per taglia</p>
       <mat-chip-list #chipList>
-        <mat-chip *ngFor="let size of sizes" [selectable]="true" [removable]="true" (removed)="removeSize(size)">
+        <mat-chip *ngFor="let size of selectedFilters.sizes" [selectable]="true" [removable]="true" (removed)="removeSize(size)">
           {{size}}
           <mat-icon matChipRemove>cancel</mat-icon>
         </mat-chip>
@@ -39,26 +51,21 @@
       <p>filtra per prezzo max</p>
       <div class="example-label-container">
         <label id="example-name-label" class="example-name-label">Prezzo</label>
-        <label class="example-value-label"> € {{sliderValue}}</label>
+        <label class="example-value-label"> € {{selectedFilters.maxPrice}}</label>
       </div>
-      <mat-slider [(ngModel)]="sliderValue" min="0" max="1000" step="25" color="primary">
+      <mat-slider [(ngModel)]="selectedFilters.maxPrice" name="sliderValue" min="0" max="1000" step="25" color="primary">
         <input matSliderThumb>
       </mat-slider>
     </div>
-    <div>
-      <p>filtra per colore</p>
-      <div *ngFor="let color of colors" class="color-filter-box">
-        <div class="color-filter">
-          <p>{{color}}</p>
-          <button mat-button>
-            <span [ngStyle]="{'background-color': color}"></span>
-          </button>
-        </div>
-      </div>
-    </div>
-    <button mat-button>FILTRA</button>
+    <mat-form-field>
+      <mat-label>filtra per colore</mat-label>
+      <mat-select [(ngModel)]="selectedFilters.color">
+        <mat-option *ngFor="let color of colors" [value]="color">{{ color }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-button (click)="filterShoes(selectedFilters)">FILTRA</button>
   </div>
   <div class="container-cards" [style.width.%]="!filter ? 100 : null">
-    <app-cards></app-cards>
+    <app-card [shoes]="shoesFiltered"></app-card>
   </div>
 </div>

@@ -10,7 +10,6 @@ import { HomeComponent } from './components/page/home/home.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CardComponent } from './components/card/card.component';
-import { CardsComponent } from './components/cards/cards.component';
 import { UnderNavbarComponent } from './components/under-navbar/under-navbar.component';
 import { SneakersModalComponent } from './components/sneakers-modal/sneakers-modal.component';
 import { LoginModalComponent } from './components/login-modal/login-modal.component';
@@ -35,7 +34,6 @@ import { LogoutConfirmModalComponent } from './components/logout-confirm-modal/l
     CarouselComponent,
     FooterComponent,
     CardComponent,
-    CardsComponent,
     UnderNavbarComponent,
     SneakersModalComponent,
     LoginModalComponent,

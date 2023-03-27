@@ -97,13 +97,13 @@ export class AdminFormComponent implements OnInit {
         console.error('Errore nella chiamata HTTP', error);
       }
     } else {
-      // try {
-      //   let response = await lastValueFrom(this.shoeSrv.(adminRequest));
-      //   this.adminForm.reset();
-      //   this.modalSrv.showNotification("Scarpa aggiunta con successo");
-      // } catch (error) {
-      //   console.error('Errore nella chiamata HTTP', error);
-      // }
+      try {
+        let response = await lastValueFrom(this.shoeSrv.updateShoe(this.shoeId, adminRequest));
+        this.adminForm.reset();
+        this.modalSrv.showNotification("Scarpa modificata con successo");
+      } catch (error) {
+        console.error('Errore nella chiamata HTTP', error);
+      }
     }
   }
 }

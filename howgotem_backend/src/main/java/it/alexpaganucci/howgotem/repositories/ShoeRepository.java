@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -33,27 +32,30 @@ public interface ShoeRepository extends JpaRepository<Shoe, Long>{
 	Optional<Shoe> filterShoeBySkuCode(@Param("s") String s);
 
 	@Query(
-			nativeQuery = true,
-			value = "SELECT * FROM SHOES s WHERE LOWER(s.BRAND) = LOWER(:b)"
-			)
-	List<Shoe> filterShoeByBrand(@Param("b") String b);
+		    nativeQuery = true,
+		    value = "SELECT * FROM SHOES s WHERE LOWER(s.BRAND) IN (:brands)"
+		)
+	List<Shoe> filterShoesByBrands(@Param("brands") List<String> brands);
 	
 	@Query(
-			nativeQuery = true,
-			value = "SELECT * FROM SHOES s WHERE LOWER(s.COLOR) = LOWER(:c)"
+			  nativeQuery = true,
+			  value = "SELECT * FROM SHOES s WHERE LOWER(s.COLOR) LIKE %:color%"
 			)
-	List<Shoe> filterShoeByColor(@Param("c") String c);
+	List<Shoe> filterShoesByColor(@Param("color") String color);
 	
 	@Query(
-			nativeQuery = true,
-			value = "SELECT * FROM SHOES s INNER JOIN SIZES si ON s.ID = si.SHOE_ID WHERE si.SIZE = :s"
+			  nativeQuery = true,
+			  value = "SELECT DISTINCT s.* FROM SHOES s INNER JOIN SIZES si ON s.ID = si.SHOE_ID WHERE si.SIZE IN (:sizes)"
 			)
-	List<Shoe> filterShoeBySize(@Param("s") double s);
+	List<Shoe> filterShoeBySizes(@Param("sizes") List<Double> sizes);
 	
 	@Query(
-			nativeQuery = true,
-			value = "SELECT * FROM SHOES s INNER JOIN SIZES si ON s.ID = si.SHOE_ID WHERE si.PRICE <= :p"
+			  nativeQuery = true,
+			  value = "SELECT DISTINCT s.* FROM SHOES s INNER JOIN SIZES si ON s.ID = si.SHOE_ID WHERE si.PRICE <= :p"
 			)
 	List<Shoe> filterShoeByPrice(@Param("p") double p);
+	
+	@Query("SELECT DISTINCT s.brand FROM Shoe s")
+	List<String> findAllDistinctBrands();
 	
 }

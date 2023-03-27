@@ -95,6 +95,18 @@ public class ShoeController {
 
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
+	
+	@GetMapping("/brands")
+	public ResponseEntity<List<String>> getAllBrands() {
+	    List<String> brands = shoeService.findAllDistinctBrands();
+	    return ResponseEntity.ok().body(brands);
+	}
+	
+	@GetMapping("/sizes")
+	public ResponseEntity<List<String>> getAllSizes() {
+	    List<String> sizes = shoeService.findAllDistinctSize();
+	    return ResponseEntity.ok().body(sizes);
+	}
 
 	@GetMapping("{id}")
 	public ResponseEntity<Object> findShoeById(@PathVariable("id") Long id) {
@@ -117,19 +129,19 @@ public class ShoeController {
 		return new ResponseEntity<>(shoeService.filterShoeBySkuCode(s), HttpStatus.OK);
 	}
 
-	@GetMapping("/filter_by_brand={b}")
-	public ResponseEntity<List<Shoe>> filterShoeByBrand(@PathVariable String b) {
-		return new ResponseEntity<>(shoeService.filterShoeByBrand(b), HttpStatus.OK);
+	@GetMapping("/filter_by_brands={b}")
+	public ResponseEntity<List<Shoe>> filterShoesByBrands(@PathVariable List<String> b) {
+		return new ResponseEntity<>(shoeService.filterShoesByBrands(b), HttpStatus.OK);
 	}
 
-	@GetMapping("/filter_by_color={c}")
-	public ResponseEntity<List<Shoe>> filterShoeByColor(@PathVariable String c) {
-		return new ResponseEntity<>(shoeService.filterShoeByColor(c), HttpStatus.OK);
+	@GetMapping("/filter_by_color={color}")
+	public ResponseEntity<List<Shoe>> filterShoesByColors(@PathVariable("color") String colors) {
+	    return new ResponseEntity<>(shoeService.filterShoeByColor(colors), HttpStatus.OK);
 	}
 
-	@GetMapping("/filter_by_size={s}")
-	public ResponseEntity<List<Shoe>> filterShoeBySize(@PathVariable double s) {
-		return new ResponseEntity<>(shoeService.filterShoeBySize(s), HttpStatus.OK);
+	@GetMapping("/filter_by_sizes={sizes}")
+	public ResponseEntity<List<Shoe>> filterShoeBySizes(@PathVariable List<Double> sizes) {
+	    return new ResponseEntity<>(shoeService.filterShoeBySizes(sizes), HttpStatus.OK);
 	}
 
 	@GetMapping("/filter_by_price={p}")

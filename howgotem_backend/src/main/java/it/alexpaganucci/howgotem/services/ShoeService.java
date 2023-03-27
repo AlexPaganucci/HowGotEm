@@ -89,6 +89,14 @@ public class ShoeService {
 	public Optional<Shoe> findById(Long id) {
 		return shoeRepository.findById(id);
 	}
+	
+	public List<String> findAllDistinctBrands() {
+	    return shoeRepository.findAllDistinctBrands();
+	}
+	
+	public List<String> findAllDistinctSize() {
+	    return sizeRepository.findAllDistinctSize();
+	}
 
 	public List<Shoe> filterShoeByPartOfModel(String m) {
 		return shoeRepository.filterShoeByPartOfModel(m);
@@ -102,16 +110,16 @@ public class ShoeService {
 		return shoeRepository.filterShoeBySkuCode(s);
 	}
 
-	public List<Shoe> filterShoeByBrand(String b) {
-		return shoeRepository.filterShoeByBrand(b);
+	public List<Shoe> filterShoesByBrands(List<String> b) {
+		return shoeRepository.filterShoesByBrands(b);
 	}
 
-	public List<Shoe> filterShoeByColor(String c) {
-		return shoeRepository.filterShoeByColor(c);
+	public List<Shoe> filterShoeByColor(String colors) {
+	    return shoeRepository.filterShoesByColor(colors);
 	}
 
-	public List<Shoe> filterShoeBySize(double s) {
-		return shoeRepository.filterShoeBySize(s);
+	public List<Shoe> filterShoeBySizes(List<Double> sizes) {
+	    return shoeRepository.filterShoeBySizes(sizes);
 	}
 
 	public List<Shoe> filterShoeByPrice(double p) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Shoe } from 'src/app/models/shoe';
 import { AuthService } from 'src/app/services/auth.service';
@@ -12,14 +12,14 @@ import { ShoeService } from 'src/app/services/shoe.service';
 export class CardComponent implements OnInit, DoCheck {
 
   isAdmin: boolean = false;
-  shoes: Shoe[] = [];
+  @Input() shoes: Shoe[] = [];
 
   constructor(private shoeSrv: ShoeService, private authSrv: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.shoeSrv.getAllShoes().subscribe((shoes: Shoe[]) => {
-      this.shoes = shoes;
-    });
+    // this.shoeSrv.getAllShoes().subscribe((shoes: Shoe[]) => {
+    //   this.shoes = shoes;
+    // });
     this.isAdminCheck();
   }
 
