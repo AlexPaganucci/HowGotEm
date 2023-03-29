@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ICreateOrderRequest, IPayPalConfig } from 'ngx-paypal';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-pay-pal',
@@ -10,9 +11,9 @@ export class PayPalComponent implements OnInit {
 
   @Input() price: number = 0;
   public payPalConfig ? : IPayPalConfig;
-  showSuccess: boolean = false;
-  showCancel: boolean = false;
-  showError: boolean = false;
+  // showSuccess: boolean = false;
+  // showCancel: boolean = false;
+  // showError: boolean = false;
 
   constructor() { }
 
@@ -23,17 +24,17 @@ export class PayPalComponent implements OnInit {
   private initConfig(): void {
     this.payPalConfig = {
         currency: 'EUR',
-        clientId: 'sb',
+        clientId: environment.paypalClientId,
         createOrderOnClient: (data) => < ICreateOrderRequest > {
             intent: 'CAPTURE',
             purchase_units: [{
                 amount: {
                     currency_code: 'EUR',
-                    value: '{{ price }}',
+                    value: this.price.toString(),
                     breakdown: {
                         item_total: {
                             currency_code: 'EUR',
-                            value: '{{ price }}'
+                            value: this.price.toString()
                         }
                     }
                 },
@@ -43,7 +44,7 @@ export class PayPalComponent implements OnInit {
                     category: 'DIGITAL_GOODS',
                     unit_amount: {
                         currency_code: 'EUR',
-                        value: '9.99',
+                        value: this.price.toString(),
                     },
                 }]
             }]
@@ -64,25 +65,25 @@ export class PayPalComponent implements OnInit {
         },
         onClientAuthorization: (data) => {
             console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-            this.showSuccess = true;
+            // this.showSuccess = true;
         },
         onCancel: (data, actions) => {
             console.log('OnCancel', data, actions);
-            this.showCancel = true;
+            // this.showCancel = true;
 
         },
         onError: err => {
             console.log('OnError', err);
-            this.showError = true;
+            // this.showError = true;
         },
         onClick: (data, actions) => {
             console.log('onClick', data, actions);
-            this.resetStatus();
+            // this.resetStatus();
         }
     };
   }
-  resetStatus() {
-    throw new Error('Method not implemented.');
-  }
+  // resetStatus() {
+    // throw new Error('Method not implemented.');
+  // }
 
 }

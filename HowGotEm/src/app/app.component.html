@@ -35,8 +35,8 @@
             <mat-form-field *ngIf="showSearch">
               <mat-label>Cerca</mat-label>
               <div>
-                <input matInput type="text" placeholder="Inserisci la tua ricerca">
-                <button mat-button matSuffix routerLink="/sneakers">
+                <input matInput type="text" placeholder="Inserisci la tua ricerca" [(ngModel)]="searchTerm" (keyup.enter)="filterSearch()">
+                <button mat-button matSuffix (click)="filterSearch()">
                   <mat-icon>search</mat-icon>
                 </button>
               </div>
@@ -64,7 +64,7 @@
             routerLink="/carrello">
             <mat-icon>shopping_cart</mat-icon>
           </button>
-          <button *ngIf="isSmallScreen" type="button" mat-button (click)="drawer.toggle()" mat-icon-button
+          <button *ngIf="isSmallScreen && !showSearch" type="button" mat-button (click)="drawer.toggle()" mat-icon-button
             aria-label="Example icon button with a vertical three dot icon">
             <mat-icon>reorder</mat-icon>
           </button>

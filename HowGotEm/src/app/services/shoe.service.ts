@@ -1,9 +1,6 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
-  BehaviorSubject,
-  combineLatest,
-  filter,
   map,
   Observable,
   of,
@@ -18,6 +15,7 @@ import { ShoeDto } from '../models/shoe-dto';
   providedIn: 'root',
 })
 export class ShoeService {
+
   private apiUrl = environment.apiUrl;
   shoesFiltered: Shoe[] = [];
 
@@ -68,84 +66,86 @@ export class ShoeService {
     return this.http.get<Shoe>(url);
   }
 
-  filterShoesByBrands(b: string[]): Observable<Shoe[]> {
-    const lowerCaseBrands = b.map((brand) => brand.toLowerCase());
-    const url = `${this.apiUrl}/shoe/filter_by_brands=${lowerCaseBrands}`;
-    return this.http.get<Shoe[]>(url);
-  }
+  // filterShoesByBrands(b: string[]): Observable<Shoe[]> {
+  //   const lowerCaseBrands = b.map((brand) => brand.toLowerCase());
+  //   const url = `${this.apiUrl}/shoe/filter_by_brands=${lowerCaseBrands}`;
+  //   return this.http.get<Shoe[]>(url);
+  // }
 
-  filterShoesByColor(color: string): Observable<Shoe[]> {
-    const lowerCaseColor = color.toLowerCase();
-    return this.http.get<Shoe[]>(
-      `${this.apiUrl}/shoe/filter_by_color=${lowerCaseColor}`
-    );
-  }
+  // filterShoesByColor(color: string): Observable<Shoe[]> {
+  //   const lowerCaseColor = color.toLowerCase();
+  //   return this.http.get<Shoe[]>(
+  //     `${this.apiUrl}/shoe/filter_by_color=${lowerCaseColor}`
+  //   );
+  // }
 
   // filterShoesBySize(s: number[]): Observable<Shoe[]> {
   //   return this.http.get<Shoe[]>(`${this.apiUrl}/shoe/filter_by_sizes=${s}`);
   // }
 
-  filterShoesBySize(s: number[]): Observable<Shoe[]> {
-    const sizes = s.join(',');
-    return this.http.get<Shoe[]>(`${this.apiUrl}/shoe/filter_by_sizes=${sizes}`);
-  }
+  // filterShoesBySize(s: number[]): Observable<Shoe[]> {
+  //   const sizes = s.join(',');
+  //   return this.http.get<Shoe[]>(`${this.apiUrl}/shoe/filter_by_sizes=${sizes}`);
+  // }
 
-  filterShoesByMaxPrice(p: number): Observable<Shoe[]> {
-    return this.http.get<Shoe[]>(`${this.apiUrl}/shoe/filter_by_price=${p}`);
-  }
+  // filterShoesByMaxPrice(p: number): Observable<Shoe[]> {
+  //   return this.http.get<Shoe[]>(`${this.apiUrl}/shoe/filter_by_price=${p}`);
+  // }
 
-  filterShoes(filters: FilterSelection): Observable<Shoe[]> {
+  filterShoes(selectedFilters: FilterSelection): Observable<Shoe[]> {
     let shoes$: Observable<Shoe[]> = this.getAllShoes();
 
-    if (filters.color !== '') {
+    if (selectedFilters.color !== '') {
       shoes$ = shoes$.pipe(
-        switchMap((shoes) => this.filterShoesByColor(filters.color))
+        switchMap((shoes) =>
+          this.filterShoesByColor(shoes, selectedFilters.color)
+        )
       );
     }
-    if (filters.brands.length > 0) {
+
+    if (selectedFilters.brands.length > 0) {
       shoes$ = shoes$.pipe(
-        switchMap((shoes) => this.filterShoesByBrands(filters.brands))
+        switchMap((shoes) =>
+          this.filterShoesByBrands(shoes, selectedFilters.brands)
+        )
       );
     }
-    if (filters.sizes.length > 0) {
+
+    if (selectedFilters.sizes.length > 0) {
       shoes$ = shoes$.pipe(
-        switchMap((shoes) => this.filterShoesBySize(filters.sizes))
+        switchMap((shoes) =>
+          this.filterShoesBySize(shoes, selectedFilters.sizes)
+        )
       );
     }
-    const maxPrice = filters.maxPrice !== null ? filters.maxPrice : Infinity;
-    shoes$ = shoes$.pipe(
-      switchMap((shoes) => this.filterShoesByMaxPrice(maxPrice))
+
+    const maxPrice = selectedFilters.maxPrice !== null ? selectedFilters.maxPrice : Infinity;
+
+    return shoes$.pipe(
+      switchMap((shoes) => this.filterShoesByMaxPrice(shoes, maxPrice)),
+      map((shoes) => shoes.filter((shoe) => shoe !== null))
     );
-    console.log(filters);
+  }
 
-    return combineLatest([
-      shoes$,
-      this.filterShoesByColor(filters.color),
-      this.filterShoesByBrands(filters.brands),
-      this.filterShoesBySize(filters.sizes),
-      this.filterShoesByMaxPrice(maxPrice)
-    ]).pipe(
-      map(([shoes, filteredByColor, filteredByBrand, filteredBySize, filteredByPrice]) => {
-        let filteredShoes = shoes;
+  filterShoesByColor(shoes: Shoe[], color: string): Observable<Shoe[]> {
+    const lowerCaseColor = color.toLowerCase();
+    return of(shoes.filter((shoe) => shoe.color.toLowerCase().includes(lowerCaseColor)));
+  }
 
-        if (filters.color !== '') {
-          filteredShoes = filteredByColor;
-        }
+  filterShoesByBrands(shoes: Shoe[], brands: string[]): Observable<Shoe[]> {
+    const lowerCaseBrands = brands.map((brand) => brand.toLowerCase());
+    return of(shoes.filter((shoe) => lowerCaseBrands.includes(shoe.brand.toLowerCase())));
+  }
 
-        if (filters.brands.length > 0) {
-          filteredShoes = filteredByBrand;
-        }
+  filterShoesBySize(shoes: Shoe[], sizes: number[]): Observable<Shoe[]> {
+    return of(shoes.filter((shoe) => {
+      return shoe.sizes.some((size) => sizes.includes(size.size));
+    }));
+  }
 
-        if (filters.sizes.length > 0) {
-          filteredShoes = filteredBySize;
-        }
-
-        if (filters.maxPrice !== null) {
-          filteredShoes = filteredByPrice;
-        }
-
-        return filteredShoes;
-      })
-    );
+  filterShoesByMaxPrice(shoes: Shoe[], maxPrice: number): Observable<Shoe[]> {
+    return of(shoes.filter((shoe) => {
+      return shoe.sizes.some((size) => size.price <= maxPrice);
+    }));
   }
 }

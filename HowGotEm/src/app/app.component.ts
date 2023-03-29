@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ModalService } from './services/modal.service';
 import { AuthService, CONST_UTENTE } from './services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +15,9 @@ export class AppComponent {
   isSmallScreen = false;
   showSearch = false;
   isLogged = false;
+  searchTerm: string = "";
 
-  constructor(private breakpointObserver: BreakpointObserver, private modalSrv: ModalService, private auth: AuthService) {}
+  constructor(private breakpointObserver: BreakpointObserver, private modalSrv: ModalService, private auth: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.breakpointObserver.observe([
@@ -62,6 +64,10 @@ export class AppComponent {
 
   openLogoutModal(){
     this.modalSrv.openLogoutModal();
+  }
+
+  filterSearch() {
+    this.router.navigate(['/sneakers', this.searchTerm]);
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CartShoe } from 'src/app/models/cart';
 import { Shoe, Size } from 'src/app/models/shoe';
+import { CONST_CART } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { ShoeService } from 'src/app/services/shoe.service';
@@ -89,7 +90,12 @@ export class ScarpaComponent implements OnInit {
         quantityOrdered: this.quantita,
       }]
     };
-    this.cartSrv.addToCart(cartShoe);
+    if(CONST_CART){
+      this.cartSrv.addToCart(cartShoe);
+    } else {
+      this.cartSrv.setCartWithoutUser();
+      this.cartSrv.addToCart(cartShoe);
+    }
     this.modalSrv.showNotification("Scarpa aggiunta al carrello");
   }
 }

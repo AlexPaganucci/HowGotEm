@@ -19,7 +19,6 @@ import { ContattiComponent } from './components/page/contatti/contatti.component
 import { CarrelloComponent } from './components/page/carrello/carrello.component';
 import { ProfiloComponent } from './components/page/profilo/profilo.component';
 import { AdminFormComponent } from './components/page/admin-form/admin-form.component';
-import { PaginatorComponent } from './components/paginator/paginator.component';
 import { ChiSiamoComponent } from './components/page/chi-siamo/chi-siamo.component';
 import { ScarpaComponent } from './components/page/scarpa/scarpa.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -47,7 +46,6 @@ import { PayPalComponent } from './components/payments/pay-pal/pay-pal.component
     CarrelloComponent,
     ProfiloComponent,
     AdminFormComponent,
-    PaginatorComponent,
     ChiSiamoComponent,
     ScarpaComponent,
     ErrorComponent,

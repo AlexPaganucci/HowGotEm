@@ -60,7 +60,7 @@ export class AuthService {
       );
   }
 
-  private setCart(): void {
+  setCart(): void {
     const userStr = sessionStorage.getItem(CONST_UTENTE);
     const user = userStr ? JSON.parse(userStr) : null;
     const cart: Cart = {
@@ -90,6 +90,7 @@ export class AuthService {
 
   clearAll() {
     sessionStorage.removeItem(CONST_UTENTE);
+    sessionStorage.removeItem(CONST_CART);
   }
 
   public logout() {

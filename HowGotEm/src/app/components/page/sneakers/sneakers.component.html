@@ -67,5 +67,8 @@
   </div>
   <div class="container-cards" [style.width.%]="!filter ? 100 : null">
     <app-card [shoes]="shoesFiltered"></app-card>
+    <mat-paginator [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="[5, 10, 20]"
+              [length]="shoesFiltered.length" (page)="onPageChange($event)"
+              showFirstLastButtons></mat-paginator>
   </div>
 </div>

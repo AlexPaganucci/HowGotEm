@@ -28,6 +28,16 @@ export class CartService {
     return cartString ? JSON.parse(cartString) : null;
   }
 
+  public setCartWithoutUser(){
+    const cart: Cart = {
+      userId: "",
+      shoes: [],
+      totalPrice: 0,
+      speditionPrice: 0
+    };
+    sessionStorage.setItem(CONST_CART, JSON.stringify(cart));
+  }
+
   private setCart(cart: Cart) {
     sessionStorage.setItem(CONST_CART, JSON.stringify(cart));
     this.cartSubject.next(cart);
@@ -46,7 +56,18 @@ export class CartService {
   }
 
   public addToCart(shoe: CartShoe): void {
-    const cart = this.getCart();
+    let cart = this.getCart();
+    if (!cart) {
+      cart = {
+          userId: "",
+          shoes: [],
+          totalPrice: 0,
+          speditionPrice: 0
+      };
+  }
+  if (!cart.shoes) {
+      cart.shoes = [];
+  }
     const index = cart.shoes.findIndex(s => s.shoe.id === shoe.shoe.id);
     if (index === -1) {
       // se la scarpa non è ancora nel carrello, la aggiungo

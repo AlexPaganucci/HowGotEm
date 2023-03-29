@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Shoe } from 'src/app/models/shoe';
 import { FilterSelection } from 'src/app/models/filter-selection';
 import { ShoeService } from 'src/app/services/shoe.service';
+import { PageEvent } from '@angular/material/paginator';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sneakers',
@@ -11,6 +14,8 @@ import { ShoeService } from 'src/app/services/shoe.service';
 })
 export class SneakersComponent implements OnInit {
 
+  // filterParam: string = "";
+  // filterSubscription: Subscription = new Subscription;
   shoesFiltered: Shoe[] = [];
   // FILTER
   filter: boolean = true;
@@ -26,10 +31,13 @@ export class SneakersComponent implements OnInit {
   availableSizes: string[] = [];
   // COLOR
   colors: string[] = [ "Nero", "Bianco", "Rosso", "Blu", "Verde", "Giallo" ];
+  //PAGINATOR
+  pageSize: number = 20;
+  pageIndex: number = 0;
 
 
 
-  constructor(private shoeSrv: ShoeService, private breakpointObserver: BreakpointObserver) {
+  constructor(private shoeSrv: ShoeService, private breakpointObserver: BreakpointObserver, private route: ActivatedRoute) {
     this.breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.Small]).subscribe(result => {
       if (result.matches) {
         // Schermo piccolo, nascondi i filtri
@@ -44,8 +52,22 @@ export class SneakersComponent implements OnInit {
   ngOnInit(): void {
     this.getAllBrands();
     this.getAllSizes();
-    this.shoeSrv.getAllShoes().subscribe((shoes) => this.shoesFiltered = shoes);
+    const filterParam = this.route.snapshot.paramMap.get('filter');
+    if (filterParam) {
+      // Se il parametro "q" è presente, effettua la ricerca filtrata per "partOfModel"
+      this.shoeSrv.filterShoeByPartOfModel(filterParam).subscribe((shoes) => this.shoesFiltered = shoes);
+    } else {
+      // Altrimenti, ottieni tutte le scarpe
+      this.shoeSrv.getAllShoes().subscribe((shoes) => this.shoesFiltered = shoes);
+    }
   }
+
+  // ngDoCheck(): void {
+  //   const newFilterParam = this.route.snapshot.queryParamMap.get('filter');
+  //   if (newFilterParam !== this.filterParam) {
+  //     this.shoeSrv.filterShoeByPartOfModel(newFilterParam).subscribe((shoes) => this.shoesFiltered = shoes);
+  //   }
+  // }
 
   getAllBrands(){
     this.shoeSrv.getAllBrands().subscribe((brand) => {
@@ -92,6 +114,16 @@ export class SneakersComponent implements OnInit {
       error: (error) => console.log(error),
       complete: () => console.log("complete filter")
     })
-    console.log(selectedFilters);
   }
+
+  onPageChange(event: PageEvent) {
+    const startIndex = event.pageIndex * event.pageSize;
+    const endIndex = startIndex + event.pageSize;
+    this.shoesFiltered = this.shoesFiltered.slice(startIndex, endIndex + 1); // Aggiunge 1 all'indice di pagina
+    console.log(this.shoesFiltered); // Verifica se l'array shoes è stato correttamente aggiornato dopo la modifica di pagina
+  }
+
+  // ngOnDestroy(): void {
+  //   this.filterSubscription.unsubscribe();
+  // }
 }

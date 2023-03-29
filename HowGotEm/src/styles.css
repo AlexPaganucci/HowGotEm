@@ -29,6 +29,11 @@ re-captcha.is-invalid > div {
   height: 100vh;
 }
 
+.mat-form-field-appearance-legacy .mat-form-field-infix {
+  padding: 0.4375em 0;
+  width: 100%;
+}
+
 /* PAGINA SNEAKERS INPUT FORM WIDHT */
 .container-scarpa-info .mat-form-field-infix{
   width: 40px;

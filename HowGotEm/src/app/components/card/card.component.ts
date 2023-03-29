@@ -1,4 +1,5 @@
 import { Component, OnInit, DoCheck, Input } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { Shoe } from 'src/app/models/shoe';
 import { AuthService } from 'src/app/services/auth.service';
@@ -17,9 +18,6 @@ export class CardComponent implements OnInit, DoCheck {
   constructor(private shoeSrv: ShoeService, private authSrv: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    // this.shoeSrv.getAllShoes().subscribe((shoes: Shoe[]) => {
-    //   this.shoes = shoes;
-    // });
     this.isAdminCheck();
   }
 
@@ -41,4 +39,5 @@ export class CardComponent implements OnInit, DoCheck {
       this.router.navigate(["/admin", shoeId]);
     });
   }
+
 }
