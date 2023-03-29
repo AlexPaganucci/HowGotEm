@@ -47,6 +47,16 @@
     <mat-label>url immagine</mat-label>
     <input matInput formControlName="urlImg">
   </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>url immagine 2</mat-label>
+    <input matInput formControlName="urlImg2">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>url immagine 3</mat-label>
+    <input matInput formControlName="urlImg3">
+  </mat-form-field>
+    <mat-label>Best Seller</mat-label>
+    <mat-checkbox (change)="toggleBestSeller($event)" color="primary" formControlName="bestSeller"></mat-checkbox>
   <button mat-button type="submit" [disabled]="adminForm.invalid" *ngIf="isModifica">Modifica</button>
   <button mat-button type="submit" [disabled]="adminForm.invalid" *ngIf="!isModifica">salva</button>
 </form>

@@ -48,12 +48,21 @@ public class Shoe {
 	List<Size> sizes = new ArrayList<>();
 	@Column(name="URL_IMG", nullable=false)
 	private String urlImg;
+	@Column(name="URL_IMG_2", nullable=false)
+	private String urlImg2;
+	@Column(name="URL_IMG_3", nullable=false)
+	private String urlImg3;
+	@Column(name="BEST_SELLER")
+	private Boolean bestSeller;
 	
-	public Shoe(String model, String skuCode, String brand, String color, String urlImg) {
+	public Shoe(String model, String skuCode, String brand, String color, String urlImg, String urlImg2, String urlImg3, Boolean bestSeller) {
 		this.model = model;
 		this.skuCode = skuCode;
 		this.brand = brand;
 		this.color = color;
 		this.urlImg = urlImg;
+		this.urlImg2 = urlImg2;
+		this.urlImg3 = urlImg3;
+		this.bestSeller = bestSeller;
 	}
 }

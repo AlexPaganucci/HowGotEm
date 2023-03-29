@@ -40,4 +40,13 @@ export class CardComponent implements OnInit, DoCheck {
     });
   }
 
+  hasAvailableSizes(shoe: Shoe): boolean {
+    for (const size of shoe.sizes) {
+      if (size.quantityAvailable > 0) {
+        return true;
+      }
+    }
+    return false;
+  }
+
 }

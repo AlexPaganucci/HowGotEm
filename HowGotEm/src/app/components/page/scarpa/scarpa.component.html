@@ -15,17 +15,19 @@
     <p>brand</p>
     <h2>{{shoe.model}}</h2>
     <p>codice di scarpa</p>
-      <mat-form-field class="example-full-width taglia">
-        <mat-label>Taglia</mat-label>
-        <mat-select [(ngModel)]="sizeNumber" (selectionChange)="onSizeChange()">
-          <mat-option value={{size.size}} *ngFor="let size of shoe.sizes">{{size.size}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+    <mat-form-field class="example-full-width taglia">
+      <mat-label>Taglia</mat-label>
+      <mat-select [(ngModel)]="sizeNumber" (selectionChange)="onSizeChange()">
+        <ng-container *ngFor="let size of shoe.sizes">
+          <mat-option *ngIf="size.quantityAvailable > 0" value="{{size.size}}">{{size.size}}</mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
       <div class="quantita">
         <button mat-button (click)="diminuisciQuantita()">-</button>
         <mat-form-field class="example-full-width">
           <mat-label>Quantità</mat-label>
-          <input matInput [(ngModel)]="quantita" name="quantita">
+          <input matInput [(ngModel)]="quantita" name="quantita" disabled>
         </mat-form-field>
         <button mat-button (click)="aumentaQuantita()">+</button>
       </div>

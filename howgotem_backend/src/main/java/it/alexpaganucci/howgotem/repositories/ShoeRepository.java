@@ -30,30 +30,36 @@ public interface ShoeRepository extends JpaRepository<Shoe, Long>{
 			value = "SELECT * FROM SHOES s WHERE s.SKU_CODE = :s"
 			)
 	Optional<Shoe> filterShoeBySkuCode(@Param("s") String s);
+	
+	@Query(
+			nativeQuery = true,
+			value = "SELECT * FROM SHOES s WHERE s.BEST_SELLER = true"
+			)
+	List<Shoe> filterBestSellerShoe();
 
-	@Query(
-		    nativeQuery = true,
-		    value = "SELECT * FROM SHOES s WHERE LOWER(s.BRAND) IN (:brands)"
-		)
-	List<Shoe> filterShoesByBrands(@Param("brands") List<String> brands);
-	
-	@Query(
-			  nativeQuery = true,
-			  value = "SELECT * FROM SHOES s WHERE LOWER(s.COLOR) LIKE %:color%"
-			)
-	List<Shoe> filterShoesByColor(@Param("color") String color);
-	
-	@Query(
-			  nativeQuery = true,
-			  value = "SELECT DISTINCT s.* FROM SHOES s INNER JOIN SIZES si ON s.ID = si.SHOE_ID WHERE si.SIZE IN (:sizes)"
-			)
-	List<Shoe> filterShoeBySizes(@Param("sizes") List<Double> sizes);
-	
-	@Query(
-			  nativeQuery = true,
-			  value = "SELECT DISTINCT s.* FROM SHOES s INNER JOIN SIZES si ON s.ID = si.SHOE_ID WHERE si.PRICE <= :p"
-			)
-	List<Shoe> filterShoeByPrice(@Param("p") double p);
+//	@Query(
+//		    nativeQuery = true,
+//		    value = "SELECT * FROM SHOES s WHERE LOWER(s.BRAND) IN (:brands)"
+//		)
+//	List<Shoe> filterShoesByBrands(@Param("brands") List<String> brands);
+//	
+//	@Query(
+//			  nativeQuery = true,
+//			  value = "SELECT * FROM SHOES s WHERE LOWER(s.COLOR) LIKE %:color%"
+//			)
+//	List<Shoe> filterShoesByColor(@Param("color") String color);
+//	
+//	@Query(
+//			  nativeQuery = true,
+//			  value = "SELECT DISTINCT s.* FROM SHOES s INNER JOIN SIZES si ON s.ID = si.SHOE_ID WHERE si.SIZE IN (:sizes)"
+//			)
+//	List<Shoe> filterShoeBySizes(@Param("sizes") List<Double> sizes);
+//	
+//	@Query(
+//			  nativeQuery = true,
+//			  value = "SELECT DISTINCT s.* FROM SHOES s INNER JOIN SIZES si ON s.ID = si.SHOE_ID WHERE si.PRICE <= :p"
+//			)
+//	List<Shoe> filterShoeByPrice(@Param("p") double p);
 	
 	@Query("SELECT DISTINCT s.brand FROM Shoe s")
 	List<String> findAllDistinctBrands();

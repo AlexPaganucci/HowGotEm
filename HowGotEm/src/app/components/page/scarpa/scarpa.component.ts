@@ -47,8 +47,11 @@ export class ScarpaComponent implements OnInit {
   }
 
   aumentaQuantita(){
-    this.quantita++;
-    console.log(this.quantita);
+    if(this.selectedSize) { // se una taglia è stata selezionata
+      if(this.quantita < this.selectedSize.quantityAvailable) { // se la quantità disponibile non è stata superata
+        this.quantita++;
+      }
+    }
   }
 
   diminuisciQuantita(){

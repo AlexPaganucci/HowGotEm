@@ -5,7 +5,10 @@ export interface Shoe {
   brand: string,
   color: string,
   sizes: Size[],
-  urlImg: string
+  urlImg: string,
+  urlImg2: string,
+  urlImg3: string,
+  bestSeller: boolean,
 }
 
 export interface Size {

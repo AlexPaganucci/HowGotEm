@@ -66,6 +66,10 @@ export class ShoeService {
     return this.http.get<Shoe>(url);
   }
 
+  getBestSellerShoes(): Observable<Shoe[]>{
+    return this.http.get<Shoe[]>(`${this.apiUrl}/shoe/best_seller`);
+  }
+
   // filterShoesByBrands(b: string[]): Observable<Shoe[]> {
   //   const lowerCaseBrands = b.map((brand) => brand.toLowerCase());
   //   const url = `${this.apiUrl}/shoe/filter_by_brands=${lowerCaseBrands}`;

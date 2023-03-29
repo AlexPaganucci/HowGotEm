@@ -47,6 +47,9 @@ public class ShoeService {
 	        existingShoe.setBrand(shoeDto.getBrand());
 	        existingShoe.setColor(shoeDto.getColor());
 	        existingShoe.setUrlImg(shoeDto.getUrlImg());
+	        existingShoe.setUrlImg2(shoeDto.getUrlImg2());
+	        existingShoe.setUrlImg3(shoeDto.getUrlImg3());
+	        existingShoe.setBestSeller(shoeDto.getBestSeller());
 
 	        // Update shoe sizes
 	        List<SizeDto> newSizeDtos = shoeDto.getSizes();
@@ -109,21 +112,25 @@ public class ShoeService {
 	public Optional<Shoe> filterShoeBySkuCode(String s) {
 		return shoeRepository.filterShoeBySkuCode(s);
 	}
-
-	public List<Shoe> filterShoesByBrands(List<String> b) {
-		return shoeRepository.filterShoesByBrands(b);
+	
+	public List<Shoe> filterBestSellerShoe(){
+		return shoeRepository.filterBestSellerShoe();
 	}
 
-	public List<Shoe> filterShoeByColor(String colors) {
-	    return shoeRepository.filterShoesByColor(colors);
-	}
-
-	public List<Shoe> filterShoeBySizes(List<Double> sizes) {
-	    return shoeRepository.filterShoeBySizes(sizes);
-	}
-
-	public List<Shoe> filterShoeByPrice(double p) {
-		return shoeRepository.filterShoeByPrice(p);
-	}
+//	public List<Shoe> filterShoesByBrands(List<String> b) {
+//		return shoeRepository.filterShoesByBrands(b);
+//	}
+//
+//	public List<Shoe> filterShoeByColor(String colors) {
+//	    return shoeRepository.filterShoesByColor(colors);
+//	}
+//
+//	public List<Shoe> filterShoeBySizes(List<Double> sizes) {
+//	    return shoeRepository.filterShoeBySizes(sizes);
+//	}
+//
+//	public List<Shoe> filterShoeByPrice(double p) {
+//		return shoeRepository.filterShoeByPrice(p);
+//	}
 
 }

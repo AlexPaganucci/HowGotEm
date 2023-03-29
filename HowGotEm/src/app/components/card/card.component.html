@@ -1,17 +1,19 @@
 <div class="flex-container">
   <div class="card-container">
-    <mat-card class="example-card" *ngFor="let shoe of shoes">
-      <mat-card-header>
-        <mat-card-title [routerLink]="['/scarpa', shoe.id]">{{shoe.model}}</mat-card-title>
-        <mat-card-subtitle>{{shoe.brand}}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <img mat-card-image src="../../../assets/img/dunk.jpg" alt="nike dunk" [routerLink]="['/scarpa', shoe.id]">
-      </mat-card-content>
-      <span *ngIf="isAdmin">
-        <button mat-button (click)="goToAdminPage(shoe.id)">MODIFICA</button>
-      </span>
-    </mat-card>
+    <ng-container *ngFor="let shoe of shoes">
+      <mat-card class="example-card" *ngIf="hasAvailableSizes(shoe)">
+        <mat-card-header>
+          <mat-card-title [routerLink]="['/scarpa', shoe.id]">{{shoe.model}}</mat-card-title>
+          <mat-card-subtitle>{{shoe.brand}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <img mat-card-image src="../../../assets/img/dunk.jpg" alt="nike dunk" [routerLink]="['/scarpa', shoe.id]">
+        </mat-card-content>
+        <span *ngIf="isAdmin">
+          <button mat-button (click)="goToAdminPage(shoe.id)">MODIFICA</button>
+        </span>
+      </mat-card>
+    </ng-container>
   </div>
   <span *ngIf="isAdmin">
     <button mat-button routerLink="/admin">AGGIUNGI SCARPA</button>

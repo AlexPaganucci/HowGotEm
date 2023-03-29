@@ -6,5 +6,8 @@ export interface ShoeDto {
   brand: string,
   color: string,
   sizes: SizeDto[],
-  urlImg: string
+  urlImg: string,
+  urlImg2: string,
+  urlImg3: string,
+  bestSeller: boolean
 }

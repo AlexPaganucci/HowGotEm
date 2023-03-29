@@ -29,7 +29,7 @@ export class SneakersComponent implements OnInit {
   // SELECT E CHIP
   availableSizes: string[] = [];
   // COLOR
-  colors: string[] = [ "Nero", "Bianco", "Rosso", "Blu", "Verde", "Giallo" ];
+  colors: string[] = [ "Nero", "Bianco", "Rosso", "Blu", "Verde", "Giallo", "Bordeaux", "Arancione", "Rosa"];
   //PAGINATOR
   showFirstLastButtons= true;
 

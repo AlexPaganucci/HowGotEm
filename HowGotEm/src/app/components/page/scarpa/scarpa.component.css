@@ -58,6 +58,11 @@
   font-weight: bold;
 }
 
+.mat-input-element[disabled] {
+  color: inherit;
+  text-align: center;
+}
+
 @media screen and (max-width: 768px) {
 
   .container-scarpa{

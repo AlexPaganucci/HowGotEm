@@ -19,4 +19,8 @@ public class ShoeDto {
     private String color;
     private List<SizeDto> sizes;
     private String urlImg;
+    private String urlImg2;
+    private String urlImg3;
+    private Boolean bestSeller;
+    
 }
