@@ -66,9 +66,8 @@
     <button mat-button (click)="filterShoes(selectedFilters)">FILTRA</button>
   </div>
   <div class="container-cards" [style.width.%]="!filter ? 100 : null">
-    <app-card [shoes]="shoesFiltered"></app-card>
-    <mat-paginator [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="[5, 10, 20]"
-              [length]="shoesFiltered.length" (page)="onPageChange($event)"
-              showFirstLastButtons></mat-paginator>
+    <app-card [shoes]="displayShoes"></app-card>
+    <p *ngIf="!displayShoes || displayShoes.length === 0">Non abbiamo trovato nessuna scarpa mi dispiace</p>
+    <mat-paginator [pageSize]="20" [length]="shoesFiltered.length" (page)="onPageChange($event)"></mat-paginator>
   </div>
 </div>

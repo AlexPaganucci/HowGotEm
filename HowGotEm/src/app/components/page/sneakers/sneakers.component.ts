@@ -5,7 +5,6 @@ import { FilterSelection } from 'src/app/models/filter-selection';
 import { ShoeService } from 'src/app/services/shoe.service';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sneakers',
@@ -14,9 +13,9 @@ import { Subscription } from 'rxjs';
 })
 export class SneakersComponent implements OnInit {
 
-  // filterParam: string = "";
-  // filterSubscription: Subscription = new Subscription;
+  shoeBySkuCode: Shoe|undefined;
   shoesFiltered: Shoe[] = [];
+  displayShoes: Shoe[] = [];
   // FILTER
   filter: boolean = true;
   selectedFilters: FilterSelection = {
@@ -32,8 +31,7 @@ export class SneakersComponent implements OnInit {
   // COLOR
   colors: string[] = [ "Nero", "Bianco", "Rosso", "Blu", "Verde", "Giallo" ];
   //PAGINATOR
-  pageSize: number = 20;
-  pageIndex: number = 0;
+  showFirstLastButtons= true;
 
 
 
@@ -49,25 +47,51 @@ export class SneakersComponent implements OnInit {
     });
   }
 
+  // ngOnInit(): void {
+  //   this.getAllBrands();
+  //   this.getAllSizes();
+
+  //   this.route.paramMap.subscribe(params => {
+  //     const filterParam = params.get('filter');
+  //     if (filterParam) {
+  //       this.shoeSrv.filterShoeByPartOfModel(filterParam).subscribe((shoes) => {
+  //         this.shoesFiltered = shoes;
+  //         this.displayShoes = this.shoesFiltered.slice(0, 20);
+  //       });
+  //     } else {
+  //       this.shoeSrv.getAllShoes().subscribe((shoes) => {
+  //         this.shoesFiltered = shoes;
+  //         this.displayShoes = this.shoesFiltered.slice(0, 20);
+  //       });
+  //     }
+  //   });
+  // }
+
   ngOnInit(): void {
     this.getAllBrands();
     this.getAllSizes();
-    const filterParam = this.route.snapshot.paramMap.get('filter');
-    if (filterParam) {
-      // Se il parametro "q" è presente, effettua la ricerca filtrata per "partOfModel"
-      this.shoeSrv.filterShoeByPartOfModel(filterParam).subscribe((shoes) => this.shoesFiltered = shoes);
-    } else {
-      // Altrimenti, ottieni tutte le scarpe
-      this.shoeSrv.getAllShoes().subscribe((shoes) => this.shoesFiltered = shoes);
-    }
-  }
 
-  // ngDoCheck(): void {
-  //   const newFilterParam = this.route.snapshot.queryParamMap.get('filter');
-  //   if (newFilterParam !== this.filterParam) {
-  //     this.shoeSrv.filterShoeByPartOfModel(newFilterParam).subscribe((shoes) => this.shoesFiltered = shoes);
-  //   }
-  // }
+    this.route.paramMap.subscribe(params => {
+      const filterParam = params.get('filter');
+      if (filterParam) {
+        this.shoeSrv.filterShoeBySkuCode(filterParam).subscribe((shoe) => {
+          this.shoeBySkuCode = shoe;
+          this.displayShoes.push(this.shoeBySkuCode);
+          if(!this.shoeBySkuCode){
+            this.shoeSrv.filterShoeByPartOfModel(filterParam).subscribe((shoes) => {
+              this.shoesFiltered = shoes;
+              this.displayShoes = this.shoesFiltered.slice(0, 20);
+            })
+          }
+        });
+      } else {
+        this.shoeSrv.getAllShoes().subscribe((shoes) => {
+          this.shoesFiltered = shoes;
+          this.displayShoes = this.shoesFiltered.slice(0, 20);
+        });
+      }
+    });
+  }
 
   getAllBrands(){
     this.shoeSrv.getAllBrands().subscribe((brand) => {
@@ -112,18 +136,16 @@ export class SneakersComponent implements OnInit {
     this.shoeSrv.filterShoes(selectedFilters).subscribe({
       next: (shoes) => this.shoesFiltered = shoes,
       error: (error) => console.log(error),
-      complete: () => console.log("complete filter")
+      complete: () => this.displayShoes = this.shoesFiltered.slice(0, 20)
     })
   }
 
   onPageChange(event: PageEvent) {
+    console.log(event);
     const startIndex = event.pageIndex * event.pageSize;
     const endIndex = startIndex + event.pageSize;
-    this.shoesFiltered = this.shoesFiltered.slice(startIndex, endIndex + 1); // Aggiunge 1 all'indice di pagina
-    console.log(this.shoesFiltered); // Verifica se l'array shoes è stato correttamente aggiornato dopo la modifica di pagina
+    this.displayShoes = this.shoesFiltered.slice(startIndex, endIndex);
+    console.log(this.displayShoes);
   }
 
-  // ngOnDestroy(): void {
-  //   this.filterSubscription.unsubscribe();
-  // }
 }
