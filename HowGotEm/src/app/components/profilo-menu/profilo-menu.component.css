@@ -1,0 +1,17 @@
+.nav-profile ul{
+  display: flex;
+}
+
+.nav-profile ul li{
+  list-style-type: none;
+  padding: 2rem;
+}
+
+.nav-profile ul li a{
+  text-decoration: none;
+  color: black;
+}
+
+.nav-profile ul li a:hover{
+  color: #1D818F;
+}

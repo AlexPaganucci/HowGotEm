@@ -14,13 +14,8 @@ export class ProfiloComponent implements OnInit {
 
   ngOnInit(): void {
     this.userSrv.getUser().subscribe({
-      next: (user) => {
-        this.user = user;
-        console.log(this.user);
-      },
-      error: (error) => {
-        console.error(error);
-      },
+      next: (user) => this.user = user,
+      error: (error) => console.error(error),
       complete: () => console.log('complete'),
     });
   }

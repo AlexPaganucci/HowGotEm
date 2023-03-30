@@ -29,6 +29,9 @@ import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSet
 import { environment } from 'src/environments/environment';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { PayPalComponent } from './components/payments/pay-pal/pay-pal.component';
+import { OrdersComponent } from './components/page/orders/orders.component';
+import { ImpostazioniComponent } from './components/page/impostazioni/impostazioni.component';
+import { ProfiloMenuComponent } from './components/profilo-menu/profilo-menu.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,9 @@ import { PayPalComponent } from './components/payments/pay-pal/pay-pal.component
     ErrorComponent,
     LogoutConfirmModalComponent,
     PayPalComponent,
+    OrdersComponent,
+    ImpostazioniComponent,
+    ProfiloMenuComponent,
   ],
   imports: [
     BrowserModule,

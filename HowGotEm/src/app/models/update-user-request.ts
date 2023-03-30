@@ -1,10 +1,14 @@
-import { Role } from "./role";
-
 export interface UpdateUserRequest {
   email: string,
   name: string,
   surname: string,
-	roles: Role[],
   password: string,
-  confirmPassword: string
+  confirmPassword: string,
+  address: string,
+  city: string,
+  postalCode: string,
+  birthdate: Date,
+  speditionAddress: string,
+  speditionCity: string,
+  speditionPostalCode: string
 }

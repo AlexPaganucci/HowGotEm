@@ -43,21 +43,27 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(unique = true)
+	@Column(name="EMAIL", unique = true)
 	@NotBlank
 	@Email
 	private String email;
+	@Column(name="NAME")
 	private String name;
+	@Column(name="SURNAME")
 	private String surname;
+	@Column(name="PASSWORD")
 	@NotBlank
 	private String password;
 	@ManyToMany
-	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@JoinTable(name = "USER_ROLES", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
 	private Set<Role> roles = new HashSet<>();
+	@Column(name="ADDRESS")
 	@NotBlank
 	private String address;
+	@Column(name="CITY")
 	@NotBlank
 	private String city;
+	@Column(name="POSTAL_CODE")
 	@NotBlank
 	private String postalCode;
 	@OneToMany(mappedBy = "user")
@@ -67,6 +73,12 @@ public class User {
 	@Temporal(TemporalType.DATE)
 	@Column(name="BIRTHDATE")
 	private Date birthdate;
+	@Column(name="SPEDITION_ADDRESS")
+	private String speditionAddress;
+	@Column(name="SPEDITION_CITY")
+	private String speditionCity;
+	@Column(name="SPEDITION_POSTAL_CODE")
+	private String speditionPostalCode;
 	
 	
 	public User(String email, String name, String surname, String password, String address, String city, String postalCode, Date birthdate) {

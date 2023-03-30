@@ -27,6 +27,7 @@ import it.alexpaganucci.howgotem.exceptions.UserNotFoundException;
 import it.alexpaganucci.howgotem.payloads.OrderRequest;
 import it.alexpaganucci.howgotem.payloads.OrderShoeRequest;
 import it.alexpaganucci.howgotem.services.OrderService;
+import it.alexpaganucci.howgotem.services.OrderShoeService;
 import it.alexpaganucci.howgotem.services.ShoeService;
 import it.alexpaganucci.howgotem.services.SizeService;
 import it.alexpaganucci.howgotem.services.UserService;
@@ -45,6 +46,8 @@ public class OrderController {
 	private SizeService sizeService;
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private OrderShoeService orderShoeService;
 	
 	@PostMapping
 	public ResponseEntity<Order> saveOrder(@RequestBody OrderRequest orderRequest) {
@@ -96,6 +99,7 @@ public class OrderController {
     public ResponseEntity<List<Order>> filterOrderByUser(@PathVariable Long id){
     	return new ResponseEntity<>(orderService.filterOrderByUser(id), HttpStatus.OK);
     }
+    
 }
 
 

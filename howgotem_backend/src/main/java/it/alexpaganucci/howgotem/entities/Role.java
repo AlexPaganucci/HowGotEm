@@ -1,5 +1,6 @@
 package it.alexpaganucci.howgotem.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -25,7 +26,7 @@ public class Role {
 	  @Id
 	  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	  private Long id;
-
+	  @Column(name="NAME")
 	  @Enumerated(EnumType.STRING)
 	  private RoleType name;
 	  

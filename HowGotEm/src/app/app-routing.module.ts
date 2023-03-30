@@ -6,6 +6,8 @@ import { CarrelloComponent } from './components/page/carrello/carrello.component
 import { ChiSiamoComponent } from './components/page/chi-siamo/chi-siamo.component';
 import { ContattiComponent } from './components/page/contatti/contatti.component';
 import { HomeComponent } from './components/page/home/home.component';
+import { ImpostazioniComponent } from './components/page/impostazioni/impostazioni.component';
+import { OrdersComponent } from './components/page/orders/orders.component';
 import { ProfiloComponent } from './components/page/profilo/profilo.component';
 import { ScarpaComponent } from './components/page/scarpa/scarpa.component';
 import { SneakersComponent } from './components/page/sneakers/sneakers.component';
@@ -19,6 +21,8 @@ const routes: Routes = [
   {path: "contatti", component: ContattiComponent},
   {path: "carrello", component: CarrelloComponent},
   {path: "profilo", component: ProfiloComponent, canActivate:[AuthGuard]},
+  {path: "orders", component: OrdersComponent, canActivate:[AuthGuard]},
+  {path: "impostazioni", component: ImpostazioniComponent, canActivate:[AuthGuard]},
   {path: "admin", component: AdminFormComponent, canActivate:[AdminGuard]},
   {path: "admin/:id", component: AdminFormComponent, canActivate:[AdminGuard]},
   {path: "chisiamo", component: ChiSiamoComponent},

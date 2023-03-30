@@ -1,5 +1,6 @@
 package it.alexpaganucci.howgotem.payloads;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.validation.constraints.Email;
@@ -21,7 +22,6 @@ public class UpdateUserRequest {
 	private String name;
 	@NotBlank
 	private String surname;
-	private Set<String> roles;
 	@StrongPassword
 	@NotBlank
 	@Size(min = 6, max = 40)
@@ -29,5 +29,20 @@ public class UpdateUserRequest {
 	@NotBlank
 	@Size(min = 6, max = 40)
 	private String confirmPassword;
-	
+	@NotBlank
+	private String address;
+	@NotBlank
+	private String city;
+	@NotBlank
+	@Size(min = 5, max = 5, message = "Il codice postale deve contenere esattamente 5 cifre")
+	private String postalCode;
+	@NotBlank
+	private Date birthdate;	
+	@NotBlank
+	private String speditionAddress;
+	@NotBlank
+	private String speditionCity;
+	@NotBlank
+	@Size(min = 5, max = 5, message = "Il codice postale deve contenere esattamente 5 cifre")
+	private String speditionPostalCode;
 }

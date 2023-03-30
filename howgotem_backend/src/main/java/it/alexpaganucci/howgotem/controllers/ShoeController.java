@@ -136,24 +136,4 @@ public class ShoeController {
 	public ResponseEntity<List<Shoe>> filterBestSellerShoe(){
 		return new ResponseEntity<>(shoeService.filterBestSellerShoe(), HttpStatus.OK);
 	}
-
-//	@GetMapping("/filter_by_brands={b}")
-//	public ResponseEntity<List<Shoe>> filterShoesByBrands(@PathVariable List<String> b) {
-//		return new ResponseEntity<>(shoeService.filterShoesByBrands(b), HttpStatus.OK);
-//	}
-//
-//	@GetMapping("/filter_by_color={color}")
-//	public ResponseEntity<List<Shoe>> filterShoesByColors(@PathVariable("color") String colors) {
-//	    return new ResponseEntity<>(shoeService.filterShoeByColor(colors), HttpStatus.OK);
-//	}
-//
-//	@GetMapping("/filter_by_sizes={sizes}")
-//	public ResponseEntity<List<Shoe>> filterShoeBySizes(@PathVariable List<Double> sizes) {
-//	    return new ResponseEntity<>(shoeService.filterShoeBySizes(sizes), HttpStatus.OK);
-//	}
-//
-//	@GetMapping("/filter_by_price={p}")
-//	public ResponseEntity<List<Shoe>> filterShoeByMaxPrice(@PathVariable double p) {
-//		return new ResponseEntity<>(shoeService.filterShoeByPrice(p), HttpStatus.OK);
-//	}
 }

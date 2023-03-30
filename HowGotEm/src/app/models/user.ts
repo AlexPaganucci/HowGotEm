@@ -12,4 +12,7 @@ export interface User {
   postalCode: string;
   orders: Order[];
   birthdate: Date;
+  speditionAddress: string,
+  speditionCity: string,
+  speditionPostalCode: string
 }

@@ -117,20 +117,4 @@ public class ShoeService {
 		return shoeRepository.filterBestSellerShoe();
 	}
 
-//	public List<Shoe> filterShoesByBrands(List<String> b) {
-//		return shoeRepository.filterShoesByBrands(b);
-//	}
-//
-//	public List<Shoe> filterShoeByColor(String colors) {
-//	    return shoeRepository.filterShoesByColor(colors);
-//	}
-//
-//	public List<Shoe> filterShoeBySizes(List<Double> sizes) {
-//	    return shoeRepository.filterShoeBySizes(sizes);
-//	}
-//
-//	public List<Shoe> filterShoeByPrice(double p) {
-//		return shoeRepository.filterShoeByPrice(p);
-//	}
-
 }

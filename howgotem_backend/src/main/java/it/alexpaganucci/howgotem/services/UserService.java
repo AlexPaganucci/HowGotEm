@@ -41,6 +41,27 @@ public class UserService {
 	            throw new PasswordMismatchException("Password and confirm password do not match");
 	        }
 	        user.setPassword(passwordEncoder.encode(updateUserRequest.getPassword()));
+	        if (updateUserRequest.getAddress() != null) {
+	        	user.setAddress(updateUserRequest.getAddress());
+	        }
+	        if (updateUserRequest.getCity() != null) {
+	        	user.setCity(updateUserRequest.getCity());
+	        }
+	        if (updateUserRequest.getPostalCode() != null) {
+	        	user.setPostalCode(updateUserRequest.getPostalCode());
+	        }
+	        if (updateUserRequest.getBirthdate() != null) {
+	        	user.setBirthdate(updateUserRequest.getBirthdate());
+	        }
+	        if (updateUserRequest.getSpeditionAddress() != null) {
+	        	user.setSpeditionAddress(updateUserRequest.getSpeditionAddress());
+	        }
+	        if (updateUserRequest.getSpeditionCity() != null) {
+	        	user.setSpeditionCity(updateUserRequest.getSpeditionCity());
+	        }
+	        if (updateUserRequest.getSpeditionPostalCode() != null) {
+	        	user.setSpeditionPostalCode(updateUserRequest.getSpeditionPostalCode());
+	        }
 		    userRepository.save(user);
 		  }
 	  
