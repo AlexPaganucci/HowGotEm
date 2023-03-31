@@ -23,7 +23,7 @@ export class CartService {
     }
    }
 
-  private getCart(): Cart {
+  getCart(): Cart {
     const cartString = sessionStorage.getItem(CONST_CART);
     return cartString ? JSON.parse(cartString) : null;
   }

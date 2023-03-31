@@ -8,7 +8,7 @@ export const environment = {
   recaptcha: {
     siteKey: '6LdrTzYlAAAAAKnt18HMhQYFvLeVwyNBrFe2ZDrH'
   },
-  paypalClientId: 'AeVI9OAaEuqX-1d_ZQpCzQWngf4jGHwo114TbAhJIH4jCatcZtexYb10m4j4S7M3rN-vtFquA4rLz1J6',
+  paypalClientId: 'AXMNnhD1fv8463rW1qoe23Wge4Otjfn1BQnR2JCFSOJ5CKqdsxi8ZDHXByi2aFcrp_nMeJ2KIdD9pHYn',
   pathImgs: '../assets/img/imgs/'
 };
 

@@ -36,14 +36,11 @@ export class ScarpaComponent implements OnInit {
     this.shoeSrv.getShoeById(id).subscribe({
       next: (shoe) => this.shoe = shoe,
       error: (error) => console.log(error),
-      complete: () => console.log("ok")
     })
   }
 
   onSizeChange() {
     this.selectedSize = this.shoe.sizes.find(size => size.size === Number(this.sizeNumber))!;
-    console.log(this.selectedSize);
-    console.log(this.sizeNumber);
   }
 
   aumentaQuantita(){
@@ -57,7 +54,6 @@ export class ScarpaComponent implements OnInit {
   diminuisciQuantita(){
     if(this.quantita>1){
       this.quantita--;
-      console.log(this.quantita);
     }
   }
 

@@ -62,8 +62,12 @@
       <p>{{ cartTotalAndSpeditionPrice | currency: 'EUR' }}</p>
     </div>
     <hr>
-    <div class="Payment-method">
-      <app-pay-pal [price]="cartTotalPrice"></app-pay-pal>
+    <div class="Payment-method" *ngIf="isLogged">
+      <app-pay-pal [price]="cartTotalPrice" [orderRequest]="orderRequest"></app-pay-pal>
+    </div>
+    <div *ngIf="!isLogged">
+      <p>Devi effettuare il login per effettuare l'acquisto</p>
+      <button mat-button (click)="openLoginModal()">ACCEDI</button>
     </div>
   </section>
 </div>

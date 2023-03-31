@@ -63,12 +63,19 @@ export class AuthService {
   setCart(): void {
     const userStr = sessionStorage.getItem(CONST_UTENTE);
     const user = userStr ? JSON.parse(userStr) : null;
-    const cart: Cart = {
-      userId: user ? user.id : '',
-      shoes: [],
-      totalPrice: 0,
-      speditionPrice: 0
-    };
+    let cartStr = sessionStorage.getItem(CONST_CART);
+    let cart: Cart;
+    if (!cartStr) {
+      cart = {
+        userId: user ? user.id : '',
+        shoes: [],
+        totalPrice: 0,
+        speditionPrice: 0
+      };
+    } else {
+      cart = JSON.parse(cartStr);
+      cart.userId = user ? user.id : cart.userId;
+    }
     sessionStorage.setItem(CONST_CART, JSON.stringify(cart));
   }
 

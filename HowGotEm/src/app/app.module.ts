@@ -32,6 +32,7 @@ import { PayPalComponent } from './components/payments/pay-pal/pay-pal.component
 import { OrdersComponent } from './components/page/orders/orders.component';
 import { ImpostazioniComponent } from './components/page/impostazioni/impostazioni.component';
 import { ProfiloMenuComponent } from './components/profilo-menu/profilo-menu.component';
+import { ErrorPaymentsModalComponent } from './components/error-payments-modal/error-payments-modal.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { ProfiloMenuComponent } from './components/profilo-menu/profilo-menu.com
     OrdersComponent,
     ImpostazioniComponent,
     ProfiloMenuComponent,
+    ErrorPaymentsModalComponent,
   ],
   imports: [
     BrowserModule,

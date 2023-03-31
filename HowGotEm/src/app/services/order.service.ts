@@ -15,14 +15,14 @@ export class OrderService {
   constructor(private http: HttpClient) { }
 
   saveOrder(orderRequest: OrderRequest): Observable<Order> {
-    return this.http.post<Order>(`http://${this.apiUrl}/order`, orderRequest);
+    return this.http.post<Order>(`${this.apiUrl}/order`, orderRequest);
   }
 
   deleteOrder(orderId: number): Observable<any> {
-    return this.http.delete(`http://${this.apiUrl}/order/${orderId}`);
+    return this.http.delete(`${this.apiUrl}/order/${orderId}`);
   }
 
   filterOrdersByUser(userId: number): Observable<Order[]> {
-    return this.http.get<Order[]>(`http://${this.apiUrl}/order/filter_by_user=${userId}`);
+    return this.http.get<Order[]>(`${this.apiUrl}/order/filter_by_user=${userId}`);
   }
 }

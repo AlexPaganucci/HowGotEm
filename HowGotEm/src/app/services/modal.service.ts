@@ -5,6 +5,7 @@ import { LoginModalComponent } from '../components/login-modal/login-modal.compo
 import { LogoutConfirmModalComponent } from '../components/logout-confirm-modal/logout-confirm-modal.component';
 import { SignupModalComponent } from '../components/signup-modal/signup-modal.component';
 import { SneakersModalComponent } from '../components/sneakers-modal/sneakers-modal.component';
+import { ErrorPaymentsModalComponent } from '../components/error-payments-modal/error-payments-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,12 @@ export class ModalService {
   openLogoutModal(): void {
     this.dialog.open(LogoutConfirmModalComponent,{
       panelClass: 'logout-dialog-container'
+    });
+  }
+
+  openErrorPaymentModal(): void {
+    this.dialog.open(ErrorPaymentsModalComponent, {
+      panelClass: 'error-payments-container'
     });
   }
 
