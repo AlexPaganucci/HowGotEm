@@ -71,7 +71,7 @@ export class PayPalComponent implements OnInit {
             this.orderSrv.saveOrder(this.orderRequest).subscribe({
               next: (order) => console.log(`${order} salvato con successo nel database`),
               error: (error) => console.log(error)
-            })
+            });
             this.cartSrv.clearCart();
         },
         onCancel: (data, actions) => {

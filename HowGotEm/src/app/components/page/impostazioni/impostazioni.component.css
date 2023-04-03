@@ -1,0 +1,31 @@
+.impostazioni-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
+.sub-container-impostazioni-form{
+  display: flex;
+  margin: 0 auto;
+}
+
+.sub-container-impostazioni-form > *{
+  padding: 1rem;
+}
+
+.calendar-impostazioni{
+  margin: 0 auto;
+}
+
+.impostazioni-form h3{
+  margin: 0 auto;
+  padding-top: 2rem;
+}
+
+@media screen and (max-width: 576px) {
+  .sub-container-impostazioni-form{
+    flex-direction: column;
+  }
+
+}

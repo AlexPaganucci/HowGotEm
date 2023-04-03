@@ -34,7 +34,7 @@ public class OrderShoe {
 	private Long id;
 	@ManyToOne
 	@JoinColumn(name="SHOE_ID")
-	@JsonBackReference
+//	@JsonBackReference
 	private Shoe shoe;
 	@ManyToOne
 	@JoinColumn(name="SIZE_ID")

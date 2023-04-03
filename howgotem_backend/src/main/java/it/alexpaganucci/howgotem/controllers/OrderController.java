@@ -100,6 +100,12 @@ public class OrderController {
     	return new ResponseEntity<>(orderService.filterOrderByUser(id), HttpStatus.OK);
     }
     
+//    @GetMapping("/send_email")
+//    public String sendEmail() {
+//    	CheckoutEmail ce = new CheckoutEmail();
+//    	ce.myEmail();
+//    	return "ciao";
+//    }
 }
 
 

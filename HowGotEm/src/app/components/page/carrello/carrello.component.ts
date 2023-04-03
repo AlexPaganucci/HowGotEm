@@ -7,6 +7,9 @@ import { Shoe } from 'src/app/models/shoe';
 import { CartService } from 'src/app/services/cart.service';
 import { AuthService, CONST_UTENTE } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -15,6 +18,9 @@ import { ModalService } from 'src/app/services/modal.service';
   styleUrls: ['./carrello.component.css'],
 })
 export class CarrelloComponent implements OnInit, OnDestroy {
+
+  imgPath = environment.pathImg
+  user!: User;
   cartShoes: CartShoe[] = [];
   shoes: Shoe[] = [];
   cartTotalPrice: number = 0;
@@ -24,9 +30,10 @@ export class CarrelloComponent implements OnInit, OnDestroy {
   isLogged: boolean = false;
   private cartSubscription: Subscription = new Subscription();
 
-  constructor(private cartService: CartService, private authSrv: AuthService, private modalSrv: ModalService) {}
+  constructor(private cartService: CartService, private authSrv: AuthService, private modalSrv: ModalService, private userSrv: UserService) {}
 
   ngOnInit(): void {
+    this.getUser();
     this.cartShoes = this.cartService.getCartItems();
     this.cartSubscription = this.cartService.cart$.subscribe((cart) => {
       this.cartShoes = cart.shoes;
@@ -54,6 +61,13 @@ export class CarrelloComponent implements OnInit, OnDestroy {
       // Aggiorna la variabile isLogged in base alla presenza del valore nel Session Storage
       this.isLogged = sessionStorage.getItem(CONST_UTENTE) != null;
     }
+  }
+
+  getUser(){
+    this.userSrv.getUser().subscribe({
+      next: (user) => this.user = user,
+      error: (error) => console.log(error),
+    })
   }
 
   removeFromCart(shoeId: number): void {

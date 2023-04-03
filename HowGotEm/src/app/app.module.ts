@@ -11,7 +11,6 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CardComponent } from './components/card/card.component';
 import { UnderNavbarComponent } from './components/under-navbar/under-navbar.component';
-import { SneakersModalComponent } from './components/sneakers-modal/sneakers-modal.component';
 import { LoginModalComponent } from './components/login-modal/login-modal.component';
 import { SignupModalComponent } from './components/signup-modal/signup-modal.component';
 import { SneakersComponent } from './components/page/sneakers/sneakers.component';
@@ -42,7 +41,6 @@ import { ErrorPaymentsModalComponent } from './components/error-payments-modal/e
     FooterComponent,
     CardComponent,
     UnderNavbarComponent,
-    SneakersModalComponent,
     LoginModalComponent,
     SignupModalComponent,
     SneakersComponent,

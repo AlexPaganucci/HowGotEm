@@ -9,7 +9,7 @@ export const environment = {
     siteKey: '6LdrTzYlAAAAAKnt18HMhQYFvLeVwyNBrFe2ZDrH'
   },
   paypalClientId: 'AXMNnhD1fv8463rW1qoe23Wge4Otjfn1BQnR2JCFSOJ5CKqdsxi8ZDHXByi2aFcrp_nMeJ2KIdD9pHYn',
-  pathImgs: '../assets/img/imgs/'
+  pathImg: '../../../assets/img/imgShoes/'
 };
 
 /*

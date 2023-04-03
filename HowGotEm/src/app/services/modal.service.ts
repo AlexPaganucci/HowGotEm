@@ -4,7 +4,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginModalComponent } from '../components/login-modal/login-modal.component';
 import { LogoutConfirmModalComponent } from '../components/logout-confirm-modal/logout-confirm-modal.component';
 import { SignupModalComponent } from '../components/signup-modal/signup-modal.component';
-import { SneakersModalComponent } from '../components/sneakers-modal/sneakers-modal.component';
 import { ErrorPaymentsModalComponent } from '../components/error-payments-modal/error-payments-modal.component';
 
 @Injectable({
@@ -13,12 +12,6 @@ import { ErrorPaymentsModalComponent } from '../components/error-payments-modal/
 export class ModalService {
 
   constructor(private dialog: MatDialog, private snackBar: MatSnackBar) { }
-
-  openSneakersModal(): void {
-    this.dialog.open(SneakersModalComponent,  {
-      panelClass: 'sneakers-dialog-container'
-    });
-  }
 
   openLoginModal(): void {
     this.dialog.open(LoginModalComponent,  {

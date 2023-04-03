@@ -1,5 +1,12 @@
 <app-profilo-menu></app-profilo-menu>
+<h2>Informazioni personali</h2>
 <section class="section-profile">
-  <h2 *ngIf="user != null">{{user.name}}</h2>
-  <p>membro di How Got'Em da 00/00/0000</p>
+  <div *ngIf="user != null">
+    <h3>{{user.name}} {{user.surname}}</h3>
+    <p>{{user.email}}</p>
+    <p>{{user.birthdate}}</p>
+    <p>{{user.city}} {{user.postalCode}}</p>
+    <p>{{user.address}}</p>
+  </div>
+  <img src="../../../../assets/img/logo.png" alt="logo How Got Em">
 </section>

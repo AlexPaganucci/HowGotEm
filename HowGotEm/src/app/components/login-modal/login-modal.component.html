@@ -1,6 +1,6 @@
 <h3 mat-dialog-title>Login form</h3>
 <div mat-dialog-content>
-  <form (ngSubmit)="onSubmit()">
+  <form>
     <div class="example-container">
       <mat-form-field class="example-full-width">
         <mat-label>Enter your email</mat-label>
@@ -18,7 +18,7 @@
         </button>
       </mat-form-field>
     </div>
-    <button mat-button type="submit" [disabled]="!email.valid && !password.valid">Accedi</button>
+    <button mat-button type="submit" (click)="onSubmit()" [disabled]="!email.valid && !password.valid">Accedi</button>
   </form>
   <p>
     Non sei ancora registrato?

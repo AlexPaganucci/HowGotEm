@@ -37,8 +37,8 @@ body {
 
 /* Toolbar css */
 mat-toolbar img {
-  width: 100px;
-  background-color: white;
+  height: 80%;
+  cursor: pointer;
 }
 
 .mat-toolbar{

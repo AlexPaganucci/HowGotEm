@@ -6,6 +6,7 @@ import { CONST_CART } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { ShoeService } from 'src/app/services/shoe.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-scarpa',
@@ -22,12 +23,11 @@ export class ScarpaComponent implements OnInit {
   //QUANTITà
   quantita: number = 1;
   //IMMAGINI
-  img1="../../../../assets/img/dunk.jpg";
-  img2="../../../../assets/img/logo.svg";
-  img3="../../../../assets/img/NewBalanceCarousel.png";
-  img4="../../../../assets/img/dunkCarousel.jpg";
+  pathShoe=environment.pathImg;
+  img1: string = "";
+  img2: string = "";
 
-  immaginePrincipale: string = this.img1;
+  immaginePrincipale: string = "";
 
   constructor(private shoeSrv: ShoeService, private cartSrv: CartService, private modalSrv: ModalService, private route: ActivatedRoute) { }
 
@@ -36,6 +36,11 @@ export class ScarpaComponent implements OnInit {
     this.shoeSrv.getShoeById(id).subscribe({
       next: (shoe) => this.shoe = shoe,
       error: (error) => console.log(error),
+      complete: () => {
+        this.img1 = `${this.pathShoe}${this.shoe.urlImg2}`;
+        this.img2 = `${this.pathShoe}${this.shoe.urlImg3}`;
+        this.immaginePrincipale = `${this.pathShoe}${this.shoe.urlImg}`;
+      }
     })
   }
 
@@ -70,12 +75,6 @@ export class ScarpaComponent implements OnInit {
           break;
         case this.img2:
           this.img2 = temp;
-          break;
-        case this.img3:
-          this.img3 = temp;
-          break;
-        case this.img4:
-          this.img4 = temp;
           break;
       }
     }

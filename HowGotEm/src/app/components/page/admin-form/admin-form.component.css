@@ -1,0 +1,26 @@
+.admin-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
+.sub-container-admin-form{
+  display: flex;
+  margin: 0 auto;
+}
+
+.admin-form mat-form-field{
+  padding: 1rem;
+}
+
+.admin-form button{
+  padding: 2rem;
+}
+
+@media screen and (max-width: 576px) {
+  .sub-container-admin-form{
+    flex-direction: column;
+  }
+
+}

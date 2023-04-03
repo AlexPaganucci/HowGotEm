@@ -1,7 +1,22 @@
 .section-profile{
   padding: 2rem;
+  display: flex;
+  justify-content: space-around;
 }
 
-.section-profile h2{
-  font-size: x-large;
+.section-profile div{
+  max-width: 30%;
+  /* font-size: x-large; */
 }
+
+.section-profile img{
+  max-width: 40%;
+}
+
+@media screen and (max-width: 576px) {
+  .section-profile{
+    flex-direction: column;
+  }
+
+}
+

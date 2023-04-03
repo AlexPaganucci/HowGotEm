@@ -46,10 +46,6 @@ export class AppComponent {
     }
   }
 
-  openSneakersModal(){
-    this.modalSrv.openSneakersModal();
-  }
-
   openLoginModal(){
     this.modalSrv.openLoginModal();
   }
@@ -58,16 +54,16 @@ export class AppComponent {
     this.modalSrv.openSignupModal();
   }
 
-  ngOnDestroy() {
-    window.removeEventListener('storage', this.handleStorageChange.bind(this));
-  }
-
   openLogoutModal(){
     this.modalSrv.openLogoutModal();
   }
 
   filterSearch() {
     this.router.navigate(['/sneakers', this.searchTerm]);
+  }
+
+  ngOnDestroy() {
+    window.removeEventListener('storage', this.handleStorageChange.bind(this));
   }
 
 }

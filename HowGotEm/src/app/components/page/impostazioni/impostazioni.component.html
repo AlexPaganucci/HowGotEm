@@ -1,100 +1,96 @@
 <app-profilo-menu></app-profilo-menu>
-<h2>Inserisci i tuoi dati per registrarti</h2>
-<form class="example-form" [formGroup]="updateForm" *ngIf="updateForm" (ngSubmit)="modifySignup()">
-  <table class="example-full-width" cellspacing="0">
-    <tr>
-      <td><mat-form-field class="example-full-width">
-          <mat-label>nome</mat-label>
-          <input matInput formControlName="name">
-        </mat-form-field></td>
-      <td><mat-form-field class="example-full-width">
-          <mat-label>cognome</mat-label>
-          <input matInput formControlName="surname">
-        </mat-form-field></td>
-    </tr>
-  </table>
-
-  <mat-form-field class="example-full-width">
-    <mat-label>Enter your email</mat-label>
-    <input matInput placeholder="pat@example.com" formControlName="email">
-    <mat-error *ngIf="updateForm.hasError('required', 'email')">Email is required</mat-error>
-    <mat-error *ngIf="updateForm.hasError('email', 'email')">Invalid email format</mat-error>
-  </mat-form-field>
-
-  <mat-form-field class="example-full-width">
-    <mat-label>Enter your new password</mat-label>
-    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
-    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'"
-      [attr.aria-pressed]="hidePassword">
-      <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
-  </mat-form-field>
-  <div
-    *ngIf="updateForm.get('password')!.invalid && (updateForm.get('password')!.dirty || updateForm.get('password')!.touched)">
-    <mat-error *ngIf="updateForm.hasError('required', 'password')">Password is required</mat-error>
-    <mat-error *ngIf="updateForm.hasError('pattern', 'password')">Password must be at least 8 characters long, contain
-      at least one lowercase letter, one uppercase letter, and one number</mat-error>
+<h2>Modifica impostazioni utente</h2>
+<form class="example-form impostazioni-form" [formGroup]="updateForm" *ngIf="updateForm">
+  <div class="sub-container-impostazioni-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>nome</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field><mat-form-field class="example-full-width">
+      <mat-label>cognome</mat-label>
+      <input matInput formControlName="surname">
+    </mat-form-field>
   </div>
+  <div class="sub-container-impostazioni-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Enter your email</mat-label>
+      <input matInput placeholder="pat@example.com" formControlName="email">
+      <mat-error *ngIf="updateForm.hasError('required', 'email')">Email is required</mat-error>
+      <mat-error *ngIf="updateForm.hasError('email', 'email')">Invalid email format</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="sub-container-impostazioni-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Enter your new password</mat-label>
+      <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+      <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hidePassword">
+        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
 
-  <mat-form-field class="example-full-width">
-    <mat-label>Enter your confirm new password</mat-label>
-    <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword">
-    <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword"
-      [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPassword">
-      <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
-  </mat-form-field>
-  <mat-error *ngIf="updateForm.hasError('notSame')">Passwords do not match</mat-error>
-
-  <p>
+    <div
+      *ngIf="updateForm.get('password')!.invalid && (updateForm.get('password')!.dirty || updateForm.get('password')!.touched)">
+      <mat-error *ngIf="updateForm.hasError('required', 'password')">Password is required</mat-error>
+      <mat-error *ngIf="updateForm.hasError('pattern', 'password')">Password must be at least 8 characters long, contain
+        at least one lowercase letter, one uppercase letter, and one number</mat-error>
+    </div>
+  </div>
+  <div class="sub-container-impostazioni-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Enter your confirm new password</mat-label>
+      <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword">
+      <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword"
+        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPassword">
+        <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-error *ngIf="updateForm.hasError('notSame')">Passwords do not match</mat-error>
+  </div>
+  <div class="sub-container-impostazioni-form">
     <mat-form-field class="example-full-width">
       <mat-label>indirizzo</mat-label>
       <textarea matInput placeholder="Inserisci il tuo indirizzo" formControlName="address"></textarea>
     </mat-form-field>
-  </p>
+  </div>
+  <div class="sub-container-impostazioni-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>città</mat-label>
+      <input matInput placeholder="Roma" formControlName="city">
+    </mat-form-field>
 
-  <table class="example-full-width" cellspacing="0">
-    <tr>
-      <td><mat-form-field class="example-full-width">
-          <mat-label>città</mat-label>
-          <input matInput placeholder="Roma" formControlName="city">
-        </mat-form-field></td>
-      <td><mat-form-field class="example-full-width">
-          <mat-label>Postal Code</mat-label>
-          <input matInput #postalCode maxlength="5" placeholder="00042" value="94043" formControlName="postalCode">
-          <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
-        </mat-form-field></td>
-    </tr>
-  </table>
 
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName="birthdate">
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-  <button mat-raised-button (click)="picker.open()">Open</button><br>
-
+    <mat-form-field class="example-full-width">
+      <mat-label>Postal Code</mat-label>
+      <input matInput #postalCode maxlength="5" placeholder="00042" value="94043" formControlName="postalCode">
+      <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="calendar-impostazioni">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="birthdate">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <button mat-raised-button (click)="picker.open()">Open</button><br>
+  </div>
   <h3>Inserisci il tuoi dati di spedizione</h3>
-  <p>
+  <div class="sub-container-impostazioni-form">
     <mat-form-field class="example-full-width">
       <mat-label>indirizzo</mat-label>
       <input matInput placeholder="Inserisci il tuo indirizzo" formControlName="speditionAddress">
     </mat-form-field>
-  </p>
-  <table class="example-full-width" cellspacing="0">
-    <tr>
-      <td><mat-form-field class="example-full-width">
-          <mat-label>città</mat-label>
-          <input matInput placeholder="Roma" formControlName="speditionCity">
-        </mat-form-field></td>
-      <td><mat-form-field class="example-full-width">
-          <mat-label>Postal Code</mat-label>
-          <input matInput #speditionPostalCode maxlength="5" placeholder="00042" value="94043" formControlName="speditionPostalCode">
-          <mat-hint align="end">{{speditionPostalCode.value.length}} / 5</mat-hint>
-        </mat-form-field></td>
-    </tr>
-  </table>
-
-  <button mat-button type="submit" [disabled]="updateForm.invalid">Modifica</button>
+  </div>
+  <div class="sub-container-impostazioni-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>città</mat-label>
+      <input matInput placeholder="Roma" formControlName="speditionCity">
+    </mat-form-field><mat-form-field class="example-full-width">
+      <mat-label>Postal Code</mat-label>
+      <input matInput #speditionPostalCode maxlength="5" placeholder="00042" value="94043"
+        formControlName="speditionPostalCode">
+      <mat-hint align="end">{{speditionPostalCode.value.length}} / 5</mat-hint>
+    </mat-form-field>
+  </div>
+  <button mat-button type="submit" (click)="modifySignup()" [disabled]="updateForm.invalid">Modifica</button>
 </form>

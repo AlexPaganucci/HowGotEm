@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Order, OrderShoe } from 'src/app/models/order';
-import { Shoe } from 'src/app/models/shoe';
+import { Order } from 'src/app/models/order';
 import { User } from 'src/app/models/user';
-import { ShoeService } from 'src/app/services/shoe.service';
 import { UserService } from 'src/app/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-orders',
@@ -12,11 +11,11 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class OrdersComponent implements OnInit {
 
+  pathImg = environment.pathImg;
   user!: User;
-  order: Order[] = [];
-  shoesOrdered: Shoe[] = [];
+  orders: Order[] = [];
 
-  constructor(private userSrv: UserService, private shoeSrv: ShoeService) { }
+  constructor(private userSrv: UserService) { }
 
   ngOnInit(): void {
     this.getShoesByUserOrders();
@@ -26,23 +25,8 @@ export class OrdersComponent implements OnInit {
     this.userSrv.getUser().subscribe({
       next: (user) => this.user = user,
       error: (error) => console.error(error),
-      complete: () => {
-        this.order = this.user.orders;
-        this.order.forEach((order) => {
-          let shoes = order.shoes;
-          shoes.forEach((shoeOrdered) => {
-            this.getShoeById(shoeOrdered.id)
-          })
-        });
-      },
+      complete: () => this.orders = this.user.orders,
     });
-  }
-
-  getShoeById(shoeId: number) {
-    this.shoeSrv.getShoeById(shoeId).subscribe({
-      next: (shoe) => this.shoesOrdered.push(shoe),
-      error: (error) => console.log(error)
-    })
   }
 
 }

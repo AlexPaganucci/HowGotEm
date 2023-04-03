@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Shoe } from 'src/app/models/shoe';
 import { AuthService } from 'src/app/services/auth.service';
 import { ShoeService } from 'src/app/services/shoe.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-card',
@@ -12,6 +13,7 @@ import { ShoeService } from 'src/app/services/shoe.service';
 })
 export class CardComponent implements OnInit, DoCheck {
 
+  pathShoe: string = environment.pathImg;
   isAdmin: boolean = false;
   @Input() shoes: Shoe[] = [];
 

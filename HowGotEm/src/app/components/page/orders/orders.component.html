@@ -1,6 +1,13 @@
 <app-profilo-menu></app-profilo-menu>
-<section>
-  <ng-container *ngFor="let shoeOrdered of shoesOrdered">
-    <p>{{shoeOrdered.model}}</p>
-  </ng-container>
-</section>
+<div *ngFor="let order of orders" class="container-order">
+  <p>Ordine del {{order.orderDate | date: 'dd/MM/yyyy'}}</p>
+  <div *ngFor="let shoe of order.shoes" class="container-order-shoe">
+    <img src="{{pathImg}}{{shoe.shoe.urlImg}}" alt="foto scarpa">
+    <p>{{shoe.shoe.model}}</p>
+    <p>{{shoe.quantities}}</p>
+    <p>{{shoe.size}}</p>
+  </div>
+  <p *ngIf="order.totalPrice < 200">Prezzo totale ordine {{order.totalPrice + 20 | currency: 'EUR' }}</p>
+  <p *ngIf="order.totalPrice >= 200">Prezzo totale ordine {{order.totalPrice | currency: 'EUR' }}</p>
+  <div class="hr"></div>
+</div>

@@ -6,6 +6,7 @@
       <table>
         <thead>
           <tr>
+            <th>Immagine</th>
             <th>Modello</th>
             <th>Prezzo</th>
             <th>Taglia</th>
@@ -15,6 +16,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let cartShoe of cartShoes">
+            <td><img src="{{imgPath}}{{cartShoe.shoe.urlImg}}" alt=""></td>
             <td>{{ cartShoe.shoe.model }}</td>
             <td>{{ cartShoe.shoe.sizes[0].price | currency: 'EUR' }}</td>
             <td>
@@ -30,7 +32,7 @@
               </ul>
             </td>
             <td>
-              <button (click)="removeFromCart(cartShoe.shoe.id)">Rimuovi</button>
+              <button mat-button (click)="removeFromCart(cartShoe.shoe.id)">Rimuovi</button>
             </td>
           </tr>
         </tbody>
@@ -38,7 +40,7 @@
           <tr>
             <td colspan="5">
               Totale: {{ cartTotalPrice | currency: 'EUR' }}
-              <button (click)="clearCart()">Svuota Carrello</button>
+              <button mat-button (click)="clearCart()">Svuota Carrello</button>
             </td>
           </tr>
         </tfoot>
@@ -62,12 +64,15 @@
       <p>{{ cartTotalAndSpeditionPrice | currency: 'EUR' }}</p>
     </div>
     <hr>
-    <div class="Payment-method" *ngIf="isLogged">
+    <div class="Payment-method" *ngIf="isLogged && user.speditionAddress && user.speditionCity && user.speditionPostalCode">
       <app-pay-pal [price]="cartTotalPrice" [orderRequest]="orderRequest"></app-pay-pal>
     </div>
     <div *ngIf="!isLogged">
       <p>Devi effettuare il login per effettuare l'acquisto</p>
       <button mat-button (click)="openLoginModal()">ACCEDI</button>
+    </div>
+    <div *ngIf="isLogged && !user.speditionAddress || !user.speditionCity || !user.speditionPostalCode">
+      Per effettuare il pagamento devi prima inserire un indirizzo di spedizione nella seguente pagina di aggiunta informazioni <a routerLink="/impostazioni">clicca qua</a>
     </div>
   </section>
 </div>

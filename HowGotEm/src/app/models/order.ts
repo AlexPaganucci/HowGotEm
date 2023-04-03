@@ -4,7 +4,7 @@ import { User } from "./user";
 export interface Order {
   id: number,
   user: User,
-  shoes: Array<OrderShoe>,
+  shoes: OrderShoe[],
   totalPrice: number,
   orderDate: Date
 }

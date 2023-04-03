@@ -1,5 +1,5 @@
 <h2>Inserisci i tuoi dati per registrarti</h2>
-<form class="example-form" [formGroup]="signupForm" (ngSubmit)="onSubmitSignup()">
+<form class="example-form" [formGroup]="signupForm">
   <table class="example-full-width" cellspacing="0">
     <tr>
       <td><mat-form-field class="example-full-width">
@@ -76,7 +76,7 @@
   <div>
     <re-captcha id="recaptcha" name="recaptcha" formControlName="recaptcha"></re-captcha>
   </div>
-  <button mat-button type="submit" [disabled]="signupForm.invalid">Registrati</button>
+  <button mat-button type="submit" (click)="onSubmitSignup()" [disabled]="signupForm.invalid">Registrati</button>
 </form>
 <p>
   Sei già registrato?
