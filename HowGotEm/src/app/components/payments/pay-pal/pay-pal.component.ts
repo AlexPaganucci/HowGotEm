@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ICreateOrderRequest, IPayPalConfig } from 'ngx-paypal';
 import { OrderRequest } from 'src/app/models/order-request';
+import { User } from 'src/app/models/user';
 import { CartService } from 'src/app/services/cart.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { OrderService } from 'src/app/services/order.service';
@@ -13,6 +14,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PayPalComponent implements OnInit {
 
+  @Input() user!: User;
   @Input() price: number = 0;
   @Input() orderRequest!: OrderRequest;
   public payPalConfig ? : IPayPalConfig;
@@ -69,8 +71,8 @@ export class PayPalComponent implements OnInit {
             console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
             // this.showSuccess = true;
             this.orderSrv.saveOrder(this.orderRequest).subscribe({
-              next: (order) => console.log(`${order} salvato con successo nel database`),
-              error: (error) => console.log(error)
+              next: (order) => this.orderSrv.sendEmail(this.user.id, order.orderId),
+              error: (error) => console.log(error),
             });
             this.cartSrv.clearCart();
         },

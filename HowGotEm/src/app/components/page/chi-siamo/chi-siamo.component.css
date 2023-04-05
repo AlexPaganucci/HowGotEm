@@ -1,0 +1,30 @@
+.container-bg{
+  position: relative;
+}
+
+.bg-image{
+    background-image: url(../../../../assets/img/fieraScarpe.jpg);
+    padding: 100px 15px;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.bg-image::before{
+    content: "";
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: url(../../../../assets/img/overlay-pattern.png) black;
+    opacity: 0.3;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+#chi-siamo-h2{
+  color: white;
+  position: relative;
+}

@@ -1,6 +1,3 @@
-<div>
-<h2></h2>
-</div>
 <div class="container-scarpa" *ngIf="shoe">
   <div class="container-scarpa-img">
     <img [src]="immaginePrincipale" alt="Immagine prodotto">
@@ -10,9 +7,9 @@
     </div>
   </div>
   <div class="container-scarpa-info">
-    <p>brand</p>
+    <h3>{{shoe.brand}}</h3>
     <h2>{{shoe.model}}</h2>
-    <p>codice di scarpa</p>
+    <p>{{shoe.skuCode}}</p>
     <mat-form-field class="example-full-width taglia">
       <mat-label>Taglia</mat-label>
       <mat-select [(ngModel)]="sizeNumber" (selectionChange)="onSizeChange()">

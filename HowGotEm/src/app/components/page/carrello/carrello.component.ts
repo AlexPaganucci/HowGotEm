@@ -21,6 +21,7 @@ export class CarrelloComponent implements OnInit, OnDestroy {
 
   imgPath = environment.pathImg
   user!: User;
+  isUserPresent: boolean = false;
   cartShoes: CartShoe[] = [];
   shoes: Shoe[] = [];
   cartTotalPrice: number = 0;
@@ -33,11 +34,34 @@ export class CarrelloComponent implements OnInit, OnDestroy {
   constructor(private cartService: CartService, private authSrv: AuthService, private modalSrv: ModalService, private userSrv: UserService) {}
 
   ngOnInit(): void {
-    this.getUser();
-    this.cartShoes = this.cartService.getCartItems();
+    // this.cartShoes = this.cartService.getCartItems();
+    // this.cartSubscription = this.cartService.cart$.subscribe((cart) => {
+    //   this.cartShoes = cart.shoes;
+    //   this.shoes = this.cartShoes.map((cartShoe) => cartShoe.shoe);
+    //   this.cartTotalPrice = cart.totalPrice;
+    //   this.cartSpeditionPrice = cart.speditionPrice;
+    //   this.cartTotalAndSpeditionPrice = cart.totalPrice + cart.speditionPrice;
+    // });
+    // this.createOrderRequest();
+    // this.authSrv.auth$.subscribe(token => {
+    //   if (token) {
+    //     this.isLogged = true;
+    //   } else {
+    //     this.isLogged = false;
+    //   }
+    // });
+    // if (this.authSrv.isLogged() && this.authSrv.checkTokenValidity()) {
+    //   this.isLogged = true;
+    // }
+    // window.addEventListener('storage', this.handleStorageChange.bind(this));
+
     this.cartSubscription = this.cartService.cart$.subscribe((cart) => {
       this.cartShoes = cart.shoes;
-      this.shoes = this.cartShoes.map((cartShoe) => cartShoe.shoe);
+      if (this.cartShoes.length > 0) {
+        this.shoes = this.cartShoes.map((cartShoe) => cartShoe.shoe);
+      } else {
+        this.shoes = [];
+      }
       this.cartTotalPrice = cart.totalPrice;
       this.cartSpeditionPrice = cart.speditionPrice;
       this.cartTotalAndSpeditionPrice = cart.totalPrice + cart.speditionPrice;
@@ -54,6 +78,19 @@ export class CarrelloComponent implements OnInit, OnDestroy {
       this.isLogged = true;
     }
     window.addEventListener('storage', this.handleStorageChange.bind(this));
+
+    // if(this.isLogged){
+    //   this.userSrv.getUser().subscribe({
+    //     next: (user) => this.user = user,
+    //     error: (error) => console.log(error),
+    //     complete: () => {
+    //       console.log();
+    //     }
+    //   })
+    // }
+    if(this.isLogged){
+      this.getUser();
+    }
   }
 
   private handleStorageChange(event: StorageEvent) {
@@ -85,6 +122,9 @@ export class CarrelloComponent implements OnInit, OnDestroy {
 
   createOrderRequest(): void {
     const cart = this.cartService.getCart();
+    if (!cart || !cart.userId) {
+      return;
+    }
     this.orderRequest = {
       userId: +cart.userId,
       shoes: []

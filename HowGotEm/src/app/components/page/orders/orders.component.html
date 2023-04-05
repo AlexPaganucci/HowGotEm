@@ -1,13 +1,14 @@
 <app-profilo-menu></app-profilo-menu>
-<div *ngFor="let order of orders" class="container-order">
-  <p>Ordine del {{order.orderDate | date: 'dd/MM/yyyy'}}</p>
-  <div *ngFor="let shoe of order.shoes" class="container-order-shoe">
-    <img src="{{pathImg}}{{shoe.shoe.urlImg}}" alt="foto scarpa">
-    <p>{{shoe.shoe.model}}</p>
-    <p>{{shoe.quantities}}</p>
-    <p>{{shoe.size}}</p>
-  </div>
-  <p *ngIf="order.totalPrice < 200">Prezzo totale ordine {{order.totalPrice + 20 | currency: 'EUR' }}</p>
-  <p *ngIf="order.totalPrice >= 200">Prezzo totale ordine {{order.totalPrice | currency: 'EUR' }}</p>
-  <div class="hr"></div>
+<h2 id="ordini-h2">ORDINI EFFETTUATI</h2>
+  <div *ngFor="let order of orders" class="container-order">
+    <p>Ordine del {{order.orderDate | date: 'dd/MM/yyyy'}} N. {{order.id}}</p>
+    <div *ngFor="let shoe of order.shoes" class="container-order-shoe">
+      <img src="{{pathImg}}{{shoe.shoe.urlImg}}" alt="foto scarpa">
+      <p>{{shoe.shoe.model}}</p>
+      <p>{{shoe.quantities}}</p>
+      <p>{{shoe.size.size}}</p>
+    </div>
+    <p *ngIf="order.totalPrice < 200">Prezzo totale ordine {{order.totalPrice + 20 | currency: 'EUR' }}</p>
+    <p *ngIf="order.totalPrice >= 200">Prezzo totale ordine {{order.totalPrice | currency: 'EUR' }}</p>
+    <div class="hr"></div>
 </div>

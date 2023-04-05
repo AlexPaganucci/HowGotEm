@@ -16,7 +16,6 @@ export class ProfiloComponent implements OnInit {
     this.userSrv.getUser().subscribe({
       next: (user) => this.user = user,
       error: (error) => console.error(error),
-      complete: () => console.log('complete'),
     });
   }
 }

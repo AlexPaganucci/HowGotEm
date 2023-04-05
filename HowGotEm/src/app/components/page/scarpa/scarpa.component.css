@@ -4,6 +4,10 @@
   padding: 2rem;
 }
 
+.container-scarpa h2{
+  padding-top: 0;
+}
+
 .container-scarpa-img{
   display: flex;
   width: 70%;
@@ -46,16 +50,6 @@
 
 .autenticita-scarpa{
   text-align: center;
-}
-
-.prodotti-correlati{
-  margin-top: 3rem;
-}
-
-.prodotti-correlati h3{
-  text-align: center;
-  font-size: x-large;
-  font-weight: bold;
 }
 
 .mat-input-element[disabled] {

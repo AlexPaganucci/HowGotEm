@@ -31,12 +31,12 @@
   color: white;
 }
 
-.carousel-item h2{
+.carousel-item h3{
   padding-top: 100px;
   font-weight: bold;
 }
 
-.carousel-item h2, .carousel-item p , .carousel-item button{
+.carousel-item h3, .carousel-item p , .carousel-item button{
   position: relative;
   z-index: 2;
   display: flex;

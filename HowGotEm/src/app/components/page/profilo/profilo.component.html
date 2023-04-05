@@ -1,10 +1,10 @@
 <app-profilo-menu></app-profilo-menu>
-<h2>Informazioni personali</h2>
+<h2 id="profilo-h2">INFORMAZIONI PERSONALI</h2>
 <section class="section-profile">
   <div *ngIf="user != null">
-    <h3>{{user.name}} {{user.surname}}</h3>
+    <h3 id="profilo-h3">{{user.name}} {{user.surname}}</h3>
     <p>{{user.email}}</p>
-    <p>{{user.birthdate}}</p>
+    <p>{{user.birthdate | date: 'dd/MM/yyyy'}}</p>
     <p>{{user.city}} {{user.postalCode}}</p>
     <p>{{user.address}}</p>
   </div>

@@ -1,6 +1,7 @@
 package it.alexpaganucci.howgotem.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,4 +18,8 @@ public interface OrderRepository extends JpaRepository<Order, Long>{
 			value = "SELECT * FROM ORDERS o WHERE o.USER_ID = :id"
 			)
 	List<Order> filterOrderByUser(@Param("id") Long id);
+	
+
+    @Query(value = "SELECT o FROM Order o ORDER BY o.orderDate DESC")
+    Order findLastOrder();
 }

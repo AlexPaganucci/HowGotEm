@@ -1,7 +1,9 @@
 package it.alexpaganucci.howgotem.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +52,7 @@ public class OrderController {
 	private OrderShoeService orderShoeService;
 	
 	@PostMapping
-	public ResponseEntity<Order> saveOrder(@RequestBody OrderRequest orderRequest) {
+	public ResponseEntity<Map<String, Object>> saveOrder(@RequestBody OrderRequest orderRequest) {
 		log.info("Received order request: {}", orderRequest);
 	    User user = userService.findById(orderRequest.getUserId())
 	    		.orElseThrow(() -> new UserNotFoundException("User not found"));
@@ -69,7 +71,15 @@ public class OrderController {
 	    Order order = new Order(user, totalPrice);
 	    order.setShoes(orderShoes);
 	    orderService.save(order);
-	    return new ResponseEntity<>(order, HttpStatus.CREATED);
+//	    return new ResponseEntity<>(order, HttpStatus.CREATED);
+	    // Aggiungi una riga per restituire l'ID dell'ordine salvato
+	    Long orderId = order.getId();
+
+	    // Restituisci l'ordine e l'ID come parte del corpo della risposta
+	    Map<String, Object> responseBody = new HashMap<>();
+	    responseBody.put("order", order);
+	    responseBody.put("orderId", orderId);
+	    return new ResponseEntity<Map<String, Object>>(responseBody, HttpStatus.CREATED);
 	}
 	
     private double calculateTotalPrice(List<OrderShoe> orderShoes) {
@@ -79,7 +89,7 @@ public class OrderController {
         }
         return totalPrice;
     }
-//    DA CONTROLLARE 
+//    DA CONTROLLARE
     @DeleteMapping("{id}")
     @PreAuthorize("hasAuthority('USER') and (#id == authentication.principal.id)")
     public ResponseEntity<?>deleteOrder(@PathVariable Long id){
@@ -100,12 +110,6 @@ public class OrderController {
     	return new ResponseEntity<>(orderService.filterOrderByUser(id), HttpStatus.OK);
     }
     
-//    @GetMapping("/send_email")
-//    public String sendEmail() {
-//    	CheckoutEmail ce = new CheckoutEmail();
-//    	ce.myEmail();
-//    	return "ciao";
-//    }
 }
 
 

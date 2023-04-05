@@ -1,9 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-h2 { text-align: center; font-size: xx-large; font-weight: bolder; padding-top: 2rem;}
-h3 { text-align: center; font-size: x-large; font-weight: bolder; padding-top: 2rem;}
+#cart-h2, #chi-siamo-h2, #profilo-h2, #ordini-h2, #signup-h2, #login-h2, #impostazioni-h2, #home-h2, #contatti-h2, #admin-h2 {
+  text-align: center;
+  font-family: 'Permanent Marker', cursive;
+  padding-top: 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+#cart-h3, #profilo-h3, #contatti-h3, #contatti-2-h3 {
+  text-align: center;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 1.5rem;
+  padding-top: 2rem;
+}
 
 re-captcha.is-invalid > div {
   border: 1px solid #dc3545 !important;

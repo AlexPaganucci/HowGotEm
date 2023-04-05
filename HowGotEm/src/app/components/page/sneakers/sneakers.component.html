@@ -68,6 +68,6 @@
   <div class="container-cards" [style.width.%]="!filter ? 100 : null">
     <app-card [shoes]="displayShoes"></app-card>
     <p *ngIf="!displayShoes || displayShoes.length === 0">Non abbiamo trovato nessuna scarpa mi dispiace</p>
-    <mat-paginator [pageSize]="18" [length]="shoesFiltered.length" (page)="onPageChange($event)"></mat-paginator>
+    <mat-paginator [pageSize]="15" [length]="shoesFiltered.length" (page)="onPageChange($event)"></mat-paginator>
   </div>
 </div>

@@ -30,4 +30,8 @@ public class OrderService {
 	public Optional<Order> findById(Long id){
 		return orderRepository.findById(id);
 	}
+	
+	public Order findLastOrder(){
+		return orderRepository.findLastOrder();
+	}
 }

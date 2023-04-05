@@ -80,14 +80,14 @@ export class SneakersComponent implements OnInit {
           if(!this.shoeBySkuCode){
             this.shoeSrv.filterShoeByPartOfModel(filterParam).subscribe((shoes) => {
               this.shoesFiltered = shoes;
-              this.displayShoes = this.shoesFiltered.slice(0, 18);
+              this.displayShoes = this.shoesFiltered.slice(0, 15);
             })
           }
         });
       } else {
         this.shoeSrv.getAllShoes().subscribe((shoes) => {
           this.shoesFiltered = shoes;
-          this.displayShoes = this.shoesFiltered.slice(0, 18);
+          this.displayShoes = this.shoesFiltered.slice(0, 15);
         });
       }
     });
@@ -136,7 +136,7 @@ export class SneakersComponent implements OnInit {
     this.shoeSrv.filterShoes(selectedFilters).subscribe({
       next: (shoes) => this.shoesFiltered = shoes,
       error: (error) => console.log(error),
-      complete: () => this.displayShoes = this.shoesFiltered.slice(0, 18)
+      complete: () => this.displayShoes = this.shoesFiltered.slice(0, 15)
     })
   }
 

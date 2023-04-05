@@ -6,16 +6,22 @@
 
 .section-profile div{
   max-width: 30%;
-  /* font-size: x-large; */
+  font-size: x-large;
 }
 
 .section-profile img{
-  max-width: 40%;
+  max-width: 20%;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 768px) {
   .section-profile{
     flex-direction: column;
+    align-items: center;
+  }
+
+  .section-profile div{
+    padding: 2rem;
+    font-size: 1rem;
   }
 
 }

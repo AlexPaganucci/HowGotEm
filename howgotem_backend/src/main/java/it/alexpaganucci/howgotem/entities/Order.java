@@ -45,7 +45,7 @@ public class Order {
 	@JsonBackReference
 	private User user;
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-	@JsonManagedReference
+//	@JsonManagedReference
 	List<OrderShoe> shoes = new ArrayList<>();
 	@Column(name="TOTAL_PRICE")
 	private double totalPrice;

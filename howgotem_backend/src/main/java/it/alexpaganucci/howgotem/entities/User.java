@@ -68,7 +68,7 @@ public class User {
 	private String postalCode;
 	@OneToMany(mappedBy = "user")
 	@Column(name="ORDERS_ID")
-	@JsonManagedReference
+//	@JsonManagedReference
 	private List<Order> orders;
 	@Temporal(TemporalType.DATE)
 	@Column(name="BIRTHDATE")

@@ -1,8 +1,7 @@
-<h2 class="title-cart">CARRELLO</h2>
+<h2 id="cart-h2">CARRELLO</h2>
 <div class="container-cart" *ngIf="shoes.length > 0; else emptyCart">
   <section class="products-cart">
     <div>
-      <h2>Carrello</h2>
       <table>
         <thead>
           <tr>
@@ -48,7 +47,7 @@
     </div>
   </section>
   <section class="cart-payment">
-    <h2>RIEPILOGO</h2>
+    <h3 id="cart-h3">RIEPILOGO</h3>
     <div class="section-cart-payment">
       <p>Subtotale</p>
       <p>{{ cartTotalPrice | currency: 'EUR' }}</p>
@@ -64,15 +63,16 @@
       <p>{{ cartTotalAndSpeditionPrice | currency: 'EUR' }}</p>
     </div>
     <hr>
-    <div class="Payment-method" *ngIf="isLogged && user.speditionAddress && user.speditionCity && user.speditionPostalCode">
-      <app-pay-pal [price]="cartTotalPrice" [orderRequest]="orderRequest"></app-pay-pal>
+    <div class="Payment-method" *ngIf="isLogged && user?.speditionAddress && user?.speditionCity && user?.speditionPostalCode">
+      <app-pay-pal [price]="cartTotalPrice" [orderRequest]="orderRequest" [user]="user"></app-pay-pal>
     </div>
-    <div *ngIf="!isLogged">
+    <div *ngIf="!isLogged" class="conditions">
       <p>Devi effettuare il login per effettuare l'acquisto</p>
       <button mat-button (click)="openLoginModal()">ACCEDI</button>
     </div>
-    <div *ngIf="isLogged && !user.speditionAddress || !user.speditionCity || !user.speditionPostalCode">
-      Per effettuare il pagamento devi prima inserire un indirizzo di spedizione nella seguente pagina di aggiunta informazioni <a routerLink="/impostazioni">clicca qua</a>
+    <div *ngIf="isLogged && !user?.speditionAddress && !user?.speditionCity && !user?.speditionPostalCode" class="conditions">
+      <p>Per effettuare il pagamento devi prima inserire le credenziali di spedizione nella seguente pagina di aggiunta informazioni</p>
+      <button mat-button routerLink="/impostazioni">CLICCA QUI</button>
     </div>
   </section>
 </div>

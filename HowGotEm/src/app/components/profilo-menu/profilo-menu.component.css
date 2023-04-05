@@ -15,3 +15,10 @@
 .nav-profile ul li a:hover{
   color: #1D818F;
 }
+
+@media screen and (max-width: 768px) {
+  .nav-profile ul{
+    flex-direction: column;
+  }
+
+}
