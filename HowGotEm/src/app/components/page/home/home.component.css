@@ -4,3 +4,55 @@
   margin: 2rem;
   font-weight: bold;
 }
+
+.bg-image-home{
+  background-image: url(../../../../assets/img/howgotem11.png);
+  padding: 100px 15px;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bg-image-home::before{
+  content: "";
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: url(../../../../assets/img/overlay-pattern.png) black;
+  opacity: 0.3;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.home-info{
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  padding: 2rem;
+  margin-block: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#info-text{
+  color: white;
+  position: relative;
+  padding: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .home-info{
+    flex-direction: column;
+  }
+
+  .home-info >*{
+    padding: 2rem;
+  }
+}

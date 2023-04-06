@@ -1,17 +1,17 @@
-.container-bg{
-  position: relative;
-}
-
-.bg-image{
+.bg-image-chi-siamo{
     background-image: url(../../../../assets/img/fieraScarpe.jpg);
     padding: 100px 15px;
     text-align: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.bg-image::before{
+.bg-image-chi-siamo::before{
     content: "";
     top: 0;
     bottom: 0;
@@ -25,6 +25,58 @@
 }
 
 #chi-siamo-h2{
+  /* color: #1D818F; */
+  color: white;
+  position: relative;
+  font-size: 2rem;
+}
+
+#chi-siamo-text-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+}
+
+#chi-siamo-text-container p{
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  /* padding-block: 2rem; */
+  /* padding: 5rem;
+  margin-inline: 5rem; */
+  /* color: white;
+  position: relative;
+  font-weight: bold; */
+}
+
+.bg-image-chi-siamo-2{
+  background-image: url(../../../../assets/img/howgotem10.png);
+  padding: 100px 15px;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-image-chi-siamo-2::before{
+  content: "";
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: url(../../../../assets/img/overlay-pattern.png) black;
+  opacity: 0.3;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.chi-siamo-p{
   color: white;
   position: relative;
 }

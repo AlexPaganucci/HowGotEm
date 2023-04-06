@@ -1,5 +1,7 @@
 .container-header-sneaker{
+  display: flex;
   padding: 2rem;
+  justify-content: space-between;
 }
 
 .container-sneakers{

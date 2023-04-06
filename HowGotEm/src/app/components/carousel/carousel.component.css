@@ -31,12 +31,12 @@
   color: white;
 }
 
-.carousel-item h3{
+/* .carousel-item h3{
   padding-top: 100px;
   font-weight: bold;
-}
+} */
 
-.carousel-item h3, .carousel-item p , .carousel-item button{
+/* .carousel-item h3, .carousel-item p , .carousel-item button{
   position: relative;
   z-index: 2;
   display: flex;
@@ -44,27 +44,23 @@
   margin: 2rem auto 0;
   justify-content: center;
   font-style: italic;
-}
+} */
 
 .carousel-item-1{
-  background-image: url('../../../assets/img/dunkCarousel.jpg');
+  background-image: url('../../../assets/img/Air-Jordan-6-Retro-Travis-Scott-carousel.jpg');
+  font-size: 0.5rem;
 }
 
 .carousel-item-2{
-  background-image: url('../../../assets/img/jordanCarousel.jpg');
+  background-image: url('../../../assets/img/Air-Jordan-4-Military-Black-carousel.jpg');
 }
 
 .carousel-item-3{
-  background-image: url('../../../assets/img/NewBalanceCarousel.png');
+  background-image: url('../../../assets/img/nike-dunk-low-panda-carousel.jpg');
 }
 
 .carousel-item.active {
   opacity: 1;
-}
-
-.carousel-item button{
-  background-color: #1D818F;
-  color: white;
 }
 
 .btn {

@@ -3,18 +3,22 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-#cart-h2, #chi-siamo-h2, #profilo-h2, #ordini-h2, #signup-h2, #login-h2, #impostazioni-h2, #home-h2, #contatti-h2, #admin-h2 {
+#sneakers-h2, #cart-h2, #chi-siamo-h2, #profilo-h2, #ordini-h2, #signup-h2, #login-h2, #impostazioni-h2, #home-h2, #contatti-h2, #admin-h2 {
   text-align: center;
   font-family: 'Permanent Marker', cursive;
   padding-top: 2rem;
   font-size: 2rem;
   font-weight: bold;
 }
-#cart-h3, #profilo-h3, #contatti-h3, #contatti-2-h3 {
+#cart-h3, #profilo-h3, #contatti-h3, #contatti-2-h3, .home-info, #info-text, .chi-siamo-p {
   text-align: center;
   font-family: 'Permanent Marker', cursive;
   font-size: 1.5rem;
   padding-top: 2rem;
+}
+
+.container-bg{
+  position: relative;
 }
 
 re-captcha.is-invalid > div {
