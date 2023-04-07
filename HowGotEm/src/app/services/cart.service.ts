@@ -8,7 +8,7 @@ import { CONST_CART } from './auth.service';
 })
 export class CartService {
 
-  private cartSubject = new BehaviorSubject<Cart>({
+  cartSubject = new BehaviorSubject<Cart>({
     userId: '',
     shoes: [],
     totalPrice: 0,

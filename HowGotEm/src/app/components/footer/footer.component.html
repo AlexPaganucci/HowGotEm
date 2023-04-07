@@ -6,33 +6,33 @@
   </div>
   <div class="container-footer">
     <div class="container-1 sub-container-footer">
-      <h4>Link utili</h4>
+      <h4 id="link-utili-h4">LINK UTILI</h4>
       <a routerLink="/sneakers">sneakers</a>
+      <a routerLink="/chisiamo">chi siamo</a>
       <a routerLink="/contatti">contatti</a>
       <a (click)="openLoginModal()">accedi</a>
-      <a (click)="openSignupModal()">registrati</a>
-      <a routerLink="/profilo">il mio account</a>
     </div>
     <div class="container-2 sub-container-footer">
-      <h4>I nostri brand</h4>
-      <a href="">Nike</a>
-      <a href="">Jordan</a>
-      <a href="">New Balance</a>
+      <h4 id="registrato-h4">SEI GIA REGISTRATO!</h4>
+      <a (click)="openProfile()">il mio account</a>
+      <a (click)="openOrders()">i miei ordini</a>
+      <a (click)="openSettings()">impostazioni profilo</a>
     </div>
     <div class="container-3 sub-container-footer">
-      <h4>Assistenza</h4>
-      <a href="">Aiuto / FAQ</a>
-      <a href="">Spedizioni</a>
-      <a href="">Resi</a>
+      <h4 id="non-registrato-h4">NON SEI ANCORA REGISTRATO!</h4>
+      <button mat-button (click)="openSignupModal()">REGISTRATI</button>
     </div>
     <div class="container-4 sub-container-footer">
-      <h4>Metodi di pagamento</h4>
+      <h4 id="metodi-pagamento-h4">METODI DI PAGAMENTO</h4>
       <div>
         <i class="fa-brands fa-cc-visa"></i>
         <i class="fa-brands fa-paypal"></i>
         <i class="fa-brands fa-cc-mastercard"></i>
-        <i class="fa-brands fa-cc-stripe"></i>
+        <!-- <i class="fa-brands fa-cc-stripe"></i> -->
       </div>
     </div>
+  </div>
+  <div class="footer-footer">
+    <p><small>HowGotEm un ecommerce di sneakers resell</small></p>
   </div>
 </div>

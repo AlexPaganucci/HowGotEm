@@ -25,8 +25,20 @@ export class OrdersComponent implements OnInit {
     this.userSrv.getUser().subscribe({
       next: (user) => this.user = user,
       error: (error) => console.error(error),
-      complete: () => this.orders = this.user.orders,
+      complete: () => {
+        this.orders = this.user.orders
+        // console.log(this.orders)
+        // this.orders.map((order) => {
+        //   console.log(typeof order.orderDate, order.orderDate);
+        // })
+      }
     });
+  }
+
+  public daysPassed(orderDate: Date): number {
+    const now = new Date();
+    const diff = Math.abs(now.getTime() - new Date(orderDate).getTime());
+    return Math.ceil(diff / (1000 * 60 * 60 * 24));
   }
 
 }

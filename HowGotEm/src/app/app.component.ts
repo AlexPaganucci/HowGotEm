@@ -36,14 +36,7 @@ export class AppComponent {
     if (this.auth.isLogged() && this.auth.checkTokenValidity()) {
       this.isLogged = true;
     }
-    window.addEventListener('storage', this.handleStorageChange.bind(this));
-  }
 
-  private handleStorageChange(event: StorageEvent) {
-    if (event.key === CONST_UTENTE) {
-      // Aggiorna la variabile isLogged in base alla presenza del valore nel Session Storage
-      this.isLogged = sessionStorage.getItem(CONST_UTENTE) != null;
-    }
   }
 
   openLoginModal(){
@@ -60,10 +53,6 @@ export class AppComponent {
 
   filterSearch() {
     this.router.navigate(['/sneakers', this.searchTerm]);
-  }
-
-  ngOnDestroy() {
-    window.removeEventListener('storage', this.handleStorageChange.bind(this));
   }
 
 }

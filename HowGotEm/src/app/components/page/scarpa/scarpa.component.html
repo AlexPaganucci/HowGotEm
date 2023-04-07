@@ -26,7 +26,7 @@
         </mat-form-field>
         <button mat-button (click)="aumentaQuantita()">+</button>
       </div>
-      <p *ngIf="selectedSize">€ {{selectedSize.price}}</p>
+      <p *ngIf="selectedSize">{{selectedSize.price | currency: 'EUR'}}</p>
       <button mat-button (click)="addToCart()">AGGIUNGI AL CARRELLO</button>
   </div>
 </div>

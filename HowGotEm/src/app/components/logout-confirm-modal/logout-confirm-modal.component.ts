@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { CartService } from 'src/app/services/cart.service';
 import { ModalService } from 'src/app/services/modal.service';
+import { Cart } from 'src/app/models/cart';
 
 @Component({
   selector: 'app-logout-confirm-modal',
@@ -10,7 +12,7 @@ import { ModalService } from 'src/app/services/modal.service';
 })
 export class LogoutConfirmModalComponent implements OnInit {
 
-  constructor(private authSrv: AuthService, private modalSrv: ModalService, private router: Router) { }
+  constructor(private authSrv: AuthService, private modalSrv: ModalService, private cartSrv: CartService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -18,6 +20,13 @@ export class LogoutConfirmModalComponent implements OnInit {
   confirmLogout(){
     this.authSrv.logout();
     this.router.navigateByUrl("");
+    let cart: Cart = {
+      userId: '',
+      shoes: [],
+      totalPrice: 0,
+      speditionPrice: 0
+    };
+    this.cartSrv.cartSubject.next(cart);
     this.modalSrv.showNotification("Logout effettuato con successo");
   }
 

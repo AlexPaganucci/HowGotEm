@@ -10,11 +10,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-size: 2rem;
   font-weight: bold;
 }
-#cart-h3, #profilo-h3, #contatti-h3, #contatti-2-h3, .home-info, #info-text, .chi-siamo-p {
+#cart-h3, #profilo-h3, #contatti-h3, #contatti-2-h3, .home-info, #info-text, .chi-siamo-p, #errore-h3 {
   text-align: center;
   font-family: 'Permanent Marker', cursive;
   font-size: 1.5rem;
   padding-top: 2rem;
+}
+
+#link-utili-h4, #registrato-h4, #non-registrato-h4, #metodi-pagamento-h4{
+  text-align: center;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 1rem;
 }
 
 .container-bg{

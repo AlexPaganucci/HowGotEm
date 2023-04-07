@@ -55,6 +55,14 @@ table tbody tr ul{
   padding-top: 2rem;
 }
 
+.cart-void{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 200px;
+}
+
 @media screen and (max-width: 768px) {
 
   .container-cart{

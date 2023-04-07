@@ -63,19 +63,31 @@
       <p>{{ cartTotalAndSpeditionPrice | currency: 'EUR' }}</p>
     </div>
     <hr>
-    <div class="Payment-method" *ngIf="isLogged && user?.speditionAddress && user?.speditionCity && user?.speditionPostalCode">
-      <app-pay-pal [price]="cartTotalPrice" [orderRequest]="orderRequest" [user]="user"></app-pay-pal>
-    </div>
-    <div *ngIf="!isLogged" class="conditions">
-      <p>Devi effettuare il login per effettuare l'acquisto</p>
-      <button mat-button (click)="openLoginModal()">ACCEDI</button>
-    </div>
-    <div *ngIf="isLogged && !user?.speditionAddress && !user?.speditionCity && !user?.speditionPostalCode" class="conditions">
-      <p>Per effettuare il pagamento devi prima inserire le credenziali di spedizione nella seguente pagina di aggiunta informazioni</p>
-      <button mat-button routerLink="/impostazioni">CLICCA QUI</button>
-    </div>
+
+    <ng-container *ngIf="isLogged; else notLoggedIn">
+      <div *ngIf="user && user.speditionAddress && user.speditionCity && user.speditionPostalCode && user.speditionAddress != null && user.speditionCity != null && user.speditionPostalCode != null else addShippingAddress">
+        <div class="Payment-method">
+          <app-pay-pal [price]="cartTotalPrice" [orderRequest]="orderRequest" [user]="user"></app-pay-pal>
+        </div>
+      </div>
+      <ng-template #addShippingAddress>
+        <div class="conditions">
+          <p>Per effettuare il pagamento devi prima inserire le credenziali di spedizione nella seguente pagina di aggiunta informazioni</p>
+          <button mat-button routerLink="/impostazioni">CLICCA QUI</button>
+        </div>
+      </ng-template>
+    </ng-container>
+
+    <ng-template #notLoggedIn>
+      <div class="conditions">
+        <p>Devi effettuare il login per effettuare l'acquisto</p>
+        <button mat-button (click)="openLoginModal()">ACCEDI</button>
+      </div>
+    </ng-template>
   </section>
 </div>
 <ng-template #emptyCart>
-  <p>Il carrello è vuoto.</p>
+  <div class="cart-void">
+    <p>Il carrello è vuoto!</p>
+  </div>
 </ng-template>

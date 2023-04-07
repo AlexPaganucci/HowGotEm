@@ -7,6 +7,7 @@ import { Cart } from '../models/cart';
 import { LoginRequest } from '../models/login-request';
 import { SignupRequest } from '../models/signup-request';
 import { Token } from '../models/token';
+import { UserService } from './user.service';
 
 export const CONST_UTENTE = 'User';
 export const CONST_CART = 'cart';
@@ -21,7 +22,7 @@ export class AuthService {
   jwtHelper = new JwtHelperService();
   apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userSrv: UserService) {
     const user = this.getUser();
     if (user && user.token) {
     this.authSubject.next(user.token);
@@ -36,6 +37,10 @@ export class AuthService {
         tap(data => {
           this.authSubject.next(data);
           sessionStorage.setItem(CONST_UTENTE, JSON.stringify(data));
+          this.userSrv.getUser().subscribe({
+            next: (res) => console.log(res),
+            error: (error) => console.log(error),
+          })
           this.setCart();
         }),
         catchError(error => {
