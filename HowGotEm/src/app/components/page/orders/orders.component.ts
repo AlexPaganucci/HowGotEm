@@ -35,10 +35,10 @@ export class OrdersComponent implements OnInit {
     });
   }
 
-  public daysPassed(orderDate: Date): number {
-    const now = new Date();
-    const diff = Math.abs(now.getTime() - new Date(orderDate).getTime());
-    return Math.ceil(diff / (1000 * 60 * 60 * 24));
-  }
+  // public daysPassed(orderDate: Date): number {
+  //   const now = new Date();
+  //   const diff = Math.abs(now.getTime() - new Date(orderDate).getTime());
+  //   return Math.ceil(diff / (1000 * 60 * 60 * 24));
+  // }
 
 }

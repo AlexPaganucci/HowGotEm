@@ -10,8 +10,8 @@
     </div>
     <p *ngIf="order.totalPrice < 200">Prezzo totale ordine {{order.totalPrice + 20 | currency: 'EUR' }}</p>
     <p *ngIf="order.totalPrice >= 200">Prezzo totale ordine {{order.totalPrice | currency: 'EUR' }}</p>
-    <p *ngIf="daysPassed(order.orderDate) < 30">Per effettuare il reso non devono essere passati più di 30 giorni!</p>
+    <!-- <p *ngIf="daysPassed(order.orderDate) < 30">Per effettuare il reso non devono essere passati più di 30 giorni!</p>
     <p *ngIf="daysPassed(order.orderDate) >= 30">RESO NON DISPONIBILE!</p>
-    <button mat-button *ngIf="daysPassed(order.orderDate) < 30">EFFETTUA IL RESO</button>
+    <button mat-button *ngIf="daysPassed(order.orderDate) < 30">EFFETTUA IL RESO</button> -->
     <div class="hr"></div>
 </div>

@@ -5,7 +5,6 @@
         <div *ngIf="showSearch">
           <button mat-button (click)="showSearch = !showSearch">ANNULLA</button>
         </div>
-        <!-- <h1 *ngIf="!showSearch" routerLink="">How Got Em</h1> -->
         <img *ngIf="!showSearch" routerLink="" src="../assets/img/logo.png" alt="Logo dell'applicazione">
         <ul class="ul-flex" *ngIf="!isSmallScreen && !showSearch">
           <li>
@@ -78,11 +77,11 @@
     <button mat-menu-item routerLink="/sneakers">
       <span>SNEAKERS</span>
     </button>
-    <button mat-menu-item routerLink="/contatti">
-      <span>CONTATTI</span>
-    </button>
     <button mat-menu-item routerLink="/chisiamo">
       <span>CHI SIAMO</span>
+    </button>
+    <button mat-menu-item routerLink="/contatti">
+      <span>CONTATTI</span>
     </button>
     <button mat-menu-item routerLink="/profilo" *ngIf="isLogged">
       <span>PROFILO</span>

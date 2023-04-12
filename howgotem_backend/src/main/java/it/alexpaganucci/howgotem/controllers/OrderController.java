@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.alexpaganucci.howgotem.entities.Order;
 import it.alexpaganucci.howgotem.entities.OrderShoe;
+import it.alexpaganucci.howgotem.entities.PaypalDataResponse;
 import it.alexpaganucci.howgotem.entities.Shoe;
 import it.alexpaganucci.howgotem.entities.Size;
 import it.alexpaganucci.howgotem.entities.User;
@@ -108,6 +109,12 @@ public class OrderController {
     @PreAuthorize("hasAuthority('USER') and (#id == authentication.principal.id)")
     public ResponseEntity<List<Order>> filterOrderByUser(@PathVariable Long id){
     	return new ResponseEntity<>(orderService.filterOrderByUser(id), HttpStatus.OK);
+    }
+    
+    @PostMapping("/paypal_data")
+    public ResponseEntity<PaypalDataResponse> savePaypalData(@RequestBody PaypalDataResponse paypalData){
+        PaypalDataResponse savedData = orderService.savePaypalData(paypalData);
+        return new ResponseEntity<>(savedData, HttpStatus.CREATED);
     }
     
 }

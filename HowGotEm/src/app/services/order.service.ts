@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Order } from '../models/order';
 import { OrderRequest } from '../models/order-request';
 import { OrderResponse } from '../models/order-response';
+import { PaypalDataResponse } from '../models/paypal-data-response';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,9 @@ export class OrderService {
       next: (response) => console.log(response),
       error: (error) => console.log(error),
     });
+  }
+
+  savePaypalData(paypalData: PaypalDataResponse): Observable<PaypalDataResponse> {
+    return this.http.post<PaypalDataResponse>(`${this.apiUrl}/order/paypal_data`, paypalData);
   }
 }
