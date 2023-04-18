@@ -14,14 +14,14 @@
   </table>
 
   <mat-form-field class="example-full-width">
-    <mat-label>Enter your email</mat-label>
+    <mat-label>Inserisci la tua email</mat-label>
     <input matInput placeholder="pat@example.com" formControlName="email">
-    <mat-error *ngIf="signupForm.hasError('required', 'email')">Email is required</mat-error>
-    <mat-error *ngIf="signupForm.hasError('email', 'email')">Invalid email format</mat-error>
+    <mat-error *ngIf="signupForm.hasError('required', 'email')">L'email è obbligatoria</mat-error>
+    <mat-error *ngIf="signupForm.hasError('email', 'email')">Email non valida</mat-error>
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
-    <mat-label>Enter your password</mat-label>
+    <mat-label>Inserisci la password</mat-label>
     <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
     <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'"
       [attr.aria-pressed]="hidePassword">
@@ -30,20 +30,21 @@
   </mat-form-field>
   <div
     *ngIf="signupForm.get('password')!.invalid && (signupForm.get('password')!.dirty || signupForm.get('password')!.touched)">
-    <mat-error *ngIf="signupForm.hasError('required', 'password')">Password is required</mat-error>
-    <mat-error *ngIf="signupForm.hasError('pattern', 'password')">Password must be at least 8 characters long, contain
-      at least one lowercase letter, one uppercase letter, and one number</mat-error>
+    <mat-error *ngIf="signupForm.hasError('required', 'password')">La password è obbligatoria</mat-error>
+    <mat-error *ngIf="signupForm.hasError('pattern', 'password')">La password deve esserre lunga almeno 8 caratteri, di cui almeno uno minuscolo
+      uno maiuscolo, e un numero</mat-error>
   </div>
 
   <mat-form-field class="example-full-width">
-    <mat-label>Enter your confirm password</mat-label>
+    <mat-label>Inserisci la password di conferma</mat-label>
     <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword">
     <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword"
       [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPassword">
       <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
   </mat-form-field>
-  <mat-error *ngIf="signupForm.hasError('notSame')">Passwords do not match</mat-error>
+  <mat-error *ngIf="signupForm.hasError('notSame')">La password non corrisponde</mat-error>
+
 
   <p>
     <mat-form-field class="example-full-width">
@@ -73,7 +74,7 @@
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
   <button mat-raised-button (click)="picker.open()">Open</button><br>
-  <div>
+  <div class="recaptcha">
     <re-captcha id="recaptcha" name="recaptcha" formControlName="recaptcha"></re-captcha>
   </div>
   <button mat-button type="submit" (click)="onSubmitSignup()" [disabled]="signupForm.invalid">Registrati</button>

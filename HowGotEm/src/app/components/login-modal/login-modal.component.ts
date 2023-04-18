@@ -24,10 +24,10 @@ export class LoginModalComponent implements OnInit {
 
   getErrorMessage() {
     if (this.email.hasError('required')) {
-      return 'You must enter a value';
+      return 'Devi inserire un valore';
     }
 
-    return this.email.hasError('email') ? 'Not a valid email' : "";
+    return this.email.hasError('email') ? 'Email non valida' : "";
   }
 
   openSignupModal(){

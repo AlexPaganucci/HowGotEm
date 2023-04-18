@@ -15,3 +15,7 @@ td {
 mat-form-field {
   margin-right: 12px;
 }
+
+.recaptcha{
+  margin-top: 10px;
+}
